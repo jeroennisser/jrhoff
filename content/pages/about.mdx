@@ -1,6 +1,137 @@
 ---
+title: Over Mij
 blocks:
-  - body: "# What is this?\n\nThis is a [TinaCMS](https://tina.io)-enabled Next.js app, so you can edit your content on a live page. In this project the Tina file-based CMS is used via GraphQL: it's powered by a schema that *you* define. It not only serves content from Markdown files in your repository, but it also generates TinaCMS forms for you automatically ✨.\n\n## New to TinaCMS?\n\nTinaCMS is feature-rich, and leaves a lot of power up to the user on how it's configured.\n\nThere can be a learning curve as you get to grips with how it all fits together.\n\nThe tutorials in our docs will guide you through the basics, to the more advanced ways to use the tool.\n\nCheck out the [Learning Guide](https://tina.io/docs/beginner-tutorials/tutorial-overview) it covers all you need to get up and running with TinaCMS.\n\n## Requirements\n\n* Git\n* [Node.js Active LTS](https://nodejs.org/en/about/releases/)\n* NPM, Yarn, pnpm, or bun\n\n## Install\n\nInstall the project's dependencies:\n\n<scriptCopyBlock\n  codeLanguage=\"bash\"\n  lightTheme=\"catppuccin-latte\"\n  darkTheme=\"catppuccin-mocha\"\n  commandMap=\"npm|npm install\n  pnpm|pnpm install\n  yarn|yarn install\n  bun|bun install\"\n/>\n\n## Run the project locally\n\nTo run the local development server:\n\n<scriptCopyBlock\n  codeLanguage=\"bash\"\n  lightTheme=\"catppuccin-latte\"\n  darkTheme=\"catppuccin-mocha\"\n  commandMap=\"npm|npm run dev\n  pnpm|pnpm run dev\n  yarn|yarn dev\n  bun|bun run dev\"\n/>\n\nThis command starts the GraphQL server and the Next.js application in development mode. It also regenerates your schema types for TypeScript and GraphQL so changes to your `/tina/config.ts` are reflected immediately.\n\nOne of the most interesting aspects of the TinaCloud Content API is that it doesn't actually require anything from the cloud to work locally. Since TinaCMS is by default a Git-backed CMS, everything can be run from your local filesystem via the CLI. \U0001F60E\n\nThis is ideal for development workflows and the API is identical to the one used in TinaCloud, so once you're ready to deploy your application you won't face any challenges there.\n\nOpen [`http://localhost:3000`](http://localhost:3000) in your browser to see your file-based content being loaded from the GraphQL API.\n\nWant to learn more? Go through the [Learning Guide](https://tina.io/docs/beginner-tutorials/tutorial-overview) to understand how to customise your TinaCMS experience.\n\n## Connect to Tina Cloud\n\nWhile the fully-local development workflow is the recommended way for developers to work,\nyou'll obviously want other editors and collaborators to be able to make changes on a hosted website with authentication.\n\nCheck out the docs on how to connect to our hosted backend - [Going to Production with TinaCloud](https://tina.io/docs/tina-cloud/overview)\n\n## Deploy\n\nSites using TinaCMS and TinaCloud can be deployed to lots of hosting providers.\n\nWe have documented some of the popular ones:\n\n* [Vercel](https://tina.io/docs/tina-cloud/deployment-options/vercel)\n* [Netlify](https://tina.io/docs/tina-cloud/deployment-options/netlify)\n* [GitHub Pages](https://tina.io/docs/tina-cloud/deployment-options/github-pages)\n* [Alibaba Cloud](https://tina.io/docs/tina-cloud/deployment-options/alibaba-cloud)\n\nIf your favourite isn't listed here, it doesn't mean that it isn't supported - we just don't have documentation for it yet.\n\n***\n\n## Getting Help\n\nYou might face issues, want to provide feedback or get help with any challenges you may have:\n\n* Read the [TinaCloud documentation](https://tina.io/docs/tina-cloud/).\n* [Join our Discord](https://discord.gg/zumN63Ybpf).\n* Visit the [community forum](https://community.tinacms.org/) to ask questions.\n* Reach out to us on Twitter at [@TinaCMS](https://x.com/tinacms).\n* [Email us](mailto\\:support@tina.io) to schedule a call with our team and share more about your context and what you're trying to achieve.\n\n## LICENSE\n\nLicensed under the [Apache 2.0 license](./LICENSE).\n"
+  - background: bg-secondary
+    headline: Jeroen van der Hoff
+    tagline: Body Therapist & NIS Therapeut met internationale ervaring
+    actions:
+      - label: Maak een afspraak
+        type: button
+        icon:
+          name: BiCalendar
+          color: white
+        link: /contact
+      - label: Bekijk tarieven
+        type: link
+        link: /tarieven
+    image:
+      src: /uploads/jeroen-photo.jpg
+      alt: Jeroen van der Hoff - Body Therapist
+    _template: hero
+  - background: ""
+    body: >
+      ## Mijn achtergrond
+
+
+      Ik ben Jeroen van der Hoff, oorspronkelijk afkomstig uit Wormerveer. Na 15
+      jaar in Nieuw-Zeeland te hebben gewoond en gewerkt, ben ik in juni 2003
+      teruggekeerd naar Nederland. Sinds oktober 2015 is mijn praktijk gevestigd
+      in Monumento Urbano, Musical 23, 1507 TS Zaandam.
+
+
+      ## Opleiding en kwalificaties
+
+
+      Ik heb een diploma in Body Therapies behaald aan het New Zealand College
+      of Massage, een opleiding die drie jaar duurde. Deze training omvatte:
+
+
+      - Therapeutische massage
+      - Sportmassage
+      - Lymfedrainage
+      - Massage voor ouderen
+      - Palliatieve massage
+      - En aanverwante modaliteiten
+
+
+      ## Professionele ervaring
+
+
+      Voordat ik in januari 2005 mijn eigen praktijk begon, werkte ik als
+      Manager of Quality Systems voor een multinational. Deze achtergrond in
+      kwaliteitssystemen komt nu goed van pas in mijn therapeutische praktijk,
+      waar precisie en zorgvuldigheid essentieel zijn.
+
+
+      Sinds de start van mijn praktijk ben ik twee keer verhuisd - eerst in 2011
+      naar Koog aan de Zaan, en vervolgens in 2015 naar de huidige locatie in
+      Zaandam.
     _template: content
+  - background: bg-secondary
+    title: NIS Specialisatie
+    description: >-
+      Mijn ontdekking en specialisatie in Neurolink NIS is voortgekomen uit
+      persoonlijke ervaring
+    items:
+      - icon:
+          name: BiHeart
+          color: orange
+          style: float
+        title: Persoonlijke ervaring
+        text: >
+          Ik ontdekte Neurolink® NIS in 2001 door persoonlijke ervaring met de
+          leerverbeteringen van mijn dochter. Deze positieve uitkomsten
+          inspireerden mij om me verder in deze methode te verdiepen.
+      - icon:
+          name: BiBookOpen
+          color: orange
+          style: float
+        title: Formele training
+        text: >
+          Ik heb de volledige NIS-training afgerond en ben geregistreerd als
+          Academy Member. Deze registratie vereist continue scholing en
+          professionele ontwikkeling.
+      - icon:
+          name: BiWorld
+          color: orange
+          style: float
+        title: Continue educatie
+        text: >
+          Jaarlijks volg ik voortgezette scholing bij NIS Masters in Freising,
+          Duitsland. Dit zorgt ervoor dat ik op de hoogte blijf van de nieuwste
+          ontwikkelingen binnen NIS.
+    _template: features
+  - background: ""
+    body: >
+      ## Mijn aanpak
+
+
+      In mijn praktijk combineer ik mijn achtergrond in body therapies met mijn
+      specialisatie in NIS. Deze combinatie stelt mij in staat om cliënten op
+      meerdere niveaus te helpen - zowel met hands-on behandelingen als met de
+      diepgaande neurologische aanpak die NIS biedt.
+
+
+      Ik geloof sterk in het vermogen van het lichaam om zichzelf te genezen
+      wanneer de juiste ondersteuning wordt geboden. Mijn rol als therapeut is
+      om die ondersteuning te bieden en het natuurlijke genezingsproces van het
+      lichaam te faciliteren.
+
+
+      ## Praktijklocaties
+
+
+      - **Hoofdlocatie**: Monumento Urbano, Musical 23, 1507 TS Zaandam (sinds
+      oktober 2015)
+      - **Vorige locaties**: Koog aan de Zaan (2011-2015), eerste
+      praktijklocatie (2005-2011)
+    _template: content
+  - background: bg-primary
+    title: Neem contact op
+    description: >-
+      Heeft u vragen over mijn achtergrond, opleiding of werkwijze? Neem gerust
+      contact met mij op.
+    actions:
+      - label: Bel 06-12261363
+        type: button
+        icon:
+          name: BiPhone
+          color: white
+          style: ""
+        link: tel:0612261363
+      - label: Email versturen
+        type: link
+        link: mailto:jeroen@bodytherapist.nl
+    _template: cta
 ---
 
