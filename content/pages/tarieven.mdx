@@ -20,18 +20,39 @@ blocks:
       alt: Praktische informatie
     _template: hero
   - background: ''
-    title: Tarieven
+    title: Behandeltarieven
     description: >-
       Actuele prijzen voor behandelingen in de kliniek (geldig vanaf 1 februari
       2023)
-    stats:
-      - stat: €120
-        type: Intake + behandeling (90 min)
-      - stat: €100
-        type: Vervolgbehandeling (60 min)
-      - stat: €150
-        type: Vervolgbehandeling (90 min)
-    _template: stats
+    items:
+      - icon:
+          name: BiCalendarPlus
+          color: orange
+          style: float
+        title: €120
+        text: |
+          **Intake + behandeling**
+
+          90 minuten
+      - icon:
+          name: BiTime
+          color: orange
+          style: float
+        title: €100
+        text: |
+          **Vervolgbehandeling**
+
+          60 minuten
+      - icon:
+          name: BiTimeFive
+          color: orange
+          style: float
+        title: €150
+        text: |
+          **Vervolgbehandeling**
+
+          90 minuten
+    _template: features
   - background: bg-secondary
     title: Extra kosten
     description: Toeslagen voor behandelingen buiten reguliere tijden en locaties
