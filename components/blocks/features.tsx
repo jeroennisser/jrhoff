@@ -54,7 +54,7 @@ export const Feature: React.FC<PageBlocksFeaturesItems> = (data) => {
 
         <h3
           data-tina-field={tinaField(data, "title")}
-          className="mt-6 font-medium"
+          className="mt-6"
         >
           {data.title}
         </h3>
