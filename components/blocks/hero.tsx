@@ -90,7 +90,7 @@ export const Hero = ({ data }: { data: PageBlocksHero }) => {
         </AnimatedGroup>
       </div>
 
-      {data.image && (
+      {data.image && (data.image.src || data.image.videoUrl) && (
         <AnimatedGroup variants={transitionVariants}>
           <div className='relative -mr-56 mt-8 overflow-hidden px-2 sm:mr-0 sm:mt-12 md:mt-20 max-w-full' data-tina-field={tinaField(data, 'image')}>
             <div aria-hidden className='bg-linear-to-b absolute inset-0 z-10 from-transparent from-35% pointer-events-none' style={gradientStyle} />
