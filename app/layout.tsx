@@ -1,6 +1,6 @@
 import React from "react";
 import { Metadata } from "next";
-import { Inter as FontSans, Lato, Nunito } from "next/font/google";
+import { Inter as FontSans, Lato, Nunito, Libre_Baskerville } from "next/font/google";
 import { cn } from "@/lib/utils";
 import { VideoDialogProvider } from "@/components/ui/VideoDialogContext";
 import VideoDialog from "@/components/ui/VideoDialog";
@@ -24,6 +24,12 @@ const lato = Lato({
   weight: "400",
 });
 
+const libreBaskerville = Libre_Baskerville({
+  subsets: ["latin"],
+  variable: "--font-libre-baskerville",
+  weight: ["400", "700"],
+});
+
 export const metadata: Metadata = {
   title: "Jeroen van der Hoff - Body Therapist & NIS Therapeut Zaandam",
   description: "Body Therapist en NIS Therapeut in Zaandam. Professionele behandelingen met Neurolink NIS voor diverse klachten. KvK: 34337856",
@@ -35,7 +41,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="nl" className={cn(fontSans.variable, nunito.variable, lato.variable)}>
+    <html lang="nl" className={cn(fontSans.variable, nunito.variable, lato.variable, libreBaskerville.variable)}>
       <body className="min-h-screen bg-background font-sans antialiased">
         <VideoDialogProvider>
           {children}

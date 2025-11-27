@@ -58,8 +58,8 @@ const iconColorClass: {
     circle: 'bg-purple-400 dark:bg-purple-500 text-purple-50',
   },
   orange: {
-    regular: 'text-orange-400',
-    circle: 'bg-orange-400 dark:bg-orange-500 text-orange-50',
+    regular: 'text-[#EB5A3C]',
+    circle: 'bg-[#EB5A3C] text-white',
   },
   yellow: {
     regular: 'text-yellow-400',

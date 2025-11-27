@@ -3,7 +3,7 @@
     "icon": {
       "name": "BiHealth",
       "color": "orange",
-      "style": "float"
+      "style": "circle"
     },
     "name": "Jeroen van der Hoff",
     "color": "default",

@@ -16,7 +16,7 @@ export const Header = () => {
       <nav
         data-state={menuState && 'active'}
         className="bg-background/50 fixed z-20 w-full border-b backdrop-blur-3xl">
-        <div className="mx-auto max-w-6xl px-6 transition-all duration-300">
+        <div className="mx-auto max-w-5xl px-6 transition-all duration-300">
           <div className="relative flex flex-wrap items-center justify-between gap-6 py-3 lg:gap-0 lg:py-4">
             <div className="flex w-full items-center justify-between gap-12">
               <Link
@@ -50,7 +50,7 @@ export const Header = () => {
                     <li key={index}>
                       <Link
                         href={item!.href!}
-                        className="text-muted-foreground hover:text-accent-foreground block duration-150">
+                        className="text-muted-foreground hover:text-primary transition-colors duration-150">
                         <span>{item!.label}</span>
                       </Link>
                     </li>
@@ -66,7 +66,7 @@ export const Header = () => {
                     <li key={index}>
                       <Link
                         href={item!.href!}
-                        className="text-muted-foreground hover:text-accent-foreground block duration-150">
+                        className="text-muted-foreground hover:text-primary transition-colors duration-150">
                         <span>{item!.label}</span>
                       </Link>
                     </li>
