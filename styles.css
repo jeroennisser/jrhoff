@@ -503,6 +503,7 @@ p {
       linear-gradient(0deg, transparent 0%, transparent calc(100% - 180px), color-mix(in srgb, var(--page-accent) 40%, #7D9D7F 60%) calc(100% - 180px), color-mix(in srgb, var(--page-accent) 40%, #7D9D7F 60%) calc(100% - 40px), transparent calc(100% - 40px));
     opacity: 0.7;
     pointer-events: none;
+    z-index: -1;
   }
 
   .bg-geo-solid-mixed::after {
@@ -516,6 +517,7 @@ p {
     left: 5%;
     opacity: 0.8;
     pointer-events: none;
+    z-index: -1;
   }
 
   /* Colorful corners with accent */
@@ -534,6 +536,7 @@ p {
       radial-gradient(circle 120px at 0% 100%, var(--page-accent) 0%, transparent 100%);
     opacity: 0.75;
     pointer-events: none;
+    z-index: -1;
   }
 
   /* Scattered colorful shapes with accent */
@@ -552,6 +555,7 @@ p {
       radial-gradient(circle 90px at 25% 80%, color-mix(in srgb, var(--page-accent) 40%, #7D9D7F 60%) 0%, transparent 100%);
     opacity: 0.7;
     pointer-events: none;
+    z-index: -1;
   }
 
   /* Edge shapes with accent color */
@@ -572,6 +576,7 @@ p {
     right: -80px;
     opacity: 0.8;
     pointer-events: none;
+    z-index: -1;
   }
 
   .bg-geo-edge-color::after {
@@ -584,5 +589,6 @@ p {
     left: -50px;
     opacity: 0.75;
     pointer-events: none;
+    z-index: -1;
   }
 }
