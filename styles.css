@@ -125,3 +125,93 @@ h1, h2, h3, h4, h5, h6 {
     @apply bg-background text-foreground;
   }
 }
+
+/* Interesting background patterns with accent color */
+@layer utilities {
+  /* Subtle gradient background */
+  .bg-gradient-subtle {
+    background: linear-gradient(135deg,
+      oklch(0.98 0.005 80) 0%,
+      oklch(0.97 0.01 40) 100%);
+  }
+
+  /* Accent gradient background */
+  .bg-gradient-accent {
+    background: linear-gradient(135deg,
+      oklch(0.98 0.005 80) 0%,
+      color-mix(in oklch, var(--primary) 5%, oklch(0.98 0.005 80)) 100%);
+  }
+
+  /* Dotted pattern with accent color */
+  .bg-dots-accent {
+    background-image: radial-gradient(
+      circle at 1px 1px,
+      color-mix(in oklch, var(--primary) 8%, transparent) 1px,
+      transparent 0
+    );
+    background-size: 40px 40px;
+  }
+
+  /* Grid pattern with accent color */
+  .bg-grid-accent {
+    background-image:
+      linear-gradient(color-mix(in oklch, var(--primary) 5%, transparent) 1px, transparent 1px),
+      linear-gradient(90deg, color-mix(in oklch, var(--primary) 5%, transparent) 1px, transparent 1px);
+    background-size: 50px 50px;
+  }
+
+  /* Subtle radial gradient from center */
+  .bg-radial-accent {
+    background: radial-gradient(
+      ellipse at center,
+      color-mix(in oklch, var(--primary) 3%, oklch(0.98 0.005 80)) 0%,
+      oklch(0.98 0.005 80) 70%
+    );
+  }
+
+  /* Diagonal stripes - very subtle */
+  .bg-stripes-accent {
+    background-image: repeating-linear-gradient(
+      45deg,
+      transparent,
+      transparent 35px,
+      color-mix(in oklch, var(--primary) 2%, transparent) 35px,
+      color-mix(in oklch, var(--primary) 2%, transparent) 70px
+    );
+  }
+
+  /* Combined: gradient + dots */
+  .bg-gradient-dots {
+    background:
+      radial-gradient(
+        circle at 1px 1px,
+        color-mix(in oklch, var(--primary) 8%, transparent) 1px,
+        transparent 0
+      ),
+      linear-gradient(135deg,
+        oklch(0.98 0.005 80) 0%,
+        color-mix(in oklch, var(--primary) 3%, oklch(0.98 0.005 80)) 100%
+      );
+    background-size: 40px 40px, 100% 100%;
+  }
+
+  /* Secondary background with accent tint */
+  .bg-secondary-accent {
+    background: linear-gradient(135deg,
+      oklch(0.95 0.01 80) 0%,
+      color-mix(in oklch, var(--primary) 3%, oklch(0.95 0.01 80)) 100%
+    );
+  }
+
+  /* Mesh gradient effect */
+  .bg-mesh-accent {
+    background:
+      radial-gradient(at 40% 20%, color-mix(in oklch, var(--primary) 15%, transparent) 0px, transparent 50%),
+      radial-gradient(at 80% 0%, color-mix(in oklch, var(--primary) 10%, transparent) 0px, transparent 50%),
+      radial-gradient(at 0% 50%, color-mix(in oklch, var(--primary) 8%, transparent) 0px, transparent 50%),
+      radial-gradient(at 100% 50%, color-mix(in oklch, var(--primary) 12%, transparent) 0px, transparent 50%),
+      radial-gradient(at 0% 100%, color-mix(in oklch, var(--primary) 8%, transparent) 0px, transparent 50%),
+      radial-gradient(at 100% 100%, color-mix(in oklch, var(--primary) 10%, transparent) 0px, transparent 50%),
+      oklch(0.98 0.005 80);
+  }
+}

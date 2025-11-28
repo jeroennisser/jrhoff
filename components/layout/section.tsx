@@ -25,6 +25,19 @@ export const tailwindBackgroundOptions = [
   { label: "Primary", value: "bg-primary" },
   { label: "Secondary", value: "bg-secondary" },
   { label: "White", value: "bg-white" },
+
+  // New accent-based backgrounds
+  { label: "🎨 Gradient Subtle", value: "bg-gradient-subtle" },
+  { label: "🎨 Gradient Accent", value: "bg-gradient-accent" },
+  { label: "🎨 Dots Pattern", value: "bg-dots-accent" },
+  { label: "🎨 Grid Pattern", value: "bg-grid-accent" },
+  { label: "🎨 Radial Accent", value: "bg-radial-accent" },
+  { label: "🎨 Stripes Pattern", value: "bg-stripes-accent" },
+  { label: "🎨 Gradient + Dots", value: "bg-gradient-dots" },
+  { label: "🎨 Secondary Accent", value: "bg-secondary-accent" },
+  { label: "🎨 Mesh Gradient", value: "bg-mesh-accent" },
+
+  // Original colors
   { label: "Gray", value: "bg-gray-50" },
   { label: "Zinc", value: "bg-zinc-50" },
   { label: "Black", value: "bg-black" },
