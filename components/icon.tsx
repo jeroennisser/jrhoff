@@ -115,6 +115,7 @@ export const Icon = ({ data, parentColor = '', className = '', tinaField = '' })
       <IconSVG
         {...(tinaField ? { 'data-tina-field': tinaField } : {})} // only render data-tina-field if it exists
         className={`${iconSizeClasses} ${iconColorClasses} ${className}`}
+        style={{ strokeWidth: '0.5px' }}
       />
     );
   }

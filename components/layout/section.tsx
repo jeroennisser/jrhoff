@@ -43,6 +43,14 @@ export const tailwindBackgroundOptions = [
   { label: "🎨 Wave Pattern", value: "bg-waves-accent" },
   { label: "🎨 Scattered Circles", value: "bg-scatter-circles" },
 
+  // Geometric patterns (circles and squares)
+  { label: "⬛ Geometric Subtle", value: "bg-geometric-subtle" },
+  { label: "⬛ Geometric Scattered", value: "bg-geometric-scattered" },
+  { label: "⬛ Geometric Squares", value: "bg-geometric-squares" },
+  { label: "⬛ Geometric Mixed", value: "bg-geometric-mixed" },
+  { label: "⬛ Geometric Asymmetric", value: "bg-geometric-asymmetric" },
+  { label: "⬛ Geometric Edges", value: "bg-geometric-edges" },
+
   // Original colors
   { label: "Gray", value: "bg-gray-50" },
   { label: "Zinc", value: "bg-zinc-50" },

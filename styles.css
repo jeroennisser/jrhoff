@@ -314,6 +314,103 @@ p {
 
   /* Thinner icon strokes */
   svg {
-    stroke-width: 1;
+    stroke-width: 0.5;
+  }
+
+  /* Make card icons thinner and more subtle */
+  .card svg,
+  [class*="Card"] svg {
+    stroke-width: 1.5;
+    fill: currentColor;
+    opacity: 0.85;
+  }
+
+  /* Geometric decorative elements - circles and squares scattered */
+  .bg-geometric-subtle {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .bg-geometric-subtle::before,
+  .bg-geometric-subtle::after {
+    content: '';
+    position: absolute;
+    pointer-events: none;
+  }
+
+  /* Large circle top-right */
+  .bg-geometric-subtle::before {
+    width: 400px;
+    height: 400px;
+    background: color-mix(in oklch, var(--primary) 8%, transparent);
+    border-radius: 50%;
+    top: -200px;
+    right: -100px;
+  }
+
+  /* Medium circle bottom-left */
+  .bg-geometric-subtle::after {
+    width: 250px;
+    height: 250px;
+    background: color-mix(in oklch, var(--primary) 6%, transparent);
+    border-radius: 50%;
+    bottom: 50px;
+    left: -80px;
+  }
+
+  /* Scattered geometric shapes */
+  .bg-geometric-scattered {
+    background-image:
+      radial-gradient(circle 180px at 10% 20%, color-mix(in oklch, var(--primary) 10%, transparent) 0%, transparent 100%),
+      radial-gradient(circle 140px at 90% 15%, color-mix(in oklch, var(--primary) 8%, transparent) 0%, transparent 100%),
+      radial-gradient(circle 100px at 5% 80%, color-mix(in oklch, var(--primary) 6%, transparent) 0%, transparent 100%),
+      radial-gradient(circle 120px at 85% 85%, color-mix(in oklch, var(--primary) 7%, transparent) 0%, transparent 100%);
+    background-color: oklch(0.98 0.005 80);
+  }
+
+  /* Geometric with squares - using linear gradients to create square shapes */
+  .bg-geometric-squares {
+    background-image:
+      linear-gradient(90deg, transparent 0%, transparent calc(50% - 80px), color-mix(in oklch, var(--primary) 4%, transparent) calc(50% - 80px), color-mix(in oklch, var(--primary) 4%, transparent) calc(50% - 60px), transparent calc(50% - 60px)),
+      linear-gradient(0deg, transparent 0%, transparent calc(30% - 60px), color-mix(in oklch, var(--primary) 5%, transparent) calc(30% - 60px), color-mix(in oklch, var(--primary) 5%, transparent) calc(30% - 40px), transparent calc(30% - 40px)),
+      radial-gradient(circle 150px at 15% 70%, color-mix(in oklch, var(--primary) 8%, transparent) 0%, transparent 100%),
+      radial-gradient(circle 200px at 88% 25%, color-mix(in oklch, var(--primary) 6%, transparent) 0%, transparent 100%);
+    background-color: oklch(0.98 0.005 80);
+  }
+
+  /* Mixed circles and rounded squares */
+  .bg-geometric-mixed {
+    position: relative;
+    background: oklch(0.98 0.005 80);
+  }
+
+  .bg-geometric-mixed::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+      radial-gradient(circle 200px at 8% 15%, color-mix(in oklch, var(--primary) 9%, transparent) 0%, transparent 100%),
+      radial-gradient(circle 150px at 92% 80%, color-mix(in oklch, var(--primary) 7%, transparent) 0%, transparent 100%),
+      radial-gradient(circle 120px at 50% 50%, color-mix(in oklch, var(--primary) 5%, transparent) 0%, transparent 100%);
+    pointer-events: none;
+  }
+
+  /* Asymmetric geometric layout */
+  .bg-geometric-asymmetric {
+    background-image:
+      radial-gradient(circle 220px at 12% 25%, color-mix(in oklch, var(--primary) 10%, transparent) 0%, transparent 100%),
+      radial-gradient(circle 160px at 85% 30%, color-mix(in oklch, var(--primary) 7%, transparent) 0%, transparent 100%),
+      radial-gradient(circle 130px at 25% 75%, color-mix(in oklch, var(--primary) 6%, transparent) 0%, transparent 100%),
+      radial-gradient(circle 90px at 70% 85%, color-mix(in oklch, var(--primary) 8%, transparent) 0%, transparent 100%);
+    background-color: oklch(0.98 0.005 80);
+  }
+
+  /* Edge circles - circles peeking from edges */
+  .bg-geometric-edges {
+    background-image:
+      radial-gradient(circle 300px at -100px 100px, color-mix(in oklch, var(--primary) 12%, transparent) 0%, transparent 100%),
+      radial-gradient(circle 250px at calc(100% + 80px) 40%, color-mix(in oklch, var(--primary) 10%, transparent) 0%, transparent 100%),
+      radial-gradient(circle 180px at 50% calc(100% + 60px), color-mix(in oklch, var(--primary) 8%, transparent) 0%, transparent 100%);
+    background-color: oklch(0.98 0.005 80);
   }
 }
