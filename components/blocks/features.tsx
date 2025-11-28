@@ -1,4 +1,5 @@
 "use client";
+import { useState } from "react";
 import {
   PageBlocksFeatures,
   PageBlocksFeaturesItems,
@@ -11,6 +12,7 @@ import { iconSchema } from "../../tina/fields/icon";
 import { Card, CardContent, CardHeader } from "../ui/card";
 import { Section } from "../layout/section";
 import { sectionBlockSchemaField } from '../layout/section';
+import { ChevronDown, ChevronUp } from "lucide-react";
 
 export const Features = ({ data }: { data: PageBlocksFeatures }) => {
   return (
@@ -40,6 +42,45 @@ const CardDecorator = ({ children }: { children: React.ReactNode }) => (
 )
 
 export const Feature: React.FC<PageBlocksFeaturesItems> = (data) => {
+  const [isExpanded, setIsExpanded] = useState(false);
+
+  // Convert rich text to plain text for length checking
+  const getPlainText = (content: any): string => {
+    if (!content) return '';
+    if (typeof content === 'string') return content;
+
+    let text = '';
+    const extract = (item: any): void => {
+      if (!item) return;
+
+      if (typeof item === 'string') {
+        text += item;
+        return;
+      }
+
+      if (Array.isArray(item)) {
+        item.forEach(extract);
+        return;
+      }
+
+      if (item.text) {
+        text += item.text;
+      }
+
+      if (item.children) {
+        extract(item.children);
+      }
+    };
+
+    extract(content);
+    return text;
+  };
+
+  const plainText = getPlainText(data.text);
+  const MAX_LENGTH = 150;
+  const shouldTruncate = plainText.length > MAX_LENGTH;
+  const truncatedText = shouldTruncate ? plainText.substring(0, MAX_LENGTH) + '...' : plainText;
+
   return (
     <Card className="group text-center shadow-zinc-950/5">
       <CardHeader className="pb-3">
@@ -61,10 +102,33 @@ export const Feature: React.FC<PageBlocksFeaturesItems> = (data) => {
       </CardHeader>
 
       <CardContent className="text-sm pb-8">
-        <TinaMarkdown
-          data-tina-field={tinaField(data, "text")}
-          content={data.text}
-        />
+        <div data-tina-field={tinaField(data, "text")}>
+          {isExpanded || !shouldTruncate ? (
+            <TinaMarkdown content={data.text} />
+          ) : (
+            <p>{truncatedText}</p>
+          )}
+        </div>
+
+        {shouldTruncate && (
+          <button
+            onClick={() => setIsExpanded(!isExpanded)}
+            className="mt-4 inline-flex items-center gap-1 text-sm text-primary hover:text-primary/80 transition-colors font-medium"
+            aria-label={isExpanded ? "Lees minder" : "Lees meer"}
+          >
+            {isExpanded ? (
+              <>
+                Lees minder
+                <ChevronUp className="w-4 h-4" />
+              </>
+            ) : (
+              <>
+                Lees meer
+                <ChevronDown className="w-4 h-4" />
+              </>
+            )}
+          </button>
+        )}
       </CardContent>
     </Card>
   );
