@@ -16,14 +16,17 @@ import { sectionBlockSchemaField } from '../layout/section';
 import { ChevronDown, ChevronUp } from "lucide-react";
 
 export const Features = ({ data }: { data: PageBlocksFeatures }) => {
+  const itemCount = data.items?.length || 0;
+  const gridCols = itemCount === 3 ? 'lg:grid-cols-3' : itemCount === 4 ? 'lg:grid-cols-4' : 'lg:grid-cols-3';
+
   return (
     <Section background={data.background!}>
-      <div className="mx-auto">
-        <div className="text-center">
-          <h2 data-tina-field={tinaField(data, 'title')} className="text-balance text-4xl font-semibold lg:text-5xl">{data.title}</h2>
-          <p data-tina-field={tinaField(data, 'description')} className="mt-4">{data.description}</p>
+      <div className="mx-auto max-w-7xl">
+        <div className="text-center mx-auto">
+          <h2 data-tina-field={tinaField(data, 'title')} className="text-balance text-3xl md:text-4xl font-bold tracking-tight">{data.title}</h2>
+          <p data-tina-field={tinaField(data, 'description')} className="mt-3 text-base md:text-lg text-gray-600 font-normal max-w-3xl mx-auto">{data.description}</p>
         </div>
-        <div className="mx-auto mt-8 grid gap-8 md:mt-16 md:grid-cols-2 lg:grid-cols-3">
+        <div className={`mx-auto mt-12 grid gap-6 md:grid-cols-2 ${gridCols} max-w-6xl`}>
           {data.items &&
             data.items.map(function (block, i) {
               return <Feature key={i} {...block!} />;
@@ -35,10 +38,8 @@ export const Features = ({ data }: { data: PageBlocksFeatures }) => {
 }
 
 const CardDecorator = ({ children }: { children: React.ReactNode }) => (
-  <div className="relative mx-auto size-36 duration-200 [--color-border:color-mix(in_oklab,var(--color-zinc-950)10%,transparent)] group-hover:[--color-border:color-mix(in_oklab,var(--color-zinc-950)20%,transparent)] dark:[--color-border:color-mix(in_oklab,var(--color-white)15%,transparent)] dark:group-hover:bg-white/5 dark:group-hover:[--color-border:color-mix(in_oklab,var(--color-white)20%,transparent)]">
-    <div aria-hidden className="absolute inset-0 bg-[linear-gradient(to_right,var(--color-border)_1px,transparent_1px),linear-gradient(to_bottom,var(--color-border)_1px,transparent_1px)] bg-[size:24px_24px]" />
-    <div aria-hidden className="bg-radial to-background absolute inset-0 from-transparent to-75%" />
-    <div className="bg-background absolute inset-0 m-auto flex size-12 items-center justify-center border-l border-t">{children}</div>
+  <div className="relative mx-auto w-20 h-20 flex items-center justify-center rounded-full bg-gradient-to-br from-primary/5 to-primary/10 group-hover:from-primary/10 group-hover:to-primary/15 transition-all duration-200">
+    <div className="scale-110">{children}</div>
   </div>
 )
 
@@ -92,10 +93,14 @@ export const Feature: React.FC<PageBlocksFeaturesItems> = (data) => {
 
   return (
     <Card
-      className={`group text-center shadow-zinc-950/5 ${hasLink ? 'cursor-pointer hover:shadow-md transition-shadow' : ''}`}
+      className={`group text-center shadow-sm border-zinc-200 rounded-xl h-full flex flex-col ${
+        hasLink
+          ? 'cursor-pointer hover:shadow-lg hover:-translate-y-1 transition-all duration-150 ease-out'
+          : ''
+      }`}
       onClick={handleCardClick}
     >
-      <CardHeader className="pb-3">
+      <CardHeader className="pb-4">
         <CardDecorator>
           {data.icon && (
             <Icon
@@ -105,45 +110,48 @@ export const Feature: React.FC<PageBlocksFeaturesItems> = (data) => {
           )}
         </CardDecorator>
 
-        <h3
-          data-tina-field={tinaField(data, "title")}
-          className="mt-6"
-        >
-          {data.title}
-        </h3>
+        <div data-tina-field={tinaField(data, "title")}>
+          <h3 className="mt-6 font-semibold text-sm">
+            {data.title}
+          </h3>
+        </div>
       </CardHeader>
 
-      <CardContent className="text-sm pb-8">
-        <div data-tina-field={tinaField(data, "text")}>
+      <CardContent className="text-sm pb-6 flex-grow flex flex-col">
+        <div data-tina-field={tinaField(data, "text")} className="text-gray-600 flex-grow leading-relaxed">
           {isExpanded || !shouldTruncate ? (
-            <TinaMarkdown content={data.text} />
+            <div className="leading-relaxed">
+              <TinaMarkdown content={data.text} />
+            </div>
           ) : (
-            <div>{truncatedText}</div>
+            <div className="leading-relaxed">{truncatedText}</div>
           )}
         </div>
 
         {shouldTruncate && (
-          <button
-            onClick={(e) => {
-              e.preventDefault();
-              e.stopPropagation();
-              setIsExpanded(!isExpanded);
-            }}
-            className="mt-4 inline-flex items-center gap-1 text-sm text-primary hover:text-primary/80 transition-colors font-medium cursor-pointer"
-            aria-label={isExpanded ? "Lees minder" : "Lees meer"}
-          >
-            {isExpanded ? (
-              <>
-                Lees minder
-                <ChevronUp className="w-4 h-4" />
-              </>
-            ) : (
-              <>
-                Lees meer
-                <ChevronDown className="w-4 h-4" />
-              </>
-            )}
-          </button>
+          <div className="flex justify-center mt-4">
+            <button
+              onClick={(e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                setIsExpanded(!isExpanded);
+              }}
+              className="inline-flex items-center gap-1 text-sm text-primary hover:text-primary/80 transition-colors font-medium cursor-pointer"
+              aria-label={isExpanded ? "Lees minder" : "Lees meer"}
+            >
+              {isExpanded ? (
+                <>
+                  Lees minder
+                  <ChevronUp className="w-4 h-4" />
+                </>
+              ) : (
+                <>
+                  Lees meer
+                  <ChevronDown className="w-4 h-4" />
+                </>
+              )}
+            </button>
+          </div>
         )}
       </CardContent>
     </Card>

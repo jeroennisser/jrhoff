@@ -36,6 +36,12 @@ export const tailwindBackgroundOptions = [
   { label: "🎨 Gradient + Dots", value: "bg-gradient-dots" },
   { label: "🎨 Secondary Accent", value: "bg-secondary-accent" },
   { label: "🎨 Mesh Gradient", value: "bg-mesh-accent" },
+  { label: "🎨 Floating Circles", value: "bg-circles-accent" },
+  { label: "🎨 Blurry Blobs", value: "bg-blobs-accent" },
+  { label: "🎨 Soft Orbs", value: "bg-orbs-accent" },
+  { label: "🎨 Gradient Circles", value: "bg-gradient-circles" },
+  { label: "🎨 Wave Pattern", value: "bg-waves-accent" },
+  { label: "🎨 Scattered Circles", value: "bg-scatter-circles" },
 
   // Original colors
   { label: "Gray", value: "bg-gray-50" },

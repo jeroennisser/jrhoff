@@ -62,24 +62,29 @@ export const Hero = ({ data }: { data: PageBlocksHero }) => {
       <div className='text-center sm:mx-auto lg:mr-auto lg:mt-0'>
         {data.headline && (
           <div data-tina-field={tinaField(data, 'headline')}>
-            <TextEffect preset='fade-in-blur' speedSegment={0.3} as='h1' className='mt-8 text-balance text-6xl md:text-7xl xl:text-[5.25rem]'>
+            <TextEffect preset='fade-in-blur' speedSegment={0.3} as='h1' className='mt-8 text-balance text-4xl md:text-5xl xl:text-6xl tracking-tight font-bold leading-tight'>
               {data.headline!}
             </TextEffect>
           </div>
         )}
         {data.tagline && (
           <div data-tina-field={tinaField(data, 'tagline')}>
-            <TextEffect per='line' preset='fade-in-blur' speedSegment={0.3} delay={0.5} as='p' className='mx-auto mt-8 max-w-2xl text-balance text-lg'>
+            <TextEffect per='line' preset='fade-in-blur' speedSegment={0.3} delay={0.5} as='p' className='mx-auto mt-5 md:mt-6 max-w-2xl text-balance text-lg md:text-xl text-gray-600 font-normal leading-relaxed'>
               {data.tagline!}
             </TextEffect>
           </div>
         )}
 
-        <AnimatedGroup variants={transitionVariants} className='mt-12 flex flex-col items-center justify-center gap-2 md:flex-row'>
+        <AnimatedGroup variants={transitionVariants} className='mt-10 md:mt-12 flex flex-col items-center justify-center gap-3 md:flex-row'>
           {data.actions &&
-            data.actions.map((action) => (
-              <div key={action!.label} data-tina-field={tinaField(action)} className='bg-foreground/10 rounded-[calc(var(--radius-xl)+0.125rem)] border p-0.5'>
-                <Button asChild size='lg' variant={action!.type === 'link' ? 'ghost' : 'default'} className='rounded-xl px-5 text-base'>
+            data.actions.map((action, index) => (
+              <div key={action!.label} data-tina-field={tinaField(action)}>
+                <Button
+                  asChild
+                  size='lg'
+                  variant={action!.type === 'link' ? 'outline' : 'default'}
+                  className='rounded-xl px-7 py-3 text-base transition-all duration-150 ease-out hover:scale-[1.02]'
+                >
                   <Link href={action!.link!}>
                     {action?.icon && <Icon data={action?.icon} />}
                     <span className='text-nowrap'>{action!.label}</span>
