@@ -413,4 +413,171 @@ p {
       radial-gradient(circle 180px at 50% calc(100% + 60px), color-mix(in oklch, var(--primary) 8%, transparent) 0%, transparent 100%);
     background-color: oklch(0.98 0.005 80);
   }
+
+  /* Solid colored geometric shapes - no blur */
+  .bg-geo-solid-squares {
+    position: relative;
+    background: oklch(0.98 0.005 80);
+    overflow: hidden;
+  }
+
+  .bg-geo-solid-squares::before,
+  .bg-geo-solid-squares::after {
+    content: '';
+    position: absolute;
+    pointer-events: none;
+  }
+
+  /* Yellow square top-right */
+  .bg-geo-solid-squares::before {
+    width: 180px;
+    height: 180px;
+    background: #E8D67A;
+    top: -40px;
+    right: 100px;
+    opacity: 0.8;
+  }
+
+  /* Green square bottom-left */
+  .bg-geo-solid-squares::after {
+    width: 150px;
+    height: 150px;
+    background: #7D9D7F;
+    bottom: 80px;
+    left: -40px;
+    opacity: 0.8;
+  }
+
+  /* Orange circles solid */
+  .bg-geo-solid-circles {
+    position: relative;
+    background: oklch(0.98 0.005 80);
+    overflow: hidden;
+  }
+
+  .bg-geo-solid-circles::before,
+  .bg-geo-solid-circles::after {
+    content: '';
+    position: absolute;
+    border-radius: 50%;
+    pointer-events: none;
+  }
+
+  /* Large orange circle top-right */
+  .bg-geo-solid-circles::before {
+    width: 200px;
+    height: 200px;
+    background: #EB5A3C;
+    top: -80px;
+    right: -60px;
+    opacity: 0.85;
+  }
+
+  /* Medium orange circle bottom-left */
+  .bg-geo-solid-circles::after {
+    width: 140px;
+    height: 140px;
+    background: #EB5A3C;
+    bottom: 100px;
+    left: -50px;
+    opacity: 0.75;
+  }
+
+  /* Mixed solid shapes - squares and circles */
+  .bg-geo-solid-mixed {
+    position: relative;
+    background: oklch(0.98 0.005 80);
+  }
+
+  .bg-geo-solid-mixed::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(90deg, transparent 0%, transparent calc(100% - 200px), #E8D67A calc(100% - 200px), #E8D67A calc(100% - 50px), transparent calc(100% - 50px)),
+      linear-gradient(0deg, transparent 0%, transparent calc(100% - 180px), #7D9D7F calc(100% - 180px), #7D9D7F calc(100% - 40px), transparent calc(100% - 40px));
+    opacity: 0.7;
+    pointer-events: none;
+  }
+
+  .bg-geo-solid-mixed::after {
+    content: '';
+    position: absolute;
+    width: 120px;
+    height: 120px;
+    background: #EB5A3C;
+    border-radius: 50%;
+    bottom: 50px;
+    left: 5%;
+    opacity: 0.8;
+    pointer-events: none;
+  }
+
+  /* Colorful corners */
+  .bg-geo-corners {
+    position: relative;
+    background: oklch(0.98 0.005 80);
+  }
+
+  .bg-geo-corners::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+      radial-gradient(circle 160px at 0% 0%, #7D9D7F 0%, transparent 100%),
+      radial-gradient(circle 140px at 100% 0%, #E8D67A 0%, transparent 100%),
+      radial-gradient(circle 120px at 0% 100%, #EB5A3C 0%, transparent 100%);
+    opacity: 0.75;
+    pointer-events: none;
+  }
+
+  /* Scattered colorful shapes */
+  .bg-geo-scattered-color {
+    position: relative;
+    background: oklch(0.98 0.005 80);
+  }
+
+  .bg-geo-scattered-color::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+      radial-gradient(circle 100px at 15% 25%, #EB5A3C 0%, transparent 100%),
+      radial-gradient(circle 80px at 85% 20%, #E8D67A 0%, transparent 100%),
+      radial-gradient(circle 90px at 25% 80%, #7D9D7F 0%, transparent 100%);
+    opacity: 0.7;
+    pointer-events: none;
+  }
+
+  /* Edge shapes with color */
+  .bg-geo-edge-color {
+    position: relative;
+    background: oklch(0.98 0.005 80);
+    overflow: hidden;
+  }
+
+  .bg-geo-edge-color::before {
+    content: '';
+    position: absolute;
+    width: 220px;
+    height: 220px;
+    background: #EB5A3C;
+    border-radius: 50%;
+    top: -100px;
+    right: -80px;
+    opacity: 0.8;
+    pointer-events: none;
+  }
+
+  .bg-geo-edge-color::after {
+    content: '';
+    position: absolute;
+    width: 160px;
+    height: 160px;
+    background: #7D9D7F;
+    bottom: -60px;
+    left: -50px;
+    opacity: 0.75;
+    pointer-events: none;
+  }
 }

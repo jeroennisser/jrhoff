@@ -97,9 +97,9 @@ export const Hero = ({ data }: { data: PageBlocksHero }) => {
 
       {data.image && (data.image.src || data.image.videoUrl) && (
         <AnimatedGroup variants={transitionVariants}>
-          <div className='relative -mr-56 mt-8 overflow-hidden px-2 sm:mr-0 sm:mt-12 md:mt-20 max-w-full' data-tina-field={tinaField(data, 'image')}>
+          <div className='relative -mr-56 mt-8 px-2 sm:mr-0 sm:mt-12 md:mt-20 mb-16 md:mb-24 max-w-full' data-tina-field={tinaField(data, 'image')}>
             <div aria-hidden className='bg-linear-to-b absolute inset-0 z-10 from-transparent from-35% pointer-events-none' style={gradientStyle} />
-            <div className='inset-shadow-2xs ring-background dark:inset-shadow-white/20 bg-background relative mx-auto max-w-5xl overflow-hidden rounded-2xl border p-4 shadow-lg shadow-zinc-950/15 ring-1'>
+            <div className='inset-shadow-2xs ring-background dark:inset-shadow-white/20 bg-background relative mx-auto max-w-5xl overflow-visible rounded-2xl border p-4 shadow-lg shadow-zinc-950/15 ring-1'>
               <ImageBlock image={data.image} />
             </div>
           </div>
