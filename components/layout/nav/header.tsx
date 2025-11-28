@@ -7,6 +7,15 @@ import { Icon } from "../../icon";
 import { useLayout } from "../layout-context";
 import { Menu, X, LogOut } from "lucide-react";
 
+// Page-specific accent colors
+const pageColors: Record<string, string> = {
+  '/': '#EB5A3C',           // Orange - Home
+  '/nis': '#7D9D7F',         // Green - NIS
+  '/about': '#DF9755',       // Warm Orange - About
+  '/tarieven': '#6B9BD1',    // Blue - Tarieven
+  '/contact': '#C97C8C',     // Pink/Rose - Contact
+};
+
 export const Header = () => {
   const { globalSettings, theme } = useLayout();
   const header = globalSettings!.header!;
@@ -14,6 +23,7 @@ export const Header = () => {
   const router = useRouter();
 
   const [menuState, setMenuState] = React.useState(false);
+  const currentPageColor = pageColors[pathname] || '#EB5A3C';
 
   const handleLogout = async () => {
     try {
@@ -24,6 +34,12 @@ export const Header = () => {
       console.error('Logout error:', error);
     }
   };
+
+  // Set CSS custom property for current page color
+  React.useEffect(() => {
+    document.documentElement.style.setProperty('--page-accent', currentPageColor);
+  }, [currentPageColor]);
+
   return (
     <header>
       <nav className="bg-background/50 fixed z-20 w-full border-b backdrop-blur-3xl">
@@ -46,15 +62,17 @@ export const Header = () => {
                 <ul className="flex gap-8 text-sm">
                   {header.nav!.map((item, index) => {
                     const isActive = pathname === item!.href;
+                    const itemColor = pageColors[item!.href!] || '#EB5A3C';
                     return (
                       <li key={index}>
                         <Link
                           href={item!.href!}
-                          className={`text-muted-foreground hover:text-primary transition-colors duration-150 pb-1 border-b-2 ${
+                          className={`transition-colors duration-150 pb-1 border-b-2 ${
                             isActive
-                              ? 'border-primary text-primary'
-                              : 'border-transparent'
-                          }`}>
+                              ? 'border-transparent'
+                              : 'border-transparent text-muted-foreground hover:opacity-70'
+                          }`}
+                          style={isActive ? { color: itemColor, borderBottomColor: itemColor } : {}}>
                           <span>{item!.label}</span>
                         </Link>
                       </li>
@@ -97,6 +115,7 @@ export const Header = () => {
               <ul className="space-y-4 text-base">
                 {header.nav!.map((item, index) => {
                   const isActive = pathname === item!.href;
+                  const itemColor = pageColors[item!.href!] || '#EB5A3C';
                   return (
                     <li key={index}>
                       <Link
@@ -104,9 +123,10 @@ export const Header = () => {
                         onClick={() => setMenuState(false)}
                         className={`transition-colors duration-150 block ${
                           isActive
-                            ? 'text-primary font-semibold'
-                            : 'text-muted-foreground hover:text-primary'
-                        }`}>
+                            ? 'font-semibold'
+                            : 'text-muted-foreground hover:opacity-70'
+                        }`}
+                        style={isActive ? { color: itemColor } : {}}>
                         <span>{item!.label}</span>
                       </Link>
                     </li>

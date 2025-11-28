@@ -94,13 +94,14 @@ p {
   --card-foreground: oklch(0.25 0 0);
   --popover: oklch(0.99 0.003 80);
   --popover-foreground: oklch(0.25 0 0);
-  --primary: #EB5A3C;
+  --page-accent: #EB5A3C;
+  --primary: var(--page-accent);
   --primary-foreground: #FFFFFF;
   --secondary: oklch(0.95 0.01 80);
   --secondary-foreground: oklch(0.25 0 0);
   --muted: oklch(0.95 0.01 80);
   --muted-foreground: oklch(0.50 0.01 0);
-  --accent: #EB5A3C;
+  --accent: var(--page-accent);
   --accent-foreground: #FFFFFF;
   --destructive: oklch(0.577 0.245 27.325);
   --border: oklch(0.90 0.01 80);
@@ -428,27 +429,27 @@ p {
     pointer-events: none;
   }
 
-  /* Yellow square top-right */
+  /* Accent square top-right */
   .bg-geo-solid-squares::before {
     width: 180px;
     height: 180px;
-    background: #E8D67A;
+    background: var(--page-accent);
     top: -40px;
     right: 100px;
-    opacity: 0.8;
+    opacity: 0.65;
   }
 
-  /* Green square bottom-left */
+  /* Accent square bottom-left - lighter variation */
   .bg-geo-solid-squares::after {
     width: 150px;
     height: 150px;
-    background: #7D9D7F;
+    background: var(--page-accent);
     bottom: 80px;
     left: -40px;
-    opacity: 0.8;
+    opacity: 0.45;
   }
 
-  /* Orange circles solid */
+  /* Page accent circles solid */
   .bg-geo-solid-circles {
     position: relative;
     background: oklch(0.98 0.005 80);
@@ -463,21 +464,21 @@ p {
     pointer-events: none;
   }
 
-  /* Large orange circle top-right */
+  /* Large accent circle top-right */
   .bg-geo-solid-circles::before {
     width: 200px;
     height: 200px;
-    background: #EB5A3C;
+    background: var(--page-accent);
     top: -80px;
     right: -60px;
     opacity: 0.85;
   }
 
-  /* Medium orange circle bottom-left */
+  /* Medium accent circle bottom-left */
   .bg-geo-solid-circles::after {
     width: 140px;
     height: 140px;
-    background: #EB5A3C;
+    background: var(--page-accent);
     bottom: 100px;
     left: -50px;
     opacity: 0.75;
@@ -494,8 +495,8 @@ p {
     position: absolute;
     inset: 0;
     background-image:
-      linear-gradient(90deg, transparent 0%, transparent calc(100% - 200px), #E8D67A calc(100% - 200px), #E8D67A calc(100% - 50px), transparent calc(100% - 50px)),
-      linear-gradient(0deg, transparent 0%, transparent calc(100% - 180px), #7D9D7F calc(100% - 180px), #7D9D7F calc(100% - 40px), transparent calc(100% - 40px));
+      linear-gradient(90deg, transparent 0%, transparent calc(100% - 200px), color-mix(in srgb, var(--page-accent) 70%, #E8D67A 30%) calc(100% - 200px), color-mix(in srgb, var(--page-accent) 70%, #E8D67A 30%) calc(100% - 50px), transparent calc(100% - 50px)),
+      linear-gradient(0deg, transparent 0%, transparent calc(100% - 180px), color-mix(in srgb, var(--page-accent) 40%, #7D9D7F 60%) calc(100% - 180px), color-mix(in srgb, var(--page-accent) 40%, #7D9D7F 60%) calc(100% - 40px), transparent calc(100% - 40px));
     opacity: 0.7;
     pointer-events: none;
   }
@@ -505,7 +506,7 @@ p {
     position: absolute;
     width: 120px;
     height: 120px;
-    background: #EB5A3C;
+    background: var(--page-accent);
     border-radius: 50%;
     bottom: 50px;
     left: 5%;
@@ -513,7 +514,7 @@ p {
     pointer-events: none;
   }
 
-  /* Colorful corners */
+  /* Colorful corners with accent */
   .bg-geo-corners {
     position: relative;
     background: oklch(0.98 0.005 80);
@@ -524,14 +525,14 @@ p {
     position: absolute;
     inset: 0;
     background-image:
-      radial-gradient(circle 160px at 0% 0%, #7D9D7F 0%, transparent 100%),
-      radial-gradient(circle 140px at 100% 0%, #E8D67A 0%, transparent 100%),
-      radial-gradient(circle 120px at 0% 100%, #EB5A3C 0%, transparent 100%);
+      radial-gradient(circle 160px at 0% 0%, color-mix(in srgb, var(--page-accent) 50%, #7D9D7F 50%) 0%, transparent 100%),
+      radial-gradient(circle 140px at 100% 0%, color-mix(in srgb, var(--page-accent) 60%, #E8D67A 40%) 0%, transparent 100%),
+      radial-gradient(circle 120px at 0% 100%, var(--page-accent) 0%, transparent 100%);
     opacity: 0.75;
     pointer-events: none;
   }
 
-  /* Scattered colorful shapes */
+  /* Scattered colorful shapes with accent */
   .bg-geo-scattered-color {
     position: relative;
     background: oklch(0.98 0.005 80);
@@ -542,14 +543,14 @@ p {
     position: absolute;
     inset: 0;
     background-image:
-      radial-gradient(circle 100px at 15% 25%, #EB5A3C 0%, transparent 100%),
-      radial-gradient(circle 80px at 85% 20%, #E8D67A 0%, transparent 100%),
-      radial-gradient(circle 90px at 25% 80%, #7D9D7F 0%, transparent 100%);
+      radial-gradient(circle 100px at 15% 25%, var(--page-accent) 0%, transparent 100%),
+      radial-gradient(circle 80px at 85% 20%, color-mix(in srgb, var(--page-accent) 50%, #E8D67A 50%) 0%, transparent 100%),
+      radial-gradient(circle 90px at 25% 80%, color-mix(in srgb, var(--page-accent) 40%, #7D9D7F 60%) 0%, transparent 100%);
     opacity: 0.7;
     pointer-events: none;
   }
 
-  /* Edge shapes with color */
+  /* Edge shapes with accent color */
   .bg-geo-edge-color {
     position: relative;
     background: oklch(0.98 0.005 80);
@@ -561,7 +562,7 @@ p {
     position: absolute;
     width: 220px;
     height: 220px;
-    background: #EB5A3C;
+    background: var(--page-accent);
     border-radius: 50%;
     top: -100px;
     right: -80px;
@@ -574,7 +575,7 @@ p {
     position: absolute;
     width: 160px;
     height: 160px;
-    background: #7D9D7F;
+    background: color-mix(in srgb, var(--page-accent) 40%, #7D9D7F 60%);
     bottom: -60px;
     left: -50px;
     opacity: 0.75;
