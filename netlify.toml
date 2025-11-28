@@ -2,7 +2,7 @@
   package = "@netlify/plugin-nextjs"
 
 [build]
-  command = "npm run build"
+  command = "NODE_OPTIONS='--max-old-space-size=4096' tinacms build --skip-cloud-checks && next build"
 
 [build.environment]
   # Disable secrets scanning for specific environment variables that are safe to expose
