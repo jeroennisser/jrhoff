@@ -1,6 +1,8 @@
+[[plugins]]
+  package = "@netlify/plugin-nextjs"
+
 [build]
   command = "npm run build"
-  publish = ".next"
 
 [build.environment]
   # Disable secrets scanning for specific environment variables that are safe to expose
