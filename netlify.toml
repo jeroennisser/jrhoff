@@ -1,0 +1,7 @@
+[build]
+  command = "npm run build"
+  publish = ".next"
+
+[build.environment]
+  # Disable secrets scanning for TinaCMS generated files
+  SECRETS_SCAN_OMIT_PATHS = "tina/__generated__/**"
