@@ -5,3 +5,10 @@
 [build.environment]
   # Disable secrets scanning for TinaCMS generated files
   SECRETS_SCAN_OMIT_PATHS = "tina/__generated__/**"
+
+# Note: Make sure these environment variables are configured in Netlify dashboard:
+# - NEXT_PUBLIC_TINA_CLIENT_ID
+# - TINA_TOKEN
+# - TINA_SEARCH_TOKEN
+# - NEXT_PUBLIC_TINA_BRANCH
+# - PASSWORD
