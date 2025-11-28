@@ -8,6 +8,12 @@
   # Disable secrets scanning for specific environment variables that are safe to expose
   SECRETS_SCAN_OMIT_KEYS = "NEXT_PUBLIC_TINA_BRANCH,VERCEL_ENV,NEXT_PUBLIC_TINA_CLIENT_ID,TINA_TOKEN"
 
+# Redirect /admin to the TinaCMS admin interface
+[[redirects]]
+  from = "/admin"
+  to = "/admin/index.html"
+  status = 200
+
 # Note: Make sure these environment variables are configured in Netlify dashboard:
 # - NEXT_PUBLIC_TINA_CLIENT_ID
 # - TINA_TOKEN
