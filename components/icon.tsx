@@ -58,7 +58,7 @@ const iconColorClass: {
     circle: 'bg-purple-400 dark:bg-purple-500 text-purple-50',
   },
   orange: {
-    regular: 'text-[#EB5A3C]',
+    regular: 'text-[#EB5A3C] opacity-70',
     circle: 'bg-[#EB5A3C] text-white',
   },
   yellow: {

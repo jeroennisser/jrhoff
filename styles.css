@@ -311,4 +311,9 @@ p {
       radial-gradient(circle 100px at 25% 85%, color-mix(in oklch, var(--primary) 5%, transparent), transparent);
     background-color: oklch(0.98 0.005 80);
   }
+
+  /* Thinner icon strokes */
+  svg {
+    stroke-width: 1;
+  }
 }

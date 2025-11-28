@@ -33,17 +33,10 @@ export const Header = () => {
             <Link
               href="/"
               aria-label="home"
-              className="flex items-center space-x-2">
-              <Icon
-                parentColor={header.color!}
-                data={{
-                  name: header.icon!.name,
-                  color: header.icon!.color,
-                  style: header.icon!.style,
-                }}
-              />{" "}
-              <span>
-                {header.name}
+              className="flex items-center gap-3">
+              <div className="w-10 h-10 rounded-full bg-[#EB5A3C]"></div>
+              <span className="text-xl font-bold text-black tracking-wide">
+                JRHOFF
               </span>
             </Link>
 

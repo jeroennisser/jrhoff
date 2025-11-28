@@ -38,8 +38,8 @@ export const Features = ({ data }: { data: PageBlocksFeatures }) => {
 }
 
 const CardDecorator = ({ children }: { children: React.ReactNode }) => (
-  <div className="relative mx-auto w-20 h-20 flex items-center justify-center rounded-full bg-gradient-to-br from-primary/5 to-primary/10 group-hover:from-primary/10 group-hover:to-primary/15 transition-all duration-200">
-    <div className="scale-110">{children}</div>
+  <div className="relative mx-auto flex items-center justify-center">
+    {children}
   </div>
 )
 
