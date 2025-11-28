@@ -10,7 +10,7 @@ export const Section: React.FC<SectionProps> = ({ className, children, backgroun
   return (
     <div className={cn("w-full", background || "bg-default")}>
       <section
-        className={cn("py-12 mx-auto max-w-5xl px-6", className)}
+        className={cn("py-12 mx-auto max-w-5xl px-6 relative z-10", className)}
         {...props}
       >
         {children}
@@ -43,6 +43,18 @@ export const tailwindBackgroundOptions = [
   { label: "🎨 Wave Pattern", value: "bg-waves-accent" },
   { label: "🎨 Scattered Circles", value: "bg-scatter-circles" },
 
+  // Geometric patterns (circles only - no squares)
+  { label: "⬛ Geometric Subtle", value: "bg-geometric-subtle" },
+  { label: "⬛ Geometric Scattered", value: "bg-geometric-scattered" },
+  { label: "⬛ Geometric Mixed", value: "bg-geometric-mixed" },
+  { label: "⬛ Geometric Asymmetric", value: "bg-geometric-asymmetric" },
+  { label: "⬛ Geometric Edges", value: "bg-geometric-edges" },
+
+  // Solid colored circles (no squares)
+  { label: "🟠 Solid Circles", value: "bg-geo-solid-circles" },
+  { label: "🎨 Colorful Corners", value: "bg-geo-corners" },
+  { label: "🎨 Scattered Colors", value: "bg-geo-scattered-color" },
+  { label: "🎨 Edge Colors", value: "bg-geo-edge-color" },
 
   // Original colors
   { label: "Gray", value: "bg-gray-50" },

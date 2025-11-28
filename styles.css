@@ -370,16 +370,6 @@ p {
     background-color: oklch(0.98 0.005 80);
   }
 
-  /* Geometric with squares - using linear gradients to create square shapes */
-  .bg-geometric-squares {
-    background-image:
-      linear-gradient(90deg, transparent 0%, transparent calc(50% - 80px), color-mix(in oklch, var(--primary) 4%, transparent) calc(50% - 80px), color-mix(in oklch, var(--primary) 4%, transparent) calc(50% - 60px), transparent calc(50% - 60px)),
-      linear-gradient(0deg, transparent 0%, transparent calc(30% - 60px), color-mix(in oklch, var(--primary) 5%, transparent) calc(30% - 60px), color-mix(in oklch, var(--primary) 5%, transparent) calc(30% - 40px), transparent calc(30% - 40px)),
-      radial-gradient(circle 150px at 15% 70%, color-mix(in oklch, var(--primary) 8%, transparent) 0%, transparent 100%),
-      radial-gradient(circle 200px at 88% 25%, color-mix(in oklch, var(--primary) 6%, transparent) 0%, transparent 100%);
-    background-color: oklch(0.98 0.005 80);
-  }
-
   /* Mixed circles and rounded squares */
   .bg-geometric-mixed {
     position: relative;
@@ -417,41 +407,6 @@ p {
     background-color: oklch(0.98 0.005 80);
   }
 
-  /* Solid colored geometric shapes - no blur */
-  .bg-geo-solid-squares {
-    position: relative;
-    background: oklch(0.98 0.005 80);
-    overflow: hidden;
-  }
-
-  .bg-geo-solid-squares::before,
-  .bg-geo-solid-squares::after {
-    content: '';
-    position: absolute;
-    pointer-events: none;
-    z-index: -1;
-  }
-
-  /* Accent square top-right */
-  .bg-geo-solid-squares::before {
-    width: 180px;
-    height: 180px;
-    background: var(--page-accent);
-    top: -40px;
-    right: 100px;
-    opacity: 0.65;
-  }
-
-  /* Accent square bottom-left - lighter variation */
-  .bg-geo-solid-squares::after {
-    width: 150px;
-    height: 150px;
-    background: var(--page-accent);
-    bottom: 80px;
-    left: -40px;
-    opacity: 0.45;
-  }
-
   /* Page accent circles solid */
   .bg-geo-solid-circles {
     position: relative;
@@ -473,9 +428,9 @@ p {
     width: 200px;
     height: 200px;
     background: var(--page-accent);
-    top: -80px;
-    right: -60px;
-    opacity: 0.85;
+    top: 20px;
+    right: 50px;
+    opacity: 0.15;
   }
 
   /* Medium accent circle bottom-left */
@@ -483,41 +438,9 @@ p {
     width: 140px;
     height: 140px;
     background: var(--page-accent);
-    bottom: 100px;
-    left: -50px;
-    opacity: 0.75;
-  }
-
-  /* Mixed solid shapes - squares and circles */
-  .bg-geo-solid-mixed {
-    position: relative;
-    background: oklch(0.98 0.005 80);
-  }
-
-  .bg-geo-solid-mixed::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background-image:
-      linear-gradient(90deg, transparent 0%, transparent calc(100% - 200px), color-mix(in srgb, var(--page-accent) 70%, #E8D67A 30%) calc(100% - 200px), color-mix(in srgb, var(--page-accent) 70%, #E8D67A 30%) calc(100% - 50px), transparent calc(100% - 50px)),
-      linear-gradient(0deg, transparent 0%, transparent calc(100% - 180px), color-mix(in srgb, var(--page-accent) 40%, #7D9D7F 60%) calc(100% - 180px), color-mix(in srgb, var(--page-accent) 40%, #7D9D7F 60%) calc(100% - 40px), transparent calc(100% - 40px));
-    opacity: 0.7;
-    pointer-events: none;
-    z-index: -1;
-  }
-
-  .bg-geo-solid-mixed::after {
-    content: '';
-    position: absolute;
-    width: 120px;
-    height: 120px;
-    background: var(--page-accent);
-    border-radius: 50%;
     bottom: 50px;
-    left: 5%;
-    opacity: 0.8;
-    pointer-events: none;
-    z-index: -1;
+    left: 30px;
+    opacity: 0.12;
   }
 
   /* Colorful corners with accent */
