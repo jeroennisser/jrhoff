@@ -1,5 +1,6 @@
 "use client";
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 import {
   PageBlocksFeatures,
   PageBlocksFeaturesItems,
@@ -43,6 +44,7 @@ const CardDecorator = ({ children }: { children: React.ReactNode }) => (
 
 export const Feature: React.FC<PageBlocksFeaturesItems> = (data) => {
   const [isExpanded, setIsExpanded] = useState(false);
+  const router = useRouter();
 
   // Convert rich text to plain text for length checking
   const getPlainText = (content: any): string => {
@@ -80,9 +82,19 @@ export const Feature: React.FC<PageBlocksFeaturesItems> = (data) => {
   const MAX_LENGTH = 150;
   const shouldTruncate = plainText.length > MAX_LENGTH;
   const truncatedText = shouldTruncate ? plainText.substring(0, MAX_LENGTH) + '...' : plainText;
+  const hasLink = !!(data as any).link;
+
+  const handleCardClick = () => {
+    if (hasLink) {
+      router.push((data as any).link);
+    }
+  };
 
   return (
-    <Card className="group text-center shadow-zinc-950/5">
+    <Card
+      className={`group text-center shadow-zinc-950/5 ${hasLink ? 'cursor-pointer hover:shadow-md transition-shadow' : ''}`}
+      onClick={handleCardClick}
+    >
       <CardHeader className="pb-3">
         <CardDecorator>
           {data.icon && (
@@ -106,14 +118,18 @@ export const Feature: React.FC<PageBlocksFeaturesItems> = (data) => {
           {isExpanded || !shouldTruncate ? (
             <TinaMarkdown content={data.text} />
           ) : (
-            <p>{truncatedText}</p>
+            <div>{truncatedText}</div>
           )}
         </div>
 
         {shouldTruncate && (
           <button
-            onClick={() => setIsExpanded(!isExpanded)}
-            className="mt-4 inline-flex items-center gap-1 text-sm text-primary hover:text-primary/80 transition-colors font-medium"
+            onClick={(e) => {
+              e.preventDefault();
+              e.stopPropagation();
+              setIsExpanded(!isExpanded);
+            }}
+            className="mt-4 inline-flex items-center gap-1 text-sm text-primary hover:text-primary/80 transition-colors font-medium cursor-pointer"
             aria-label={isExpanded ? "Lees minder" : "Lees meer"}
           >
             {isExpanded ? (
@@ -193,6 +209,12 @@ export const featureBlockSchema: Template = {
           type: "rich-text",
           label: "Text",
           name: "text",
+        },
+        {
+          type: "string",
+          label: "Link (optional)",
+          name: "link",
+          description: "Internal link (e.g., /nis, /about) or external URL",
         },
       ],
     },

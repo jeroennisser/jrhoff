@@ -12,7 +12,7 @@ import { scriptCopyBlockSchema, ScriptCopyBtn } from '../magicui/script-copy-btn
 
 export const Content = ({ data }: { data: PageBlocksContent }) => {
   return (
-    <Section background={data.background!} className='prose prose-lg' data-tina-field={tinaField(data, 'body')}>
+    <Section background={data.background!} className='prose prose-lg prose-blockquote:text-center prose-blockquote:not-italic prose-blockquote:font-semibold prose-blockquote:text-xl prose-blockquote:border-l-0 prose-blockquote:mx-auto prose-blockquote:max-w-3xl prose-blockquote:py-8' data-tina-field={tinaField(data, 'body')}>
       <TinaMarkdown
         content={data.body}
         components={{
