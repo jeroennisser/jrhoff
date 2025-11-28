@@ -2,17 +2,28 @@
 
 import React from "react";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { Icon } from "../../icon";
 import { useLayout } from "../layout-context";
-import { Menu, X } from "lucide-react";
+import { Menu, X, LogOut } from "lucide-react";
 
 export const Header = () => {
   const { globalSettings, theme } = useLayout();
   const header = globalSettings!.header!;
   const pathname = usePathname();
+  const router = useRouter();
 
-  const [menuState, setMenuState] = React.useState(false)
+  const [menuState, setMenuState] = React.useState(false);
+
+  const handleLogout = async () => {
+    try {
+      await fetch('/api/logout', { method: 'POST' });
+      router.push('/login');
+      router.refresh();
+    } catch (error) {
+      console.error('Logout error:', error);
+    }
+  };
   return (
     <header>
       <nav className="bg-background/50 fixed z-20 w-full border-b backdrop-blur-3xl">
@@ -67,6 +78,14 @@ export const Header = () => {
                 </svg>
                 <span>06-12261363</span>
               </a>
+
+              <button
+                onClick={handleLogout}
+                className="flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors"
+                aria-label="Uitloggen">
+                <LogOut className="w-4 h-4" />
+                <span>Uitloggen</span>
+              </button>
             </div>
 
             {/* Mobile Menu Button */}
@@ -101,6 +120,19 @@ export const Header = () => {
                   );
                 })}
               </ul>
+
+              <div className="mt-6 pt-6 border-t">
+                <button
+                  onClick={() => {
+                    setMenuState(false);
+                    handleLogout();
+                  }}
+                  className="flex items-center gap-2 text-base text-muted-foreground hover:text-primary transition-colors"
+                  aria-label="Uitloggen">
+                  <LogOut className="w-4 h-4" />
+                  <span>Uitloggen</span>
+                </button>
+              </div>
             </div>
           )}
         </div>
