@@ -5,7 +5,12 @@
 @plugin "@tailwindcss/typography";
 
 /* Apply Libre Baskerville to all headings with balanced hierarchy */
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   font-family: var(--font-libre-baskerville), serif;
   line-height: 1.2;
   letter-spacing: -0.02em;
@@ -45,7 +50,8 @@ p {
 .lead {
   line-height: 1.6;
   font-weight: 400;
-  color: rgb(75, 85, 99); /* text-gray-600 */
+  color: rgb(75, 85, 99);
+  /* text-gray-600 */
 }
 
 @theme inline {
@@ -160,6 +166,7 @@ p {
   * {
     @apply border-border outline-ring/50;
   }
+
   body {
     @apply bg-background text-foreground;
   }
@@ -167,27 +174,26 @@ p {
 
 /* Interesting background patterns with accent color */
 @layer utilities {
+
   /* Subtle gradient background */
   .bg-gradient-subtle {
     background: linear-gradient(135deg,
-      oklch(0.98 0.005 80) 0%,
-      oklch(0.97 0.01 40) 100%);
+        oklch(0.98 0.005 80) 0%,
+        oklch(0.97 0.01 40) 100%);
   }
 
   /* Accent gradient background */
   .bg-gradient-accent {
     background: linear-gradient(135deg,
-      oklch(0.98 0.005 80) 0%,
-      color-mix(in oklch, var(--primary) 5%, oklch(0.98 0.005 80)) 100%);
+        oklch(0.98 0.005 80) 0%,
+        color-mix(in oklch, var(--primary) 5%, oklch(0.98 0.005 80)) 100%);
   }
 
   /* Dotted pattern with accent color */
   .bg-dots-accent {
-    background-image: radial-gradient(
-      circle at 1px 1px,
-      color-mix(in oklch, var(--primary) 8%, transparent) 1px,
-      transparent 0
-    );
+    background-image: radial-gradient(circle at 1px 1px,
+        color-mix(in oklch, var(--primary) 8%, transparent) 1px,
+        transparent 0);
     background-size: 40px 40px;
   }
 
@@ -201,45 +207,37 @@ p {
 
   /* Subtle radial gradient from center */
   .bg-radial-accent {
-    background: radial-gradient(
-      ellipse at center,
-      color-mix(in oklch, var(--primary) 3%, oklch(0.98 0.005 80)) 0%,
-      oklch(0.98 0.005 80) 70%
-    );
+    background: radial-gradient(ellipse at center,
+        color-mix(in oklch, var(--primary) 3%, oklch(0.98 0.005 80)) 0%,
+        oklch(0.98 0.005 80) 70%);
   }
 
   /* Diagonal stripes - very subtle */
   .bg-stripes-accent {
-    background-image: repeating-linear-gradient(
-      45deg,
-      transparent,
-      transparent 35px,
-      color-mix(in oklch, var(--primary) 2%, transparent) 35px,
-      color-mix(in oklch, var(--primary) 2%, transparent) 70px
-    );
+    background-image: repeating-linear-gradient(45deg,
+        transparent,
+        transparent 35px,
+        color-mix(in oklch, var(--primary) 2%, transparent) 35px,
+        color-mix(in oklch, var(--primary) 2%, transparent) 70px);
   }
 
   /* Combined: gradient + dots */
   .bg-gradient-dots {
     background:
-      radial-gradient(
-        circle at 1px 1px,
+      radial-gradient(circle at 1px 1px,
         color-mix(in oklch, var(--primary) 8%, transparent) 1px,
-        transparent 0
-      ),
+        transparent 0),
       linear-gradient(135deg,
         oklch(0.98 0.005 80) 0%,
-        color-mix(in oklch, var(--primary) 3%, oklch(0.98 0.005 80)) 100%
-      );
+        color-mix(in oklch, var(--primary) 3%, oklch(0.98 0.005 80)) 100%);
     background-size: 40px 40px, 100% 100%;
   }
 
   /* Secondary background with accent tint */
   .bg-secondary-accent {
     background: linear-gradient(135deg,
-      oklch(0.95 0.01 80) 0%,
-      color-mix(in oklch, var(--primary) 3%, oklch(0.95 0.01 80)) 100%
-    );
+        oklch(0.95 0.01 80) 0%,
+        color-mix(in oklch, var(--primary) 3%, oklch(0.95 0.01 80)) 100%);
   }
 
   /* Mesh gradient effect */
@@ -290,8 +288,7 @@ p {
       radial-gradient(circle at 75% 65%, color-mix(in oklch, var(--primary) 12%, transparent) 0%, transparent 30%),
       linear-gradient(135deg,
         oklch(0.98 0.005 80) 0%,
-        color-mix(in oklch, var(--primary) 4%, oklch(0.98 0.005 80)) 100%
-      );
+        color-mix(in oklch, var(--primary) 4%, oklch(0.98 0.005 80)) 100%);
   }
 
   /* Wave pattern with accent */
@@ -497,7 +494,7 @@ p {
     border-radius: 50%;
     top: -100px;
     right: -80px;
-    opacity: 0.8;
+    opacity: 0.15;
     pointer-events: none;
     z-index: 0;
   }
@@ -510,7 +507,8 @@ p {
     background: color-mix(in srgb, var(--page-accent) 40%, #7D9D7F 60%);
     bottom: -60px;
     left: -50px;
-    opacity: 0.75;
+    border-radius: 50%;
+    opacity: 0.15;
     pointer-events: none;
     z-index: 0;
   }

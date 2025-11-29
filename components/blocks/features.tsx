@@ -93,11 +93,10 @@ export const Feature: React.FC<PageBlocksFeaturesItems> = (data) => {
 
   return (
     <Card
-      className={`group text-center shadow-sm border-zinc-200 rounded-xl h-full flex flex-col ${
-        hasLink
+      className={`group text-center shadow-sm border-accent-100 bg-white/60 backdrop-blur-sm rounded-xl h-full flex flex-col ${hasLink
           ? 'cursor-pointer hover:shadow-lg hover:-translate-y-1 transition-all duration-150 ease-out'
           : ''
-      }`}
+        }`}
       onClick={handleCardClick}
     >
       <CardHeader className="pb-4">
@@ -105,7 +104,7 @@ export const Feature: React.FC<PageBlocksFeaturesItems> = (data) => {
           {data.icon && (
             <Icon
               tinaField={tinaField(data, "icon")}
-              data={{ size: "large", ...data.icon }}
+              data={{ size: "large", ...data.icon, color: 'accent' }}
             />
           )}
         </CardDecorator>

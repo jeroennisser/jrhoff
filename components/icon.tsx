@@ -69,6 +69,10 @@ const iconColorClass: {
     regular: 'text-white opacity-80',
     circle: 'bg-white-400 dark:bg-white-500 text-white-50',
   },
+  accent: {
+    regular: 'text-[var(--page-accent)]',
+    circle: 'bg-[var(--page-accent)] text-white',
+  },
 };
 
 const iconSizeClass = {
