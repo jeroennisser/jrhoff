@@ -337,7 +337,7 @@ p {
     content: '';
     position: absolute;
     pointer-events: none;
-    z-index: -1;
+    z-index: 0;
   }
 
   /* Large circle top-right */
@@ -385,7 +385,7 @@ p {
       radial-gradient(circle 150px at 92% 80%, color-mix(in oklch, var(--primary) 7%, transparent) 0%, transparent 100%),
       radial-gradient(circle 120px at 50% 50%, color-mix(in oklch, var(--primary) 5%, transparent) 0%, transparent 100%);
     pointer-events: none;
-    z-index: -1;
+    z-index: 0;
   }
 
   /* Asymmetric geometric layout */
@@ -420,7 +420,7 @@ p {
     position: absolute;
     border-radius: 50%;
     pointer-events: none;
-    z-index: -1;
+    z-index: 0;
   }
 
   /* Large accent circle top-right */
@@ -459,7 +459,7 @@ p {
       radial-gradient(circle 120px at 0% 100%, var(--page-accent) 0%, transparent 100%);
     opacity: 0.75;
     pointer-events: none;
-    z-index: -1;
+    z-index: 0;
   }
 
   /* Scattered colorful shapes with accent */
@@ -478,7 +478,7 @@ p {
       radial-gradient(circle 90px at 25% 80%, color-mix(in srgb, var(--page-accent) 40%, #7D9D7F 60%) 0%, transparent 100%);
     opacity: 0.7;
     pointer-events: none;
-    z-index: -1;
+    z-index: 0;
   }
 
   /* Edge shapes with accent color */
@@ -499,7 +499,7 @@ p {
     right: -80px;
     opacity: 0.8;
     pointer-events: none;
-    z-index: -1;
+    z-index: 0;
   }
 
   .bg-geo-edge-color::after {
@@ -512,6 +512,6 @@ p {
     left: -50px;
     opacity: 0.75;
     pointer-events: none;
-    z-index: -1;
+    z-index: 0;
   }
 }
