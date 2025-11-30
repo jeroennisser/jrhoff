@@ -23,7 +23,7 @@ export const Features = ({ data }: { data: PageBlocksFeatures }) => {
     <Section background={data.background!}>
       <div className="mx-auto max-w-7xl">
         <div className="text-center mx-auto">
-          <h2 data-tina-field={tinaField(data, 'title')} className="text-balance text-3xl md:text-4xl font-bold tracking-tight">{data.title}</h2>
+          <h2 data-tina-field={tinaField(data, 'title')} className="text-balance text-3xl md:text-4xl font-bold tracking-tight" style={{ color: 'var(--page-accent)' }}>{data.title}</h2>
           <p data-tina-field={tinaField(data, 'description')} className="mt-3 text-base md:text-lg text-gray-600 font-normal max-w-3xl mx-auto">{data.description}</p>
         </div>
         <div className={`mx-auto mt-12 grid gap-6 md:grid-cols-2 ${gridCols} max-w-6xl`}>
