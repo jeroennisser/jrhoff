@@ -44,6 +44,7 @@ export const tailwindBackgroundOptions = [
   { label: "🎨 Scattered Circles", value: "bg-scatter-circles" },
 
   // Geometric patterns (circles only - no squares)
+  { label: "✨ Hero Layered", value: "bg-hero-layered" },
   { label: "⬛ Geometric Subtle", value: "bg-geometric-subtle" },
   { label: "⬛ Geometric Scattered", value: "bg-geometric-scattered" },
   { label: "⬛ Geometric Mixed", value: "bg-geometric-mixed" },

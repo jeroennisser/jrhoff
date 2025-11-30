@@ -31,6 +31,12 @@ export const Header = () => {
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
       
+      // Always show on mobile when menu is open
+      if (menuState) {
+        setIsVisible(true);
+        return;
+      }
+      
       // Show header if at top or scrolling up
       if (currentScrollY < 10 || currentScrollY < lastScrollY) {
         setIsVisible(true);
@@ -61,18 +67,29 @@ export const Header = () => {
     document.documentElement.style.setProperty('--page-accent', currentPageColor);
   }, [currentPageColor]);
 
+  // Force visibility when menu is open
+  React.useEffect(() => {
+    if (menuState) {
+      setIsVisible(true);
+    }
+  }, [menuState]);
+
   return (
-    <header className="fixed z-20 w-full px-4 pt-4">
-      <nav className="bg-background/95 backdrop-blur-xl rounded-full border shadow-lg mx-auto max-w-5xl">
+    <header 
+      className={`fixed z-20 w-full px-4 transition-all duration-300 ease-in-out ${
+        isVisible ? 'top-0 pt-2' : '-top-24'
+      }`}
+    >
+      <nav className="bg-background/95 backdrop-blur-xl border shadow-lg mx-auto max-w-5xl transition-all duration-500 ease-out rounded-[2rem]">
         <div className="px-6 transition-all duration-300">
-          <div className="flex items-center justify-between py-3 lg:py-4">
+          <div className="flex items-center justify-between py-2 lg:py-2">
             {/* Logo */}
             <Link
               href="/"
               aria-label="home"
               className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-full bg-[#EB5A3C]"></div>
-              <span className="text-xl font-bold text-black tracking-wide">
+              <div className="w-8 h-8 rounded-full bg-[#EB5A3C]"></div>
+              <span className="text-lg font-bold text-black tracking-wide">
                 JRHOFF
               </span>
             </Link>
@@ -112,7 +129,7 @@ export const Header = () => {
 
               <button
                 onClick={handleLogout}
-                className="flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors"
+                className="flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors cursor-pointer"
                 aria-label="Uitloggen">
                 <LogOut className="w-4 h-4" />
                 <span>Uitloggen</span>

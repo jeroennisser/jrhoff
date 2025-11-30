@@ -115,27 +115,31 @@ const AnimationComponent: React.FC<{
   per: 'line' | 'word' | 'char';
   segmentWrapperClassName?: string;
 }> = React.memo(({ segment, variants, per, segmentWrapperClassName }) => {
+  // Check for accent marker (contains *)
+  const isHighlighted = segment.includes('*');
+  const cleanSegment = segment.replaceAll('*', '');
+
   const content =
     per === 'line' ? (
       <motion.span variants={variants} className='block'>
-        {segment}
+        {cleanSegment}
       </motion.span>
     ) : per === 'word' ? (
       <motion.span
         aria-hidden='true'
         variants={variants}
-        className='inline-block whitespace-pre'
+        className={cn('inline-block whitespace-pre', isHighlighted && 'text-[var(--page-accent)]')}
       >
-        {segment}
+        {cleanSegment}
       </motion.span>
     ) : (
       <motion.span className='inline-block whitespace-pre'>
-        {segment.split('').map((char, charIndex) => (
+        {cleanSegment.split('').map((char, charIndex) => (
           <motion.span
             key={`char-${charIndex}`}
             aria-hidden='true'
             variants={variants}
-            className='inline-block whitespace-pre'
+            className={cn('inline-block whitespace-pre', isHighlighted && 'text-[var(--page-accent)]')}
           >
             {char}
           </motion.span>
