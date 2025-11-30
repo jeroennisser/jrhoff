@@ -9,11 +9,11 @@ import { Menu, X, LogOut } from "lucide-react";
 
 // Page-specific accent colors
 const pageColors: Record<string, string> = {
-  '/': '#EB5A3C',           // Coral/Orange - Home
-  '/nis': '#3C7A73',         // Purple - NIS
-  '/about': '#EB5A3C',       // Blue - About
-  '/contact': '#EB5A3C',     // Red - Contact
-  '/tarieven': '#3C7A73',    // Teal - Tarieven
+  '/': '#EB5A3C',         
+  '/nis': '#3C7A73',      
+  '/about': '#EB5A3C',       
+  '/contact': '#EB5A3C',     
+  '/tarieven': '#3C7A73',    
 };
 
 export const Header = () => {
