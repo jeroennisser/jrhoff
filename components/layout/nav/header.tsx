@@ -7,7 +7,7 @@ import { Icon } from "../../icon";
 import { useLayout } from "../layout-context";
 import { Menu, X, LogOut } from "lucide-react";
 
-// Page-specific accent colors
+// Page-specific accent colors 
 const pageColors: Record<string, string> = {
   '/': '#EB5A3C',         
   '/nis': '#3C7A73',      
