@@ -21,7 +21,7 @@ export const CallToAction = ({ data }: { data: PageBlocksCta }) => {
                                 asChild
                                 size="lg"
                                 variant={action!.type === 'link' ? 'outline' : 'default'}
-                                className="rounded-xl px-7 py-3 text-base transition-all duration-150 ease-out hover:scale-[1.02]">
+                                className="px-7 py-3 text-base transition-all duration-150 ease-out hover:scale-[1.02]">
                                 <Link href={action!.link!}>
                                     {action?.icon && (<Icon data={action?.icon} />)}
                                     <span className="text-nowrap">{action!.label}</span>

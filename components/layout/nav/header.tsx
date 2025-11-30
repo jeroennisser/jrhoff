@@ -23,7 +23,28 @@ export const Header = () => {
   const router = useRouter();
 
   const [menuState, setMenuState] = React.useState(false);
+  const [isVisible, setIsVisible] = React.useState(true);
+  const [lastScrollY, setLastScrollY] = React.useState(0);
   const currentPageColor = pageColors[pathname] || '#EB5A3C';
+
+  React.useEffect(() => {
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY;
+      
+      // Show header if at top or scrolling up
+      if (currentScrollY < 10 || currentScrollY < lastScrollY) {
+        setIsVisible(true);
+      } else if (currentScrollY > lastScrollY && currentScrollY > 10) {
+        // Hide when scrolling down and not at top
+        setIsVisible(false);
+      }
+      
+      setLastScrollY(currentScrollY);
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [lastScrollY]);
 
   const handleLogout = async () => {
     try {
@@ -41,9 +62,9 @@ export const Header = () => {
   }, [currentPageColor]);
 
   return (
-    <header>
-      <nav className="bg-background/50 fixed z-20 w-full border-b backdrop-blur-3xl">
-        <div className="mx-auto max-w-full px-6 lg:px-12 transition-all duration-300">
+    <header className="fixed z-20 w-full px-4 pt-4">
+      <nav className="bg-background/95 backdrop-blur-xl rounded-full border shadow-lg mx-auto max-w-5xl">
+        <div className="px-6 transition-all duration-300">
           <div className="flex items-center justify-between py-3 lg:py-4">
             {/* Logo */}
             <Link
@@ -67,11 +88,10 @@ export const Header = () => {
                       <li key={index}>
                         <Link
                           href={item!.href!}
-                          className={`transition-colors duration-150 pb-1 border-b-2 ${
-                            isActive
-                              ? 'border-transparent'
-                              : 'border-transparent text-muted-foreground hover:opacity-70'
-                          }`}
+                          className={`transition-colors duration-150 pb-1 border-b-2 ${isActive
+                            ? 'border-transparent'
+                            : 'border-transparent text-muted-foreground hover:opacity-70'
+                            }`}
                           style={isActive ? { color: itemColor, borderBottomColor: itemColor } : {}}>
                           <span>{item!.label}</span>
                         </Link>
@@ -121,11 +141,10 @@ export const Header = () => {
                       <Link
                         href={item!.href!}
                         onClick={() => setMenuState(false)}
-                        className={`transition-colors duration-150 block ${
-                          isActive
-                            ? 'font-semibold'
-                            : 'text-muted-foreground hover:opacity-70'
-                        }`}
+                        className={`transition-colors duration-150 block ${isActive
+                          ? 'font-semibold'
+                          : 'text-muted-foreground hover:opacity-70'
+                          }`}
                         style={isActive ? { color: itemColor } : {}}>
                         <span>{item!.label}</span>
                       </Link>

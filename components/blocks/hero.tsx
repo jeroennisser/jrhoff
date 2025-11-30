@@ -83,7 +83,7 @@ export const Hero = ({ data }: { data: PageBlocksHero }) => {
                   asChild
                   size='lg'
                   variant={action!.type === 'link' ? 'outline' : 'default'}
-                  className='rounded-xl px-7 py-3 text-base transition-all duration-150 ease-out hover:scale-[1.02]'
+                  className='px-7 py-3 text-base transition-all duration-150 ease-out hover:scale-[1.02]'
                 >
                   <Link href={action!.link!}>
                     {action?.icon && <Icon data={action?.icon} />}
@@ -170,9 +170,9 @@ export const heroBlockSchema: Template = {
           label: 'Action Label',
           type: 'button',
           icon: {
-              name: "Tina",
-              color: "white",
-              style: "float",
+            name: "Tina",
+            color: "white",
+            style: "float",
           },
           link: '/',
         },
