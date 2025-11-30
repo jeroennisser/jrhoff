@@ -59,7 +59,7 @@ export const Hero = ({ data }: { data: PageBlocksHero }) => {
 
   return (
     <Section background={data.background!}>
-      <div className='text-center sm:mx-auto lg:mr-auto lg:mt-0'>
+      <div className='text-center sm:mx-auto lg:mr-auto lg:mt-0 pt-20 md:pt-24'>
         {data.headline && (
           <div data-tina-field={tinaField(data, 'headline')}>
             <TextEffect preset='fade-in-blur' speedSegment={0.3} as='h1' className='mt-8 text-balance text-4xl md:text-5xl xl:text-6xl tracking-tight font-bold leading-tight'>
