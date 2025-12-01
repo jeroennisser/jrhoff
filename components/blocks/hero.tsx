@@ -59,52 +59,76 @@ export const Hero = ({ data }: { data: PageBlocksHero }) => {
 
   return (
     <Section background={data.background!}>
-      <div className='text-center sm:mx-auto lg:mr-auto lg:mt-0 pt-20 md:pt-24'>
-        {data.headline && (
-          <div data-tina-field={tinaField(data, 'headline')}>
-            <TextEffect preset='fade-in-blur' speedSegment={0.3} as='h1' className='mt-8 text-balance text-4xl md:text-5xl xl:text-6xl tracking-tight font-bold leading-tight'>
-              {data.headline!}
-            </TextEffect>
-          </div>
-        )}
-        {data.tagline && (
-          <div data-tina-field={tinaField(data, 'tagline')}>
-            <TextEffect per='line' preset='fade-in-blur' speedSegment={0.3} delay={0.5} as='p' className='mx-auto mt-5 md:mt-6 max-w-2xl text-balance text-lg md:text-xl text-gray-600 font-normal leading-relaxed'>
-              {data.tagline!}
-            </TextEffect>
-          </div>
-        )}
-
-        <AnimatedGroup variants={transitionVariants} className='mt-10 md:mt-12 flex flex-col items-center justify-center gap-3 md:flex-row'>
-          {data.actions &&
-            data.actions.map((action, index) => (
-              <div key={action!.label} data-tina-field={tinaField(action)}>
-                <Button
-                  asChild
-                  size='lg'
-                  variant={action!.type === 'link' ? 'outline' : 'default'}
-                  className='px-7 py-3 text-base transition-all duration-150 ease-out hover:scale-[1.02]'
-                >
-                  <Link href={action!.link!}>
-                    {action?.icon && <Icon data={action?.icon} />}
-                    <span className='text-nowrap'>{action!.label}</span>
-                  </Link>
-                </Button>
-              </div>
-            ))}
-        </AnimatedGroup>
-      </div>
-
-      {data.image && (data.image.src || data.image.videoUrl) && (
-        <AnimatedGroup variants={transitionVariants}>
-          <div className='relative -mr-56 mt-8 px-2 sm:mr-0 sm:mt-12 md:mt-20 mb-16 md:mb-24 max-w-full' data-tina-field={tinaField(data, 'image')}>
-            <div aria-hidden className='bg-linear-to-b absolute inset-0 z-10 from-transparent from-35% pointer-events-none' style={gradientStyle} />
-            <div className='inset-shadow-2xs ring-background dark:inset-shadow-white/20 bg-background relative mx-auto max-w-5xl overflow-visible rounded-2xl border p-4 shadow-lg shadow-zinc-950/15 ring-1'>
-              <ImageBlock image={data.image} />
+      <div className="grid lg:grid-cols-2 gap-12 items-center pt-12 md:pt-16 pb-10">
+        <div className='text-left mt-12 lg:mt-0'>
+          {data.headline && (
+            <div data-tina-field={tinaField(data, 'headline')}>
+              <TextEffect preset='fade-in-blur' speedSegment={0.3} as='h1' className='mt-4 text-balance text-2xl md:text-3xl xl:text-4xl tracking-tight font-bold font-serif leading-snug text-gray-900'>
+                {data.headline!}
+              </TextEffect>
             </div>
-          </div>
-        </AnimatedGroup>
-      )}
+          )}
+          {data.tagline && (
+            <div data-tina-field={tinaField(data, 'tagline')}>
+              <TextEffect per='line' preset='fade-in-blur' speedSegment={0.3} delay={0.5} as='p' className='mt-6 max-w-xl text-lg text-gray-600 font-normal leading-relaxed'>
+                {data.tagline!}
+              </TextEffect>
+            </div>
+          )}
+
+          {data.usps && data.usps.length > 0 && (
+            <div className="mt-6 flex flex-col gap-4 text-base text-gray-700">
+              {data.usps.map((usp, i) => (
+                <div key={i} className="flex items-center gap-3">
+                  <div className="flex-shrink-0 w-5 h-5 flex items-center justify-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="w-4 h-4 text-gray-400">
+                      <polyline points="20 6 9 17 4 12" />
+                    </svg>
+                  </div>
+                  <span className="text-gray-600">{usp?.text}</span>
+                </div>
+              ))}
+            </div>
+          )}
+
+          <AnimatedGroup variants={transitionVariants} className='mt-10 flex flex-col sm:flex-row items-start gap-4'>
+            {data.actions &&
+              data.actions.map((action, index) => (
+                <div key={action!.label} data-tina-field={tinaField(action)}>
+                  <Button
+                    asChild
+                    size='lg'
+                    variant={action!.type === 'link' ? 'outline' : 'default'}
+                    className={`px-8 py-6 text-base rounded-2xl transition-all duration-150 ease-out hover:scale-[1.02] ${action!.type === 'link' ? 'border-[1.5px] border-gray-200 bg-transparent hover:bg-gray-50 hover:shadow-sm text-gray-900' : 'bg-orange-600 hover:bg-orange-700 text-white'}`}
+                  >
+                    <Link href={action!.link!}>
+                      {action?.icon && <Icon data={action?.icon} />}
+                      <span className='text-nowrap font-medium'>{action!.label}</span>
+                    </Link>
+                  </Button>
+                </div>
+              ))}
+          </AnimatedGroup>
+
+          {data.trust && (
+            <div className="mt-6">
+              <p className="text-base font-medium text-gray-600">{data.trust.text}</p>
+              <p className="text-sm text-gray-500 mt-1">Al 12+ jaar ervaring met NIS & Body Therapy</p>
+            </div>
+          )}
+        </div>
+
+        {data.image && (data.image.src || data.image.videoUrl) && (
+          <AnimatedGroup variants={transitionVariants} className="relative flex justify-center lg:justify-end">
+            <div className='relative w-full max-w-sm aspect-square' data-tina-field={tinaField(data, 'image')}>
+              {/* Decorative background blob or gradient could go here if needed */}
+              <div className='relative w-full h-full rounded-full overflow-hidden border-4 border-white shadow-2xl shadow-orange-900/10'>
+                <ImageBlock image={data.image} />
+              </div>
+            </div>
+          </AnimatedGroup>
+        )}
+      </div>
     </Section>
   );
 };
@@ -127,11 +151,11 @@ const ImageBlock = ({ image }: { image: PageBlocksHeroImage }) => {
   if (image.src) {
     return (
       <Image
-        className='z-2 border-border/25 aspect-video relative rounded-2xl border max-w-full h-auto object-cover'
+        className='z-2 relative w-full h-full object-cover'
         alt={image!.alt || ''}
         src={image!.src!}
         height={1080}
-        width={1920}
+        width={1080}
       />
     );
   }
@@ -159,6 +183,26 @@ export const heroBlockSchema: Template = {
       type: 'string',
       label: 'Tagline',
       name: 'tagline',
+      ui: {
+        component: 'textarea',
+      },
+    },
+    {
+      label: 'USPs',
+      name: 'usps',
+      type: 'object',
+      list: true,
+      ui: {
+        itemProps: (item) => ({ label: item.text }),
+      },
+      fields: [
+        iconSchema as any,
+        {
+          label: 'Text',
+          name: 'text',
+          type: 'string',
+        },
+      ],
     },
     {
       label: 'Actions',
@@ -197,6 +241,23 @@ export const heroBlockSchema: Template = {
         {
           label: 'Link',
           name: 'link',
+          type: 'string',
+        },
+      ],
+    },
+    {
+      label: 'Trust Element',
+      name: 'trust',
+      type: 'object',
+      fields: [
+        {
+          label: 'Show Stars',
+          name: 'stars',
+          type: 'boolean',
+        },
+        {
+          label: 'Text',
+          name: 'text',
           type: 'string',
         },
       ],
