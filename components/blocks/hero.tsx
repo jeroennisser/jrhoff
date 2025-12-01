@@ -72,7 +72,7 @@ export const Hero = ({ data }: { data: PageBlocksHero }) => {
           )}
           {data.tagline && (
             <div data-tina-field={tinaField(data, 'tagline')}>
-              <TextEffect per='line' preset='fade-in-blur' speedSegment={0.3} delay={0.5} as='p' className={`mt-6 max-w-xl text-lg text-gray-600 font-normal leading-relaxed ${!hasImage ? 'mx-auto' : ''}`}>
+              <TextEffect per='line' preset='fade-in-blur' speedSegment={0.3} delay={0.5} as='div' className={`mt-6 max-w-xl text-lg text-gray-600 font-normal leading-relaxed ${!hasImage ? 'mx-auto' : ''}`}>
                 {data.tagline!}
               </TextEffect>
             </div>
@@ -122,7 +122,7 @@ export const Hero = ({ data }: { data: PageBlocksHero }) => {
 
         {hasImage && (
           <AnimatedGroup variants={transitionVariants} className="relative flex justify-center lg:justify-end lg:col-span-4">
-            <div className='relative w-full max-w-sm aspect-square' data-tina-field={tinaField(data, 'image')}>
+            <div className='relative w-full max-w-md aspect-square' data-tina-field={tinaField(data, 'image')}>
               {/* Decorative background blob or gradient could go here if needed */}
               <div className='relative w-full h-full rounded-full overflow-hidden border-4 border-white shadow-2xl shadow-orange-900/10'>
                 <ImageBlock image={data.image!} />
