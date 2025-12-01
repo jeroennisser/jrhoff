@@ -83,7 +83,7 @@ export const Hero = ({ data }: { data: PageBlocksHero }) => {
               {data.usps.map((usp, i) => (
                 <div key={i} className="flex items-center gap-3">
                   <div className="flex-shrink-0 w-5 h-5 flex items-center justify-center">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="w-4 h-4 text-gray-400">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" className="w-4 h-4 text-gray-600">
                       <polyline points="20 6 9 17 4 12" />
                     </svg>
                   </div>
@@ -101,7 +101,7 @@ export const Hero = ({ data }: { data: PageBlocksHero }) => {
                     asChild
                     size='lg'
                     variant={action!.type === 'link' ? 'outline' : 'default'}
-                    className={`px-8 py-6 text-base rounded-full transition-all duration-150 ease-out hover:scale-[1.02] ${action!.type === 'link' ? 'border-[1.5px] border-gray-200 bg-transparent hover:bg-gray-50 hover:shadow-sm text-gray-900' : 'bg-orange-600 hover:bg-orange-700 text-white'}`}
+                    className={`px-8 py-6 text-base rounded-full transition-all duration-150 ease-out hover:scale-[1.02] ${action!.type === 'link' ? 'border-[1.5px] border-gray-300 bg-white hover:bg-orange-100 hover:shadow-sm !text-gray-900 hover:!text-gray-900' : 'bg-orange-600 hover:bg-orange-700 text-white'}`}
                   >
                     <Link href={action!.link!}>
                       {action?.icon && <Icon data={action?.icon} />}
