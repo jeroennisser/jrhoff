@@ -9,11 +9,11 @@ import { Menu, X, LogOut } from "lucide-react";
 
 // Page-specific accent colors 
 const pageColors: Record<string, string> = {
-  '/': '#EB5A3C',         
-  '/nis': '#3C7A73',      
-  '/about': '#EB5A3C',       
-  '/contact': '#EB5A3C',     
-  '/tarieven': '#3C7A73',    
+  '/': '#EB5A3C',
+  '/nis': '#3C7A73',
+  '/about': '#EB5A3C',
+  '/contact': '#EB5A3C',
+  '/tarieven': '#3C7A73',
 };
 
 export const Header = () => {
@@ -30,13 +30,13 @@ export const Header = () => {
   React.useEffect(() => {
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
-      
+
       // Always show on mobile when menu is open
       if (menuState) {
         setIsVisible(true);
         return;
       }
-      
+
       // Show header if at top or scrolling up
       if (currentScrollY < 10 || currentScrollY < lastScrollY) {
         setIsVisible(true);
@@ -44,7 +44,7 @@ export const Header = () => {
         // Hide when scrolling down and not at top
         setIsVisible(false);
       }
-      
+
       setLastScrollY(currentScrollY);
     };
 
@@ -75,12 +75,11 @@ export const Header = () => {
   }, [menuState]);
 
   return (
-    <header 
-      className={`fixed z-20 w-full px-4 transition-all duration-300 ease-in-out ${
-        isVisible ? 'top-0 pt-2' : '-top-24'
-      }`}
+    <header
+      className={`fixed z-20 w-full px-4 transition-all duration-300 ease-in-out ${isVisible ? 'top-0 pt-2' : '-top-24'
+        }`}
     >
-      <nav className="bg-background/95 backdrop-blur-xl border shadow-lg mx-auto max-w-5xl transition-all duration-500 ease-out rounded-[2rem]">
+      <nav className="bg-[#FCF2E9]/95 backdrop-blur-xl border shadow-lg mx-auto max-w-5xl transition-all duration-500 ease-out rounded-[2rem]">
         <div className="px-6 transition-all duration-300">
           <div className="flex items-center justify-between py-2 lg:py-2">
             {/* Logo */}

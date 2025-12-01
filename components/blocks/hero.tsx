@@ -57,27 +57,29 @@ export const Hero = ({ data }: { data: PageBlocksHero }) => {
     } as React.CSSProperties;
   }
 
+  const hasImage = !!(data.image && ((data.image.src && data.image.src.length > 0) || (data.image.videoUrl && data.image.videoUrl.length > 0)));
+
   return (
     <Section background={data.background!}>
-      <div className="grid lg:grid-cols-2 gap-12 items-center pt-12 md:pt-16 pb-10">
-        <div className='text-left mt-12 lg:mt-0'>
+      <div className={`grid lg:grid-cols-12 gap-8 lg:gap-12 items-center pt-12 md:pt-16 pb-10 ${!hasImage ? 'justify-center' : ''}`}>
+        <div className={`mt-12 lg:mt-0 ${hasImage ? 'text-left lg:col-span-8' : 'text-center lg:col-span-10 lg:col-start-2'}`}>
           {data.headline && (
             <div data-tina-field={tinaField(data, 'headline')}>
-              <TextEffect preset='fade-in-blur' speedSegment={0.3} as='h1' className='mt-4 text-balance text-2xl md:text-3xl xl:text-4xl tracking-tight font-bold font-serif leading-snug text-gray-900'>
+              <TextEffect preset='fade-in-blur' speedSegment={0.3} as='h1' className={`mt-4 text-balance text-2xl md:text-3xl xl:text-4xl tracking-tight font-bold font-serif leading-snug text-accent ${!hasImage ? 'mx-auto' : ''}`}>
                 {data.headline!}
               </TextEffect>
             </div>
           )}
           {data.tagline && (
             <div data-tina-field={tinaField(data, 'tagline')}>
-              <TextEffect per='line' preset='fade-in-blur' speedSegment={0.3} delay={0.5} as='p' className='mt-6 max-w-xl text-lg text-gray-600 font-normal leading-relaxed'>
+              <TextEffect per='line' preset='fade-in-blur' speedSegment={0.3} delay={0.5} as='p' className={`mt-6 max-w-xl text-lg text-gray-600 font-normal leading-relaxed ${!hasImage ? 'mx-auto' : ''}`}>
                 {data.tagline!}
               </TextEffect>
             </div>
           )}
 
           {data.usps && data.usps.length > 0 && (
-            <div className="mt-6 flex flex-col gap-4 text-base text-gray-700">
+            <AnimatedGroup variants={transitionVariants} className={`mt-6 flex flex-col gap-4 text-base text-gray-700 ${!hasImage ? 'items-center' : ''}`}>
               {data.usps.map((usp, i) => (
                 <div key={i} className="flex items-center gap-3">
                   <div className="flex-shrink-0 w-5 h-5 flex items-center justify-center">
@@ -88,10 +90,10 @@ export const Hero = ({ data }: { data: PageBlocksHero }) => {
                   <span className="text-gray-600">{usp?.text}</span>
                 </div>
               ))}
-            </div>
+            </AnimatedGroup>
           )}
 
-          <AnimatedGroup variants={transitionVariants} className='mt-10 flex flex-col sm:flex-row items-start gap-4'>
+          <AnimatedGroup variants={transitionVariants} className={`mt-10 flex flex-col sm:flex-row gap-4 ${hasImage ? 'items-start' : 'justify-center items-center'}`}>
             {data.actions &&
               data.actions.map((action, index) => (
                 <div key={action!.label} data-tina-field={tinaField(action)}>
@@ -99,7 +101,7 @@ export const Hero = ({ data }: { data: PageBlocksHero }) => {
                     asChild
                     size='lg'
                     variant={action!.type === 'link' ? 'outline' : 'default'}
-                    className={`px-8 py-6 text-base rounded-2xl transition-all duration-150 ease-out hover:scale-[1.02] ${action!.type === 'link' ? 'border-[1.5px] border-gray-200 bg-transparent hover:bg-gray-50 hover:shadow-sm text-gray-900' : 'bg-orange-600 hover:bg-orange-700 text-white'}`}
+                    className={`px-8 py-6 text-base rounded-full transition-all duration-150 ease-out hover:scale-[1.02] ${action!.type === 'link' ? 'border-[1.5px] border-gray-200 bg-transparent hover:bg-gray-50 hover:shadow-sm text-gray-900' : 'bg-orange-600 hover:bg-orange-700 text-white'}`}
                   >
                     <Link href={action!.link!}>
                       {action?.icon && <Icon data={action?.icon} />}
@@ -111,19 +113,19 @@ export const Hero = ({ data }: { data: PageBlocksHero }) => {
           </AnimatedGroup>
 
           {data.trust && (
-            <div className="mt-6">
+            <AnimatedGroup variants={transitionVariants} className="mt-6">
               <p className="text-base font-medium text-gray-600">{data.trust.text}</p>
               <p className="text-sm text-gray-500 mt-1">Al 12+ jaar ervaring met NIS & Body Therapy</p>
-            </div>
+            </AnimatedGroup>
           )}
         </div>
 
-        {data.image && (data.image.src || data.image.videoUrl) && (
-          <AnimatedGroup variants={transitionVariants} className="relative flex justify-center lg:justify-end">
+        {hasImage && (
+          <AnimatedGroup variants={transitionVariants} className="relative flex justify-center lg:justify-end lg:col-span-4">
             <div className='relative w-full max-w-sm aspect-square' data-tina-field={tinaField(data, 'image')}>
               {/* Decorative background blob or gradient could go here if needed */}
               <div className='relative w-full h-full rounded-full overflow-hidden border-4 border-white shadow-2xl shadow-orange-900/10'>
-                <ImageBlock image={data.image} />
+                <ImageBlock image={data.image!} />
               </div>
             </div>
           </AnimatedGroup>

@@ -516,12 +516,13 @@ p {
   /* Homepage Hero Background Layered */
   .bg-hero-layered {
     position: relative;
-    background-color: oklch(0.98 0.005 80);
+    background-color: #FCF2E9;
+    /* Specific warm beige requested by user */
     /* overflow: hidden; - Removed to allow blobs to be visible */
     /* Add solid circles as static background layers to mix with animated blobs */
     background-image:
-      radial-gradient(circle 200px at calc(100% - 50px) 50px, color-mix(in oklch, var(--page-accent) 8%, transparent), transparent),
-      radial-gradient(circle 140px at 30px calc(100% - 50px), color-mix(in oklch, var(--page-accent) 6%, transparent), transparent);
+      radial-gradient(circle 200px at calc(100% - 50px) 50px, color-mix(in oklch, var(--page-accent) 12%, transparent), transparent),
+      radial-gradient(circle 140px at 30px calc(100% - 50px), color-mix(in oklch, var(--page-accent) 8%, transparent), transparent);
     z-index: 1;
     /* Establish stacking context */
   }
@@ -536,7 +537,7 @@ p {
     height: 60vw;
     max-width: 800px;
     max-height: 800px;
-    background: radial-gradient(circle, color-mix(in oklch, var(--page-accent) 5%, transparent) 0%, transparent 70%);
+    background: radial-gradient(circle, color-mix(in oklch, var(--page-accent) 8%, transparent) 0%, transparent 70%);
     border-radius: 45% 55% 60% 40% / 50% 40% 60% 50%;
     filter: blur(80px);
     z-index: -1;
