@@ -584,4 +584,25 @@ p {
       transform: translate(30px, -30px) scale(1.05);
     }
   }
+
+  /* Text Reveal Animation - LCP Optimized (CSS only) */
+  .animate-fade-in-blur {
+    animation: fade-in-blur 0.8s ease-out forwards;
+    opacity: 0;
+    /* Start hidden, but handled by CSS immediately */
+  }
+
+  @keyframes fade-in-blur {
+    0% {
+      opacity: 0;
+      filter: blur(10px);
+      transform: translateY(10px);
+    }
+
+    100% {
+      opacity: 1;
+      filter: blur(0);
+      transform: translateY(0);
+    }
+  }
 }

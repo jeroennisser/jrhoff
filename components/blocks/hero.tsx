@@ -65,9 +65,18 @@ export const Hero = ({ data }: { data: PageBlocksHero }) => {
         <div className={`mt-12 lg:mt-0 ${hasImage ? 'text-center lg:text-left lg:col-span-7 2xl:col-span-6' : 'text-center lg:col-span-10 lg:col-start-2'}`}>
           {data.headline && (
             <div data-tina-field={tinaField(data, 'headline')}>
-              <TextEffect per='line' preset='fade-in-blur' speedSegment={0.3} as='h1' className={`mt-4 text-balance text-2xl md:text-3xl xl:text-4xl tracking-tight font-bold font-serif leading-snug text-accent ${!hasImage ? 'mx-auto' : 'lg:mx-0 mx-auto'}`}>
-                {data.headline!}
-              </TextEffect>
+              <h1 className={`mt-4 text-balance text-2xl md:text-3xl xl:text-4xl tracking-tight font-bold font-serif leading-snug text-accent animate-fade-in-blur ${!hasImage ? 'mx-auto' : 'lg:mx-0 mx-auto'}`}>
+                {data.headline?.split(/(\s+)/).map((segment, i) => {
+                  if (segment.includes('*')) {
+                    return (
+                      <span key={i} className="text-[var(--page-accent)]">
+                        {segment.replaceAll('*', '')}
+                      </span>
+                    );
+                  }
+                  return <span key={i}>{segment}</span>;
+                })}
+              </h1>
             </div>
           )}
           {data.tagline && (
@@ -101,7 +110,7 @@ export const Hero = ({ data }: { data: PageBlocksHero }) => {
                     asChild
                     size='lg'
                     variant={action!.type === 'link' ? 'outline' : 'default'}
-                    className={`px-8 py-6 text-base rounded-full transition-all duration-150 ease-out hover:scale-[1.02] ${action!.type === 'link' ? 'border-[1.5px] border-gray-300 bg-white hover:bg-orange-100 hover:shadow-sm !text-gray-900 hover:!text-gray-900' : 'bg-orange-600 hover:bg-orange-700 text-white'}`}
+                    className={`px-8 py-6 text-base rounded-full transition-all duration-150 ease-out hover:scale-[1.02] ${action!.type === 'link' ? 'border-[1.5px] border-gray-300 bg-white hover:bg-orange-100 hover:shadow-sm !text-gray-900 hover:!text-gray-900' : 'bg-[var(--page-accent)] hover:opacity-90 text-white'}`}
                   >
                     <Link href={action!.link!}>
                       {action?.icon && <Icon data={action?.icon} />}

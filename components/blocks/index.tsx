@@ -1,15 +1,17 @@
 import { tinaField } from "tinacms/dist/react";
 import { Page, PageBlocks } from "../../tina/__generated__/types";
 import { Hero } from "./hero";
-import { Content } from "./content";
-import { Features } from "./features";
-import { Testimonial } from "./testimonial";
-import { Video } from "./video";
-import { Callout } from "./callout";
-import { Stats } from "./stats";
-import { CallToAction } from "./call-to-action";
-import { Gallery } from "./gallery";
-import { ContactForm } from "./contact-form";
+import dynamic from "next/dynamic";
+
+const Content = dynamic(() => import("./content").then((mod) => mod.Content));
+const Features = dynamic(() => import("./features").then((mod) => mod.Features));
+const Testimonial = dynamic(() => import("./testimonial").then((mod) => mod.Testimonial));
+const Video = dynamic(() => import("./video").then((mod) => mod.Video));
+const Callout = dynamic(() => import("./callout").then((mod) => mod.Callout));
+const Stats = dynamic(() => import("./stats").then((mod) => mod.Stats));
+const CallToAction = dynamic(() => import("./call-to-action").then((mod) => mod.CallToAction));
+const Gallery = dynamic(() => import("./gallery").then((mod) => mod.Gallery));
+const ContactForm = dynamic(() => import("./contact-form").then((mod) => mod.ContactForm));
 
 export const Blocks = (props: Omit<Page, "id" | "_sys" | "_values">) => {
   if (!props.blocks) return null;
