@@ -1,115 +1,127 @@
-> ⚠️ **This repository has moved!**  
-> The new location is: [tinacms/tina-nextjs-starter](https://github.com/tinacms/tina-nextjs-starter)
+# JRHOFF - NIS & Body Therapy Website
 
-# Tina Starter 🦙
+A modern, visually stunning website for Jeroen Hoff's NIS & Body Therapy practice, built with Next.js and TinaCMS.
 
-![tina-cloud-starter-demo](https://user-images.githubusercontent.com/103008/130587027-995ccc45-a852-4f90-b658-13e8e0517339.gif)
+## 🎨 Features
 
-This Next.js starter is powered by [TinaCMS](https://app.tina.io) for you and your team to visually live edit the structured content of your website. ✨
+- **Visual CMS**: Powered by [TinaCMS](https://app.tina.io) for easy content management
+- **Modern Design**: Premium UI with warm color palette, smooth animations, and glassmorphism effects
+- **Responsive**: Fully responsive design optimized for all devices
+- **Performance**: Built with Next.js 15 and Turbopack for optimal performance
+- **Type-Safe**: Full TypeScript support with auto-generated types from TinaCMS schema
 
-The content is managed through Markdown and JSON files stored in your GitHub repository, and queried through Tina GraphQL API.
+## 🚀 Tech Stack
 
-### Features
+- **Framework**: Next.js 15 with Turbopack
+- **CMS**: TinaCMS for content management
+- **Styling**: Tailwind CSS with custom design system
+- **Animations**: Motion (Framer Motion) for smooth transitions
+- **Icons**: Lucide React
+- **Authentication**: Custom login system
 
-- [Tina Headless CMS](https://app.tina.io) for authentication, content modeling, visual editing and team management.
-- [Vercel](https://vercel.com) deployment to visually edit your site from the `/admin` route.
-- Local development workflow from the filesystem with a local GraqhQL server.
+## 📦 Getting Started
 
-## Requirements
+### Prerequisites
 
-- Git, [Node.js Active LTS](https://nodejs.org/en/about/releases/), pnpm installed for local development.
-- A [TinaCMS](https://app.tina.io) account for live editing.
+- Node.js (Active LTS version)
+- npm or pnpm
+- A [TinaCMS](https://app.tina.io) account
 
-## Local Development
+### Installation
 
-Install the project's dependencies:
-
-> [!NOTE]  
-> [Do you know the best package manager for Node.js?](https://www.ssw.com.au/rules/best-package-manager-for-node/) Using the right package manager can greatly enhance your development workflow. We recommend using pnpm for its speed and efficient handling of dependencies. Learn more about why pnpm might be the best choice for your projects by checking out this rule from SSW.
-
-
+1. Clone the repository:
+```bash
+git clone <repository-url>
+cd jrhoff
 ```
+
+2. Install dependencies:
+```bash
+npm install
+# or
 pnpm install
 ```
 
-Run the project locally:
-
+3. Set up environment variables:
+Create a `.env.local` file with:
 ```
-pnpm dev
+NEXT_PUBLIC_TINA_CLIENT_ID=<your-tina-client-id>
+TINA_TOKEN=<your-tina-token>
+NEXT_PUBLIC_TINA_BRANCH=main
+```
+
+4. Run the development server:
+```bash
+npm run dev
 ```
 
 ### Local URLs
 
-- http://localhost:3000 : browse the website
-- http://localhost:3000/admin : connect to Tina Cloud and go in edit mode
-- http://localhost:3000/exit-admin : log out of Tina Cloud
-- http://localhost:4001/altair/ : GraphQL playground to test queries and browse the API documentation
+- **Website**: http://localhost:3000
+- **CMS Admin**: http://localhost:3000/admin
+- **GraphQL Playground**: http://localhost:4001/altair/
 
-## Deployment
+## 🎨 Design System
 
-### GitHub Pages
+The website features a carefully crafted design system:
 
-This starter can be deployed to GitHub Pages. A GitHub Actions workflow is included that handles the build and deployment process. 
+- **Color Palette**: Warm beige background (#FCF2E9) with orange accent (#EB5A3C)
+- **Typography**: Serif headings with sans-serif body text
+- **Components**: Reusable blocks including Hero, Features, Content, and CTA sections
+- **Animations**: Staggered fade-in effects and smooth transitions
 
-To deploy to GitHub Pages:
+## 📝 Content Management
 
-1. In your repository settings, ensure GitHub Pages is enabled and set to deploy from the `gh-pages` branch
-2. Push changes to your main branch - the workflow will automatically build and deploy the site
+Content is managed through TinaCMS and stored as MDX files in the `content/pages/` directory:
 
-> [!NOTE]
-> When deploying to GitHub Pages, you'll need to update your secrets in Settings | Secrets and variables | Actions to include:
-> - `NEXT_PUBLIC_TINA_CLIENT_ID`
-> - `TINA_TOKEN`
->
-> You get these from your TinaCloud project - [read the docs](https://tina.io/docs/tina-cloud/deployment-options/github-pages)
+- `home.mdx` - Homepage with hero and features
+- `nis.mdx` - NIS treatment information
+- `about.mdx` - About page
+- `contact.mdx` - Contact information
+- `tarieven.mdx` - Pricing information
 
-> [!IMPORTANT]
-> GitHub Pages does not support server side code, so this will run as a static site. If you don't want to deploy to GitHub pages, just delete `.github/workflows/build-and-deploy.yml`
+## 🔧 Development
 
-### Building the Starter Locally (Using the hosted content API)
-
-Replace the `.env.example`, with `.env`
+### Project Structure
 
 ```
-NEXT_PUBLIC_TINA_CLIENT_ID=<get this from the project you create at app.tina.io>
-TINA_TOKEN=<get this from the project you create at app.tina.io>
-NEXT_PUBLIC_TINA_BRANCH=<Specify the branch with Tina configured>
+jrhoff/
+├── app/                    # Next.js app directory
+├── components/             # React components
+│   ├── blocks/            # Content blocks (Hero, Features, etc.)
+│   ├── layout/            # Layout components (Header, Footer)
+│   └── motion-primitives/ # Animation components
+├── content/               # MDX content files
+├── styles.css             # Global styles and design tokens
+└── tina/                  # TinaCMS configuration
 ```
 
-Build the project:
+### Key Components
 
-```bash
-pnpm build
-```
+- **Hero Block**: Asymmetrical layout with animated text and circular image
+- **Features Block**: Grid layout for showcasing key features
+- **Content Block**: Flexible markdown content rendering
+- **CTA Block**: Call-to-action sections with buttons
 
-## Getting Help
+## 🚢 Deployment
 
-To get help with any TinaCMS challenges you may have:
+The site can be deployed to:
 
-- Visit the [documentation](https://tina.io/docs/) to learn about Tina.
-- [Join our Discord](https://discord.gg/zumN63Ybpf) to share feedback.
-- Visit the [community forum](https://community.tinacms.org/) to ask questions.
-- Get support through the chat widget on the TinaCMS Dashboard
-- [Email us](mailto:support@tina.io) to schedule a call with our team and share more about your context and what you're trying to achieve.
-- [Search or open an issue](https://github.com/tinacms/tinacms/issues) if something is not working.
-- Reach out on Twitter at [@tina_cms](https://twitter.com/tina_cms).
+- **Vercel**: Recommended for Next.js apps
+- **GitHub Pages**: Static export support (see original README for details)
+- **Other platforms**: Any platform supporting Next.js
 
-## Development tips
-
-### Visual Studio Code GraphQL extension
-
-[Install the GraphQL extension](https://marketplace.visualstudio.com/items?itemName=GraphQL.vscode-graphql) to benefit from type auto-completion.
-
-### Typescript
-
-A good way to ensure your components match the shape of your data is to leverage the auto-generated TypeScript types.
-These are rebuilt when your `tina` config changes.
-
-## LICENSE
+## 📄 License
 
 Licensed under the [Apache 2.0 license](./LICENSE).
 
+## 🤝 Support
 
-# Repository cleaned of LFS content
-# Repository cleaned of LFS content - Wed Sep 17 15:00:42 AEST 2025
+For TinaCMS-related questions:
+- [Documentation](https://tina.io/docs/)
+- [Discord Community](https://discord.gg/zumN63Ybpf)
+- [Community Forum](https://community.tinacms.org/)
 
+---
+
+Built with ❤️ for holistic health and wellness.
