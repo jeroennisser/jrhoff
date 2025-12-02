@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Netlify Forms</title>
+</head>
+<body>
+    <!-- 
+        This file is used to help Netlify detect forms in the application.
+        Since the forms are rendered with React/Next.js, sometimes the build bots miss them.
+        Defining them here in static HTML ensures they are detected and configured correctly.
+    -->
+
+    <!-- Contact Form -->
+    <form name="contact" netlify netlify-honeypot="bot-field" hidden>
+        <input type="hidden" name="form-name" value="contact" />
+        <input name="bot-field" />
+        <input type="radio" name="appointmentType" />
+        <input type="text" name="name" />
+        <input type="email" name="email" />
+        <input type="tel" name="phone" />
+        <textarea name="message"></textarea>
+    </form>
+
+    <!-- Newsletter Form -->
+    <form name="newsletter" netlify netlify-honeypot="bot-field" hidden>
+        <input type="hidden" name="form-name" value="newsletter" />
+        <input name="bot-field" />
+        <input type="email" name="email-address" />
+    </form>
+
+</body>
+</html>
