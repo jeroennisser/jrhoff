@@ -518,7 +518,8 @@ p {
     position: relative;
     background-color: #FCF2E9;
     /* Specific warm beige requested by user */
-    /* overflow: hidden; - Removed to allow blobs to be visible */
+    overflow: hidden;
+    /* Ensure blobs don't trigger scroll or layout shifts */
     /* Add solid circles as static background layers to mix with animated blobs */
     background-image:
       radial-gradient(circle 200px at calc(100% - 50px) 50px, color-mix(in oklch, var(--page-accent) 12%, transparent), transparent),
@@ -544,6 +545,8 @@ p {
     /* Behind content */
     animation: float-slow 15s ease-in-out infinite alternate;
     pointer-events: none;
+    will-change: transform;
+    /* Hint to browser for smoother animation */
   }
 
   .bg-hero-layered::after {
@@ -563,6 +566,8 @@ p {
     /* Behind content */
     animation: float-slower 20s ease-in-out infinite alternate-reverse;
     pointer-events: none;
+    will-change: transform;
+    /* Hint to browser for smoother animation */
   }
 
   @keyframes float-slow {

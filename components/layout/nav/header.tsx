@@ -81,7 +81,7 @@ export const Header = () => {
     >
       <nav className="bg-[#FCF2E9]/95 backdrop-blur-xl border shadow-lg mx-4 transition-all duration-500 ease-out rounded-[2rem]">
         <div className="px-6 transition-all duration-300">
-          <div className="flex items-center justify-between py-2 lg:py-2">
+          <div className="flex items-center justify-between py-2 lg:py-2 relative">
             {/* Logo */}
             <Link
               href="/"
@@ -93,8 +93,8 @@ export const Header = () => {
               </span>
             </Link>
 
-            {/* Desktop Menu */}
-            <div className="hidden lg:flex items-center gap-8">
+            {/* Desktop Menu - Centered */}
+            <div className="hidden lg:flex absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
               <nav>
                 <ul className="flex gap-8 text-sm">
                   {header.nav!.map((item, index) => {
@@ -116,7 +116,10 @@ export const Header = () => {
                   })}
                 </ul>
               </nav>
+            </div>
 
+            {/* Desktop Utilities - Right */}
+            <div className="hidden lg:flex items-center gap-6">
               <a
                 href="tel:0612261363"
                 className="flex items-center gap-2 text-sm text-primary hover:text-primary/80 transition-colors font-medium">
@@ -131,7 +134,7 @@ export const Header = () => {
                 className="flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors cursor-pointer"
                 aria-label="Uitloggen">
                 <LogOut className="w-4 h-4" />
-                <span>Uitloggen</span>
+                <span className="sr-only">Uitloggen</span>
               </button>
             </div>
 

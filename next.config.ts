@@ -1,5 +1,5 @@
 import type { NextConfig } from 'next'
- 
+
 const nextConfig: NextConfig = {
   images: {
     remotePatterns: [
@@ -14,6 +14,11 @@ const nextConfig: NextConfig = {
         port: '',
       }
     ],
+  },
+  modularizeImports: {
+    'react-icons': {
+      transform: 'react-icons/{{member}}',
+    },
   },
   async headers() {
     // these are also defined in the root layout since github pages doesn't support headers

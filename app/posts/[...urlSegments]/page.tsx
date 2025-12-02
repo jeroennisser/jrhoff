@@ -24,29 +24,34 @@ export default async function PostPage({
 }
 
 export async function generateStaticParams() {
-  let posts = await client.queries.postConnection();
-  const allPosts = posts;
+  try {
+    let posts = await client.queries.postConnection();
+    const allPosts = posts;
 
-  if (!allPosts.data.postConnection.edges) {
-    return [];
-  }
-
-  while (posts.data?.postConnection.pageInfo.hasNextPage) {
-    posts = await client.queries.postConnection({
-      after: posts.data.postConnection.pageInfo.endCursor,
-    });
-
-    if (!posts.data.postConnection.edges) {
-      break;
+    if (!allPosts.data.postConnection.edges) {
+      return [];
     }
 
-    allPosts.data.postConnection.edges.push(...posts.data.postConnection.edges);
+    while (posts.data?.postConnection.pageInfo.hasNextPage) {
+      posts = await client.queries.postConnection({
+        after: posts.data.postConnection.pageInfo.endCursor,
+      });
+
+      if (!posts.data.postConnection.edges) {
+        break;
+      }
+
+      allPosts.data.postConnection.edges.push(...posts.data.postConnection.edges);
+    }
+
+    const params =
+      allPosts.data?.postConnection.edges.map((edge) => ({
+        urlSegments: edge?.node?._sys.breadcrumbs,
+      })) || [];
+
+    return params;
+  } catch (error) {
+    console.warn('Failed to generate static params for posts:', error);
+    return [];
   }
-
-  const params =
-    allPosts.data?.postConnection.edges.map((edge) => ({
-      urlSegments: edge?.node?._sys.breadcrumbs,
-    })) || [];
-
-  return params;
 }
