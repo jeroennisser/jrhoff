@@ -71,13 +71,7 @@ export const components: Components<{
             <TinaMarkdown content={props.children} />
           </div>
           <div className='mt-8 '>
-            <form
-              className='sm:flex'
-              name="newsletter"
-              method="POST"
-              data-netlify="true"
-            >
-              <input type="hidden" name="form-name" value="newsletter" />
+            <form className='sm:flex'>
               <label htmlFor='email-address' className='sr-only'>
                 Email address
               </label>

@@ -28,6 +28,7 @@ export const ContactForm = ({ data }: { data: PageBlocksContactForm }) => {
             const form = e.currentTarget;
             const formDataToSend = new FormData(form);
             const data = new URLSearchParams();
+            data.append('form-name', 'contact'); // Explicitly add form-name
             for (const pair of formDataToSend.entries()) {
                 data.append(pair[0], pair[1] as string);
             }
