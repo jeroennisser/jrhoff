@@ -1,3 +1,37 @@
+To optimize the homepage for conversion, we need to shift from a "brochure" style (just listing links) to a Sales Narrative.
+
+The goal of a homepage is to answer three questions immediately:
+
+Does this solve my specific problem? (Agitation)
+Can I trust this person? (Authority & Social Proof)
+What do I do next? (Call to Action)
+Here is a concrete plan to restructure your home.mdx using your existing components.
+
+1. The Strategy: "The 4-Step Conversion Flow"
+Currently, your homepage jumps from the Hero straight to "Welcome/Menu links". We need to insert persuasion steps in between.
+
+Hero: Promise a result (already good, just needs a tweak).
+Problem Awareness: "Do you suffer from X, Y, Z?" (Use features block).
+Social Proof: "Others recovered too." (Add testimonial block).
+Process: "How we fix it." (Use features block).
+Authority: Short intro to Jeroen (Use content block).
+2. Implementation
+Replace the contents of content/pages/home.mdx with this optimised structure.
+
+Key Changes made below:
+
+Hero: Added "12+ jaar ervaring" to the trust text.
+Pain Points (New): Added a "Waar loop je tegenaan?" section. If a user sees their symptom, they are 80% more likely to book.
+Social Proof (New): Added the testimonial block (which was missing from the homepage).
+Process (New): Added a "Zo werkt het" section to remove anxiety about what happens during a session.
+code
+Mdx
+
+download
+
+content_copy
+
+expand_less
 ---
 title: Jeroen van der Hoff - Body Therapist
 blocks:
@@ -116,3 +150,23 @@ blocks:
         link: 'https://wa.me/31612261363'
     _template: cta
 ---
+3. Visual Tweak (Optional but Recommended)
+In your components/blocks/hero.tsx, you currently have a static image circle. To increase conversion, consider adding a distinct "Trust Badge" overlay on the image if possible, or ensuring the image used (/uploads/nis-muscle-test.jpg) clearly shows Jeroen's face smiling while working.
+
+Trust is the #1 conversion factor in therapy. If the current image is just a generic muscle test (hands only), replace it with a photo of you engaging with a client.
+
+4. Technical Fix for the "Actions"
+In the updated MDX above, I added a WhatsApp link to the bottom CTA. Make sure your Button component handles external links safely (which next/link usually does, but for https:// it sometimes requires standard <a> tags).
+
+Check components/blocks/call-to-action.tsx. Your current implementation uses Link for everything:
+
+code
+Tsx
+
+download
+
+content_copy
+
+expand_less
+<Link href={action!.link!}>
+This works fine for external links in Next.js, but make sure the link in the CMS starts with https://.

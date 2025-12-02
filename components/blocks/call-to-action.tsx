@@ -7,6 +7,10 @@ import { PageBlocksCta } from '@/tina/__generated__/types';
 import { Icon } from '../icon';
 import { Section } from '../layout/section';
 
+const isExternalLink = (url: string) => {
+    return url.startsWith('http://') || url.startsWith('https://') || url.startsWith('tel:') || url.startsWith('mailto:');
+};
+
 export const CallToAction = ({ data }: { data: PageBlocksCta }) => {
     return (
         <Section>
@@ -15,20 +19,32 @@ export const CallToAction = ({ data }: { data: PageBlocksCta }) => {
                 <p className="mt-4" data-tina-field={tinaField(data, 'description')}>{data.description}</p>
 
                 <div className="mt-12 flex flex-wrap justify-center gap-4">
-                    {data.actions && data.actions.map(action => (
-                        <div key={action!.label} data-tina-field={tinaField(action)}>
-                            <Button
-                                asChild
-                                size="lg"
-                                variant={action!.type === 'link' ? 'outline' : 'default'}
-                                className="px-7 py-3 text-base transition-all duration-150 ease-out hover:scale-[1.02]">
-                                <Link href={action!.link!}>
-                                    {action?.icon && (<Icon data={action?.icon} />)}
-                                    <span className="text-nowrap">{action!.label}</span>
-                                </Link>
-                            </Button>
-                        </div>
-                    ))}
+                    {data.actions && data.actions.map(action => {
+                        const linkUrl = action!.link!;
+                        const isExternal = isExternalLink(linkUrl);
+                        
+                        return (
+                            <div key={action!.label} data-tina-field={tinaField(action)}>
+                                <Button
+                                    asChild
+                                    size="lg"
+                                    variant={action!.type === 'link' ? 'outline' : 'default'}
+                                    className="px-7 py-3 text-base transition-all duration-150 ease-out hover:scale-[1.02]">
+                                    {isExternal ? (
+                                        <a href={linkUrl} target={linkUrl.startsWith('http') ? '_blank' : undefined} rel={linkUrl.startsWith('http') ? 'noopener noreferrer' : undefined}>
+                                            {action?.icon && (<Icon data={action?.icon} />)}
+                                            <span className="text-nowrap">{action!.label}</span>
+                                        </a>
+                                    ) : (
+                                        <Link href={linkUrl}>
+                                            {action?.icon && (<Icon data={action?.icon} />)}
+                                            <span className="text-nowrap">{action!.label}</span>
+                                        </Link>
+                                    )}
+                                </Button>
+                            </div>
+                        );
+                    })}
                 </div>
             </div>
         </Section>

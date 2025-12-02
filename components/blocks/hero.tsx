@@ -13,6 +13,10 @@ import { TextEffect } from '../motion-primitives/text-effect';
 import { Button } from '../ui/button';
 import HeroVideoDialog from '../ui/hero-video-dialog';
 import { Transition } from 'motion/react';
+
+const isExternalLink = (url: string) => {
+  return url.startsWith('http://') || url.startsWith('https://') || url.startsWith('tel:') || url.startsWith('mailto:');
+};
 const transitionVariants = {
   container: {
     visible: {
@@ -104,21 +108,33 @@ export const Hero = ({ data }: { data: PageBlocksHero }) => {
 
           <AnimatedGroup variants={transitionVariants} className={`mt-10 flex flex-col sm:flex-row gap-4 ${hasImage ? 'justify-center items-center lg:justify-start lg:items-start' : 'justify-center items-center'}`}>
             {data.actions &&
-              data.actions.map((action, index) => (
-                <div key={action!.label} data-tina-field={tinaField(action)}>
-                  <Button
-                    asChild
-                    size='lg'
-                    variant={action!.type === 'link' ? 'outline' : 'default'}
-                    className={`px-8 py-6 text-base rounded-full transition-all duration-150 ease-out hover:scale-[1.02] ${action!.type === 'link' ? 'border-[1.5px] border-gray-300 bg-white hover:bg-orange-100 hover:shadow-sm !text-gray-900 hover:!text-gray-900' : 'bg-[var(--page-accent)] hover:opacity-90 text-white'}`}
-                  >
-                    <Link href={action!.link!}>
-                      {action?.icon && <Icon data={action?.icon} />}
-                      <span className='text-nowrap font-medium'>{action!.label}</span>
-                    </Link>
-                  </Button>
-                </div>
-              ))}
+              data.actions.map((action, index) => {
+                const linkUrl = action!.link!;
+                const isExternal = isExternalLink(linkUrl);
+                
+                return (
+                  <div key={action!.label} data-tina-field={tinaField(action)}>
+                    <Button
+                      asChild
+                      size='lg'
+                      variant={action!.type === 'link' ? 'outline' : 'default'}
+                      className={`px-8 py-6 text-base rounded-full transition-all duration-150 ease-out hover:scale-[1.02] ${action!.type === 'link' ? 'border-[1.5px] border-gray-300 bg-white hover:bg-orange-100 hover:shadow-sm !text-gray-900 hover:!text-gray-900' : 'bg-[var(--page-accent)] hover:opacity-90 text-white'}`}
+                    >
+                      {isExternal ? (
+                        <a href={linkUrl} target={linkUrl.startsWith('http') ? '_blank' : undefined} rel={linkUrl.startsWith('http') ? 'noopener noreferrer' : undefined}>
+                          {action?.icon && <Icon data={action?.icon} />}
+                          <span className='text-nowrap font-medium'>{action!.label}</span>
+                        </a>
+                      ) : (
+                        <Link href={linkUrl}>
+                          {action?.icon && <Icon data={action?.icon} />}
+                          <span className='text-nowrap font-medium'>{action!.label}</span>
+                        </Link>
+                      )}
+                    </Button>
+                  </div>
+                );
+              })}
           </AnimatedGroup>
 
           {data.trust && (
