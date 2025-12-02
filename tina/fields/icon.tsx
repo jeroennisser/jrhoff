@@ -1,8 +1,8 @@
 'use client';
 import React from 'react';
 import { Button, wrapFieldsWithMeta } from 'tinacms';
-import { BiChevronRight } from 'react-icons/bi';
-import { GoCircleSlash } from 'react-icons/go';
+// These icons are now imported in components/icon.tsx
+// No need to import here since they're used via IconOptions
 import { Icon, IconOptions } from '../../components/icon';
 import { Popover, PopoverButton, Transition, PopoverPanel } from '@headlessui/react';
 import { ColorPickerInput } from './color';
@@ -39,7 +39,17 @@ export const IconPickerInput = wrapFieldsWithMeta(({ input }) => {
               <Button className={`text-sm h-11 px-4 ${InputIcon ? 'h-11' : 'h-10'}`} size='custom' rounded='full' variant={open ? 'secondary' : 'white'}>
                 {InputIcon && <InputIcon className='w-7 mr-1 h-auto fill-current text-blue-500' />}
                 {inputLabel}
-                {!InputIcon && <BiChevronRight className='w-5 h-auto fill-current opacity-70 ml-1' />}
+                {!InputIcon && (
+                  <Icon
+                    data={{
+                      name: 'BiChevronRight',
+                      color: 'blue',
+                      style: 'regular',
+                      size: 'custom',
+                    }}
+                    className='w-5 h-auto fill-current opacity-70 ml-1'
+                  />
+                )}
               </Button>
             </PopoverButton>
             <div className='absolute w-full min-w-[192px] max-w-2xl -bottom-2 left-0 translate-y-full' style={{ zIndex: 1000 }}>
@@ -70,7 +80,17 @@ export const IconPickerInput = wrapFieldsWithMeta(({ input }) => {
                         />
                       </div>
                       {filteredBlocks.length === 0 && (
-                        <span className='relative text-center text-xs px-2 py-3 text-gray-300 bg-gray-50 italic'>No matches found</span>
+                        <span className='relative text-center text-xs px-2 py-3 text-gray-300 bg-gray-50 italic'>
+                          <Icon
+                            data={{
+                              name: 'GoCircleSlash',
+                              color: 'red',
+                              style: 'regular',
+                              size: 'small',
+                            }}
+                          />
+                          No matches found
+                        </span>
                       )}
                       {filteredBlocks.length > 0 && (
                         <div className='w-full grid grid-cols-6 auto-rows-auto p-2 overflow-y-auto'>
@@ -83,7 +103,14 @@ export const IconPickerInput = wrapFieldsWithMeta(({ input }) => {
                               close();
                             }}
                           >
-                            <GoCircleSlash className='w-6 h-auto text-gray-200' />
+                            <Icon
+                              data={{
+                                name: 'BiChevronRight',
+                                color: 'blue',
+                                style: 'circle',
+                                size: 'xs',
+                              }}
+                            />
                           </button>
                           {filteredBlocks.map((name) => {
                             return (

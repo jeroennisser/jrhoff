@@ -1,0 +1,37 @@
+
+> @tinacms/starter@0.1.0 build-local
+> tinacms build --local --skip-indexing --skip-cloud-checks && next build
+
+Starting Tina build
+server listening on port 4001
+│
+○  Tina build complete ──────────────────────────────────╮
+│                                                        │
+│  🦙 Tina Config                                        │
+│     API url:            http://localhost:4001/graphql  │
+│                                                        │
+│  🤖 Auto-generated files                               │
+│     GraphQL Client:     tina/__generated__/client.ts   │
+│     Typescript Types:   tina/__generated__/types.ts    │
+│     Static HTML file:   public/admin/index.html        │
+│                                                        │
+│                                                        │
+├────────────────────────────────────────────────────────╯
+   ▲ Next.js 15.3.0
+   - Environments: .env.local
+
+   Creating an optimized production build ...
+Failed to compile.
+
+./components/mermaid-renderer.tsx
+Module not found: Can't resolve 'mermaid'
+
+https://nextjs.org/docs/messages/module-not-found
+
+Import trace for requested module:
+./components/blocks/mermaid.tsx
+./components/mdx-components.tsx
+./app/posts/[...urlSegments]/client-page.tsx
+
+
+> Build failed because of webpack errors

@@ -5,7 +5,6 @@ import Image from 'next/image';
 import { TinaPrism } from './tina-prism';
 import { Video } from './blocks/video';
 import { PageBlocksVideo } from '@/tina/__generated__/types';
-import { Mermaid } from './blocks/mermaid';
 
 export const components: Components<{
   BlockQuote: {
@@ -26,10 +25,6 @@ export const components: Components<{
   code_block: (props) => {
     if (!props) {
       return <></>;
-    }
-
-    if (props.lang === 'mermaid') {
-      return <Mermaid value={props.value} />
     }
 
     return <TinaPrism lang={props.lang} value={props.value} />;
@@ -109,7 +104,6 @@ export const components: Components<{
       </span>
     );
   },
-  mermaid: (props: any) => <Mermaid {...props} />,
   video: (props) => {
     return <Video data={props} />;
   },

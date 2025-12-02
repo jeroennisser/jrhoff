@@ -1,9 +1,49 @@
 'use client';
 //TODO: Fix Types in this file
 //
-import * as BoxIcons from 'react-icons/bi';
+// Import only the specific BoxIcons we actually use (instead of entire library)
+import {
+  BiTargetLock,
+  BiHeart,
+  BiTimeFive,
+  BiCalendar,
+  BiInfoCircle,
+  BiSad,
+  BiBrain,
+  BiBattery,
+  BiBody,
+  BiCalendarCheck,
+  BiPhone,
+  BiMap,
+  BiEnvelope,
+  BiBuilding,
+  BiTime,
+  BiAlarm,
+  BiBookOpen,
+  BiWorld,
+  BiCalendarPlus,
+  BiMoon,
+  BiCalendarWeek,
+  BiCheckShield,
+  BiFile,
+  BiLock,
+  BiBlock,
+  BiHealth,
+  BiMobileAlt,
+  BiCar,
+  BiBus,
+  BiTrain,
+  BiSearch,
+  BiRefresh,
+  BiCheckCircle,
+  BiHeartCircle,
+  BiShield,
+  BiGroup,
+  BiChevronRight,
+} from 'react-icons/bi';
 import { FaFacebookF, FaGithub, FaLinkedin, FaXTwitter, FaYoutube } from 'react-icons/fa6';
 import { AiFillInstagram } from 'react-icons/ai';
+import { GoCircleSlash } from 'react-icons/go';
 import React from 'react';
 import { useLayout } from './layout/layout-context';
 
@@ -21,13 +61,56 @@ export const IconOptions = {
       />
     </svg>
   ),
-  ...BoxIcons,
+  // BoxIcons - only the ones we actually use
+  BiTargetLock,
+  BiTarget: BiTargetLock, // Alias for MDX compatibility
+  BiHeart,
+  BiTimeFive,
+  BiCalendar,
+  BiInfoCircle,
+  BiSad,
+  BiBrain,
+  BiBattery,
+  BiBody,
+  BiCalendarCheck,
+  BiPhone,
+  BiMap,
+  BiEnvelope,
+  BiBuilding,
+  BiTime,
+  BiAlarm,
+  BiBookOpen,
+  BiWorld,
+  BiCalendarPlus,
+  BiMoon,
+  BiCalendarWeek,
+  BiCheckShield,
+  BiShieldCheck: BiCheckShield, // Alias for MDX compatibility
+  BiFile,
+  BiLock,
+  BiBlock,
+  BiHealth,
+  BiMobileAlt,
+  BiCar,
+  BiBus,
+  BiTrain,
+  BiSearch,
+  BiRefresh,
+  BiCheckCircle,
+  BiHeartCircle,
+  BiShield,
+  BiGroup,
+  BiChevronRight,
+  // FontAwesome 6
   FaFacebookF,
   FaGithub,
   FaLinkedin,
   FaXTwitter,
   FaYoutube,
+  // Ant Icons
   AiFillInstagram,
+  // Go Icons
+  GoCircleSlash,
 };
 
 const iconColorClass: {
