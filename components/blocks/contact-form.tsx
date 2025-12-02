@@ -27,11 +27,15 @@ export const ContactForm = ({ data }: { data: PageBlocksContactForm }) => {
         try {
             const form = e.currentTarget;
             const formDataToSend = new FormData(form);
+            const data = new URLSearchParams();
+            for (const pair of formDataToSend.entries()) {
+                data.append(pair[0], pair[1] as string);
+            }
 
             const response = await fetch('/', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-                body: new URLSearchParams(formDataToSend as any).toString(),
+                body: data.toString(),
             });
 
             if (response.ok) {
