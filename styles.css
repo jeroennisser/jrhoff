@@ -531,8 +531,8 @@ p {
   .bg-hero-layered::before {
     content: '';
     position: absolute;
-    top: -10%;
-    /* Moved inward slightly */
+    top: -100px;
+    /* Fixed value to prevent layout shift */
     right: -5%;
     width: 60vw;
     height: 60vw;
@@ -552,8 +552,8 @@ p {
   .bg-hero-layered::after {
     content: '';
     position: absolute;
-    bottom: -10%;
-    /* Moved inward slightly */
+    bottom: -100px;
+    /* Fixed value to prevent layout shift */
     left: -5%;
     width: 50vw;
     height: 50vw;
