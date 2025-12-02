@@ -25,9 +25,10 @@ export function middleware(request: NextRequest) {
     return NextResponse.next();
   }
 
-  // Allow access to login page, API routes, and static assets
+  // Allow access to login page, API routes, form helpers, and static assets
   if (
     pathname === '/login' ||
+    pathname === '/__forms.html' ||
     pathname.startsWith('/api/') ||
     pathname.startsWith('/_next/') ||
     pathname.startsWith('/favicon') ||

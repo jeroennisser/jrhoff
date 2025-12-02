@@ -1,0 +1,71 @@
+Based on the analysis of your project files, the issue is likely caused by the form submitting a POST request to the root path(/). In a Next.js App Router application hosted on Netlify, requests to / are handled by the Next.js Server / Edge Runtime, which often bypasses Netlify's static form detection and processing layer.
+
+To fix this, you need to target the static HTML helper file you've already created (public/__forms.html) when submitting the form via JavaScript.
+
+Here are the steps to resolve the issue:
+
+    1. Update the Fetch URL in ContactForm
+Modify the handleSubmit function in components / blocks / contact - form.tsx to submit to / __forms.html instead of /.This explicitly tells Netlify to handle the request against the static file definition.
+
+    File: components / blocks / contact - form.tsx
+
+code
+Tsx
+
+download
+
+content_copy
+
+expand_less
+// ... inside handleSubmit ...
+
+try {
+    const form = e.currentTarget;
+    const formDataToSend = new FormData(form);
+    const data = new URLSearchParams();
+    data.append('form-name', 'contact');
+    for (const pair of formDataToSend.entries()) {
+        data.append(pair[0], pair[1] as string);
+    }
+
+    // Change this line from '/' to '/__forms.html'
+    const response = await fetch('/__forms.html', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: data.toString(),
+    });
+
+    // ...
+    2. Update Middleware to Allow the Form Helper
+Your middleware.ts is configured to intercept almost all routes for password protection.Even if the user is authenticated, it's safer to exclude the form helper file from the middleware completely to ensure Netlify's edge layer can process the POST request without interference.
+
+        File: middleware.ts
+
+    code
+    TypeScript
+
+    download
+
+    content_copy
+
+    expand_less
+    // ... inside middleware function ...
+
+    // Allow access to login page, API routes, and static assets
+    if (
+        pathname === '/login' ||
+        pathname === '/__forms.html' || // Add this line
+        pathname.startsWith('/api/') ||
+        pathname.startsWith('/_next/') ||
+        pathname.startsWith('/favicon') ||
+        pathname.startsWith('/uploads/')
+    ) {
+        return NextResponse.next();
+    }
+
+// ...
+Summary of Why This Happens
+Netlify Forms work by parsing static HTML files at build time.You correctly provided public / __forms.html for this.
+Runtime Handling: When you submit via fetch('/'), the request hits the Next.js server handler.Since your page is a React Server Component, it doesn't know how to handle a POST body formatted for Netlify Forms, and the request completes without triggering Netlify's form processor.
+The Fix: By posting to / __forms.html, you target a static asset.Netlify's infrastructure is designed to intercept POST requests to static files and process them as form submissions before serving the file.
+After deploying these changes, your form submissions should start appearing in the Netlify dashboard.
