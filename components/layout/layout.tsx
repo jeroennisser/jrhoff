@@ -15,7 +15,7 @@ export default async function Layout({ children, rawPageData }: LayoutProps) {
     {
       fetchOptions: {
         next: {
-          revalidate: 60,
+          revalidate: 3600, // Cache for 1 hour instead of 60 seconds
         },
       }
     }

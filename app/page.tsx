@@ -3,8 +3,7 @@ import client from "@/tina/__generated__/client";
 import Layout from "@/components/layout/layout";
 import ClientPage from "./[...urlSegments]/client-page";
 
-export const revalidate = 300;
-export const dynamic = 'force-dynamic';
+export const revalidate = 3600; // Cache for 1 hour
 
 export default async function Home() {
   let data;

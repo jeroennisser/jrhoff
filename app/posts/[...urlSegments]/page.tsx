@@ -3,7 +3,7 @@ import client from '@/tina/__generated__/client';
 import Layout from '@/components/layout/layout';
 import PostClientPage from './client-page';
 
-export const revalidate = 300;
+export const revalidate = 3600; // Cache for 1 hour
 
 export default async function PostPage({
   params,
