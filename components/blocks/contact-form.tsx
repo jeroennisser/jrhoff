@@ -77,18 +77,9 @@ export const ContactForm = ({ data }: { data: PageBlocksContactForm }) => {
                 <form
                     name="contact"
                     method="POST"
-                    data-netlify="true"
-                    data-netlify-honeypot="bot-field"
                     onSubmit={handleSubmit}
                     className="space-y-6"
                 >
-                    {/* Hidden fields for Netlify */}
-                    <input type="hidden" name="form-name" value="contact" />
-                    <div className="hidden">
-                        <label>
-                            Don't fill this out if you're human: <input name="bot-field" />
-                        </label>
-                    </div>
 
                     {/* Appointment Type Selection */}
                     <div className="space-y-3">
