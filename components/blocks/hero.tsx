@@ -106,41 +106,54 @@ export const Hero = ({ data }: { data: PageBlocksHero }) => {
             </AnimatedGroup>
           )}
 
-          <AnimatedGroup variants={transitionVariants} className={`mt-10 flex flex-col sm:flex-row gap-4 ${hasImage ? 'justify-center items-center lg:justify-start lg:items-start' : 'justify-center items-center'}`}>
-            {data.actions &&
-              data.actions.map((action, index) => {
-                const linkUrl = action!.link!;
-                const isExternal = isExternalLink(linkUrl);
-                
-                return (
-                  <div key={action!.label} data-tina-field={tinaField(action)}>
-                    <Button
-                      asChild
-                      size='lg'
-                      variant={action!.type === 'link' ? 'outline' : 'default'}
-                      className={`px-8 py-6 text-base rounded-full transition-all duration-150 ease-out hover:scale-[1.02] ${action!.type === 'link' ? 'border-[1.5px] border-gray-300 bg-white hover:bg-orange-100 hover:shadow-sm !text-gray-900 hover:!text-gray-900' : 'bg-[var(--page-accent)] hover:opacity-90 text-white'}`}
-                    >
-                      {isExternal ? (
-                        <a href={linkUrl} target={linkUrl.startsWith('http') ? '_blank' : undefined} rel={linkUrl.startsWith('http') ? 'noopener noreferrer' : undefined}>
-                          {action?.icon && <Icon data={action?.icon} />}
-                          <span className='text-nowrap font-medium'>{action!.label}</span>
-                        </a>
-                      ) : (
-                        <Link href={linkUrl}>
-                          {action?.icon && <Icon data={action?.icon} />}
-                          <span className='text-nowrap font-medium'>{action!.label}</span>
-                        </Link>
-                      )}
-                    </Button>
-                  </div>
-                );
-              })}
+
+          <AnimatedGroup variants={transitionVariants} className={`mt-10 flex flex-col gap-4 ${hasImage ? 'justify-center items-center lg:justify-start lg:items-start' : 'justify-center items-center'}`}>
+            <div className="flex flex-col sm:flex-row gap-4">
+              {data.actions &&
+                data.actions.map((action, index) => {
+                  const linkUrl = action!.link!;
+                  const isExternal = isExternalLink(linkUrl);
+                  const isPrimary = action!.type === 'button';
+
+                  return (
+                    <div key={action!.label} data-tina-field={tinaField(action)}>
+                      <Button
+                        asChild
+                        size='lg'
+                        variant={isPrimary ? 'default' : 'outline'}
+                        className={`px-8 py-6 text-base rounded-full transition-all duration-150 ease-out hover:scale-[1.02] ${!isPrimary ? 'border-[1.5px] border-gray-300 bg-white hover:bg-orange-100 hover:shadow-sm !text-gray-900 hover:!text-gray-900' : 'bg-[var(--page-accent)] hover:opacity-90 text-white'}`}
+                      >
+                        {isExternal ? (
+                          <a href={linkUrl} target={linkUrl.startsWith('http') ? '_blank' : undefined} rel={linkUrl.startsWith('http') ? 'noopener noreferrer' : undefined} className="flex items-center gap-2">
+                            {action?.icon && <Icon data={action?.icon} />}
+                            <div className="flex flex-col items-start">
+                              <span className='text-nowrap font-medium'>{action!.label}</span>
+                              {isPrimary && data.actionsSubtitle && (
+                                <span className="text-xs font-normal opacity-90">{data.actionsSubtitle}</span>
+                              )}
+                            </div>
+                          </a>
+                        ) : (
+                          <Link href={linkUrl} className="flex items-center gap-2">
+                            {action?.icon && <Icon data={action?.icon} />}
+                            <div className="flex flex-col items-start">
+                              <span className='text-nowrap font-medium'>{action!.label}</span>
+                              {isPrimary && data.actionsSubtitle && (
+                                <span className="text-xs font-normal opacity-90">{data.actionsSubtitle}</span>
+                              )}
+                            </div>
+                          </Link>
+                        )}
+                      </Button>
+                    </div>
+                  );
+                })}
+            </div>
           </AnimatedGroup>
 
           {data.trust && (
             <AnimatedGroup variants={transitionVariants} className="mt-6">
               <p className="text-base font-medium text-gray-600">{data.trust.text}</p>
-              <p className="text-sm text-gray-500 mt-1">Al 12+ jaar ervaring met NIS & Body Therapy</p>
             </AnimatedGroup>
           )}
         </div>
@@ -271,6 +284,12 @@ export const heroBlockSchema: Template = {
           type: 'string',
         },
       ],
+    },
+    {
+      label: 'Actions Subtitle',
+      name: 'actionsSubtitle',
+      type: 'string',
+      description: 'Optional subtitle text below the action buttons (e.g., "Gratis kennismaking ook mogelijk")',
     },
     {
       label: 'Trust Element',

@@ -22,23 +22,34 @@ export const CallToAction = ({ data }: { data: PageBlocksCta }) => {
                     {data.actions && data.actions.map(action => {
                         const linkUrl = action!.link!;
                         const isExternal = isExternalLink(linkUrl);
-                        
+                        const isPrimary = action!.type === 'button';
+
                         return (
                             <div key={action!.label} data-tina-field={tinaField(action)}>
                                 <Button
                                     asChild
                                     size="lg"
-                                    variant={action!.type === 'link' ? 'outline' : 'default'}
+                                    variant={isPrimary ? 'default' : 'outline'}
                                     className="px-7 py-3 text-base transition-all duration-150 ease-out hover:scale-[1.02]">
                                     {isExternal ? (
-                                        <a href={linkUrl} target={linkUrl.startsWith('http') ? '_blank' : undefined} rel={linkUrl.startsWith('http') ? 'noopener noreferrer' : undefined}>
+                                        <a href={linkUrl} target={linkUrl.startsWith('http') ? '_blank' : undefined} rel={linkUrl.startsWith('http') ? 'noopener noreferrer' : undefined} className="flex items-center gap-2">
                                             {action?.icon && (<Icon data={action?.icon} />)}
-                                            <span className="text-nowrap">{action!.label}</span>
+                                            <div className="flex flex-col items-start">
+                                                <span className="text-nowrap">{action!.label}</span>
+                                                {isPrimary && data.actionsSubtitle && (
+                                                    <span className="text-xs font-normal opacity-90">{data.actionsSubtitle}</span>
+                                                )}
+                                            </div>
                                         </a>
                                     ) : (
-                                        <Link href={linkUrl}>
+                                        <Link href={linkUrl} className="flex items-center gap-2">
                                             {action?.icon && (<Icon data={action?.icon} />)}
-                                            <span className="text-nowrap">{action!.label}</span>
+                                            <div className="flex flex-col items-start">
+                                                <span className="text-nowrap">{action!.label}</span>
+                                                {isPrimary && data.actionsSubtitle && (
+                                                    <span className="text-xs font-normal opacity-90">{data.actionsSubtitle}</span>
+                                                )}
+                                            </div>
                                         </Link>
                                     )}
                                 </Button>
@@ -128,6 +139,12 @@ export const ctaBlockSchema: Template = {
                     type: 'string',
                 },
             ],
+        },
+        {
+            label: 'Actions Subtitle',
+            name: 'actionsSubtitle',
+            type: 'string',
+            description: 'Optional subtitle text below the action buttons',
         },
     ],
 };

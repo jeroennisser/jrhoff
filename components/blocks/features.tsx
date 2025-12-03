@@ -49,7 +49,16 @@ export const Feature: React.FC<PageBlocksFeaturesItems> = (data) => {
 
   const handleCardClick = () => {
     if (hasLink) {
-      router.push((data as any).link);
+      const link = (data as any).link;
+      // Check if it's an anchor link (starts with #)
+      if (link.startsWith('#')) {
+        const element = document.querySelector(link);
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      } else {
+        router.push(link);
+      }
     }
   };
 
