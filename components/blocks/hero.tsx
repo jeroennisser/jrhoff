@@ -88,11 +88,9 @@ export const Hero = ({ data }: { data: PageBlocksHero }) => {
                   const handleClick = (e: React.MouseEvent) => {
                     if (linkUrl.startsWith('#')) {
                       e.preventDefault();
-                      console.log('Anchor link clicked:', linkUrl);
 
                       // Extract anchor and query params
                       const [anchor, query] = linkUrl.split('?');
-                      console.log('Anchor:', anchor, 'Query:', query);
 
                       // Update URL with query params if present (query params must come before hash)
                       if (query) {
@@ -104,17 +102,13 @@ export const Hero = ({ data }: { data: PageBlocksHero }) => {
                         window.dispatchEvent(new CustomEvent('formTypeChange', {
                           detail: { type: urlParams.get('type') }
                         }));
-                        console.log('Dispatched formTypeChange event with type:', urlParams.get('type'));
                       }
 
                       // Wait a brief moment for React to update, then scroll
                       setTimeout(() => {
                         const element = document.querySelector(anchor);
-                        console.log('Found element:', element);
                         if (element) {
                           element.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                        } else {
-                          console.error('Element not found for selector:', anchor);
                         }
                       }, 100);
                     }

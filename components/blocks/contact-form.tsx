@@ -30,10 +30,8 @@ export const ContactForm = ({ data }: { data: PageBlocksContactForm }) => {
         const handleFormTypeChange = (event: Event) => {
             const customEvent = event as CustomEvent;
             const type = customEvent.detail?.type;
-            console.log('FormTypeChange event received, type:', type);
 
             if (type === 'kennismaking') {
-                console.log('Setting form to kennismaking mode');
                 setFormData(prev => ({
                     ...prev,
                     appointmentType: 'appointment',
@@ -45,9 +43,7 @@ export const ContactForm = ({ data }: { data: PageBlocksContactForm }) => {
         window.addEventListener('formTypeChange', handleFormTypeChange);
 
         // Also check on mount
-        console.log('Contact form mounted, typeParam:', typeParam);
         if (typeParam === 'kennismaking') {
-            console.log('Initial typeParam is kennismaking, setting form');
             setFormData(prev => ({
                 ...prev,
                 appointmentType: 'appointment',
