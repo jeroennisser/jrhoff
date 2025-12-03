@@ -22,27 +22,21 @@ export const ContactForm = ({ data }: { data: PageBlocksContactForm }) => {
         if (!type && typeof window !== 'undefined') {
             type = sessionStorage.getItem('formType');
             if (type) {
-                console.log('Found formType in sessionStorage:', type);
                 // Clear it after reading
                 sessionStorage.removeItem('formType');
             }
         }
 
-        console.log('Contact form initializing with type:', type);
         let initialAppointmentType = data.appointmentMode ? 'appointment' : 'information';
         let initialTreatmentType = 'free_intro';
 
         if (type === 'kennismaking') {
-            console.log('Setting to kennismaking mode');
             initialAppointmentType = 'appointment';
             initialTreatmentType = 'free_intro';
         } else if (type === 'intake') {
-            console.log('Setting to intake mode');
             initialAppointmentType = 'appointment';
             initialTreatmentType = 'intake';
         }
-
-        console.log('Initial form data:', { initialAppointmentType, initialTreatmentType });
 
         return {
             appointmentType: initialAppointmentType,
