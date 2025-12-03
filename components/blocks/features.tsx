@@ -71,7 +71,7 @@ export const Feature: React.FC<PageBlocksFeaturesItems> = (data) => {
           {data.icon && (
             <Icon
               tinaField={tinaField(data, "icon")}
-              data={{ size: "large", ...data.icon, color: 'accent' }}
+              data={{ size: "large", ...data.icon }}
             />
           )}
         </CardDecorator>

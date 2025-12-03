@@ -6,12 +6,13 @@ interface SectionProps extends React.HTMLProps<HTMLElement> {
   children: ReactNode;
 }
 
-export const Section: React.FC<SectionProps> = ({ className, children, background, ...props }) => {
+export const Section: React.FC<SectionProps> = ({ className, children, background, id, ...props }) => {
   return (
-    <div className={cn("w-full", background || "bg-default")}>
+    <div className={cn("w-full", background || "bg-default")} id={id} suppressHydrationWarning>
       <section
         className={cn("py-12 mx-auto max-w-7xl px-6 relative z-10", className)}
         {...props}
+        suppressHydrationWarning
       >
         {children}
       </section>

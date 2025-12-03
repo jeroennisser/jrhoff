@@ -15,7 +15,7 @@ import HeroVideoDialog from '../ui/hero-video-dialog';
 import { Transition } from 'motion/react';
 
 const isExternalLink = (url: string) => {
-  return url.startsWith('http://') || url.startsWith('https://') || url.startsWith('tel:') || url.startsWith('mailto:');
+  return url.startsWith('http://') || url.startsWith('https://') || url.startsWith('tel:') || url.startsWith('mailto:') || url.startsWith('#');
 };
 const transitionVariants = {
   container: {
@@ -65,11 +65,11 @@ export const Hero = ({ data }: { data: PageBlocksHero }) => {
 
   return (
     <Section background={data.background!}>
-      <div className={`grid lg:grid-cols-12 gap-8 lg:gap-12 items-center pt-12 md:pt-16 pb-10 ${!hasImage ? 'justify-center' : ''}`}>
-        <div className={`mt-12 lg:mt-0 ${hasImage ? 'text-center lg:text-left lg:col-span-7 2xl:col-span-6' : 'text-center lg:col-span-10 lg:col-start-2'}`}>
+      <div className={`grid lg:grid-cols-12 gap-8 lg:gap-12 items-center pt-12 md:pt-16 pb-10 ${!hasImage ? 'justify-center' : ''}`} suppressHydrationWarning>
+        <div className={`mt-12 lg:mt-0 ${hasImage ? 'text-center lg:text-left lg:col-span-7 2xl:col-span-6' : 'text-center lg:col-span-10 lg:col-start-2'}`} suppressHydrationWarning>
           {data.headline && (
             <div data-tina-field={tinaField(data, 'headline')}>
-              <h1 className={`mt-4 text-balance text-2xl md:text-3xl xl:text-4xl tracking-tight font-bold font-serif leading-snug text-accent animate-fade-in-blur ${!hasImage ? 'mx-auto' : 'lg:mx-0 mx-auto'}`}>
+              <h1 className={`mt-4 text-balance text-2xl md:text-3xl xl:text-4xl tracking-tight font-bold font-serif leading-snug text-accent animate-fade-in-blur ${!hasImage ? 'mx-auto' : 'lg:mx-0 mx-auto'}`} suppressHydrationWarning>
                 {data.headline?.split(/(\s+)/).map((segment, i) => {
                   if (segment.includes('*')) {
                     return (
@@ -108,43 +108,78 @@ export const Hero = ({ data }: { data: PageBlocksHero }) => {
 
 
           <AnimatedGroup variants={transitionVariants} className={`mt-10 flex flex-col gap-4 ${hasImage ? 'justify-center items-center lg:justify-start lg:items-start' : 'justify-center items-center'}`}>
-            <div className="flex flex-col sm:flex-row gap-4">
+            <div className="flex flex-col sm:flex-row gap-4" suppressHydrationWarning>
               {data.actions &&
                 data.actions.map((action, index) => {
                   const linkUrl = action!.link!;
                   const isExternal = isExternalLink(linkUrl);
                   const isPrimary = action!.type === 'button';
 
+                  const handleClick = (e: React.MouseEvent) => {
+                    if (linkUrl.startsWith('#')) {
+                      e.preventDefault();
+                      const element = document.querySelector(linkUrl);
+                      if (element) {
+                        element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                      }
+                    }
+                  };
+
                   return (
-                    <div key={action!.label} data-tina-field={tinaField(action)}>
-                      <Button
-                        asChild
-                        size='lg'
-                        variant={isPrimary ? 'default' : 'outline'}
-                        className={`px-8 py-6 text-base rounded-full transition-all duration-150 ease-out hover:scale-[1.02] ${!isPrimary ? 'border-[1.5px] border-gray-300 bg-white hover:bg-orange-100 hover:shadow-sm !text-gray-900 hover:!text-gray-900' : 'bg-[var(--page-accent)] hover:opacity-90 text-white'}`}
-                      >
-                        {isExternal ? (
-                          <a href={linkUrl} target={linkUrl.startsWith('http') ? '_blank' : undefined} rel={linkUrl.startsWith('http') ? 'noopener noreferrer' : undefined} className="flex items-center gap-2">
+                    <div key={action!.label} data-tina-field={tinaField(action)} suppressHydrationWarning>
+                      {linkUrl.startsWith('#') ? (
+                        <Button
+                          size='lg'
+                          variant={isPrimary ? 'default' : 'outline'}
+                          className={`px-8 py-6 text-base rounded-full transition-all duration-150 ease-out hover:scale-[1.02] ${!isPrimary ? 'border-[1.5px] border-gray-300 bg-white hover:bg-orange-100 hover:shadow-sm !text-gray-900 hover:!text-gray-900' : 'bg-[var(--page-accent)] hover:opacity-90 text-white'}`}
+                          onClick={handleClick}
+                        >
+                          <div className="flex items-center gap-2" suppressHydrationWarning>
                             {action?.icon && <Icon data={action?.icon} />}
-                            <div className="flex flex-col items-start">
+                            <div className="flex flex-col items-start" suppressHydrationWarning>
                               <span className='text-nowrap font-medium'>{action!.label}</span>
                               {isPrimary && data.actionsSubtitle && (
                                 <span className="text-xs font-normal opacity-90">{data.actionsSubtitle}</span>
                               )}
                             </div>
-                          </a>
-                        ) : (
-                          <Link href={linkUrl} className="flex items-center gap-2">
-                            {action?.icon && <Icon data={action?.icon} />}
-                            <div className="flex flex-col items-start">
-                              <span className='text-nowrap font-medium'>{action!.label}</span>
-                              {isPrimary && data.actionsSubtitle && (
-                                <span className="text-xs font-normal opacity-90">{data.actionsSubtitle}</span>
-                              )}
-                            </div>
-                          </Link>
-                        )}
-                      </Button>
+                          </div>
+                        </Button>
+                      ) : (
+                        <Button
+                          asChild
+                          size='lg'
+                          variant={isPrimary ? 'default' : 'outline'}
+                          className={`px-8 py-6 text-base rounded-full transition-all duration-150 ease-out hover:scale-[1.02] ${!isPrimary ? 'border-[1.5px] border-gray-300 bg-white hover:bg-orange-100 hover:shadow-sm !text-gray-900 hover:!text-gray-900' : 'bg-[var(--page-accent)] hover:opacity-90 text-white'}`}
+                        >
+                          {isExternal ? (
+                            <a
+                              href={linkUrl}
+                              target={linkUrl.startsWith('http') ? '_blank' : undefined}
+                              rel={linkUrl.startsWith('http') ? 'noopener noreferrer' : undefined}
+                              className="flex items-center gap-2"
+                              suppressHydrationWarning
+                            >
+                              {action?.icon && <Icon data={action?.icon} />}
+                              <div className="flex flex-col items-start" suppressHydrationWarning>
+                                <span className='text-nowrap font-medium'>{action!.label}</span>
+                                {isPrimary && data.actionsSubtitle && (
+                                  <span className="text-xs font-normal opacity-90">{data.actionsSubtitle}</span>
+                                )}
+                              </div>
+                            </a>
+                          ) : (
+                            <Link href={linkUrl} className="flex items-center gap-2" suppressHydrationWarning>
+                              {action?.icon && <Icon data={action?.icon} />}
+                              <div className="flex flex-col items-start" suppressHydrationWarning>
+                                <span className='text-nowrap font-medium'>{action!.label}</span>
+                                {isPrimary && data.actionsSubtitle && (
+                                  <span className="text-xs font-normal opacity-90">{data.actionsSubtitle}</span>
+                                )}
+                              </div>
+                            </Link>
+                          )}
+                        </Button>
+                      )}
                     </div>
                   );
                 })}

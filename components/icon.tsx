@@ -14,6 +14,7 @@ import {
   BiBody,
   BiCalendarCheck,
   BiPhone,
+  BiPhoneCall,
   BiMap,
   BiEnvelope,
   BiBuilding,
@@ -40,6 +41,8 @@ import {
   BiShield,
   BiGroup,
   BiChevronRight,
+  BiMessageDetail,
+  BiLogoWhatsapp,
 } from 'react-icons/bi';
 import { FaFacebookF, FaGithub, FaLinkedin, FaXTwitter, FaYoutube } from 'react-icons/fa6';
 import { AiFillInstagram } from 'react-icons/ai';
@@ -74,8 +77,11 @@ export const IconOptions = {
   BiBody,
   BiCalendarCheck,
   BiPhone,
+  BiPhoneCall,
   BiMap,
   BiEnvelope,
+  BiMessageDetail,
+  BiLogoWhatsapp,
   BiBuilding,
   BiTime,
   BiAlarm,
@@ -191,8 +197,9 @@ export const Icon = ({ data, parentColor = '', className = '', tinaField = '' })
       <div
         {...(tinaField ? { 'data-tina-field': tinaField } : {})} // only render data-tina-field if it exists
         className={`relative z-10 inline-flex items-center justify-center shrink-0 ${iconSizeClasses} rounded-full ${iconColorClass[iconColor].circle} ${className}`}
+        suppressHydrationWarning
       >
-        <IconSVG className='w-2/3 h-2/3' />
+        <IconSVG className='w-2/3 h-2/3' suppressHydrationWarning />
       </div>
     );
   } else {
@@ -203,6 +210,7 @@ export const Icon = ({ data, parentColor = '', className = '', tinaField = '' })
         {...(tinaField ? { 'data-tina-field': tinaField } : {})} // only render data-tina-field if it exists
         className={`${iconSizeClasses} ${iconColorClasses} ${className}`}
         style={{ strokeWidth: '0.5px' }}
+        suppressHydrationWarning
       />
     );
   }

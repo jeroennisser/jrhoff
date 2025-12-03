@@ -70,8 +70,8 @@ export const ContactForm = ({ data }: { data: PageBlocksContactForm }) => {
     };
 
     return (
-        <Section background={data.background!}>
-            <div className="max-w-2xl mx-auto bg-white/40 backdrop-blur-sm rounded-2xl p-8 shadow-sm">
+        <Section background={data.background!} id="aanvraagformulier">
+            <div className="max-w-2xl mx-auto bg-white/40 backdrop-blur-sm rounded-2xl p-8 shadow-sm" suppressHydrationWarning>
                 {data.title && (
                     <h2 className="text-3xl md:text-4xl font-bold font-serif text-gray-900 text-center mb-4" data-tina-field={tinaField(data, 'title')}>
                         {data.title}
