@@ -132,7 +132,7 @@ export const ContactForm = ({ data }: { data: PageBlocksContactForm }) => {
                             <label className="block text-sm font-medium text-gray-700 mb-3">
                                 Type behandeling <span className="text-orange-600">*</span>
                             </label>
-                            <div className="grid grid-cols-2 gap-4">
+                            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                                 <label className={cn(
                                     "border rounded-xl p-4 cursor-pointer transition-all",
                                     formData.treatmentType === 'intake'
@@ -167,6 +167,23 @@ export const ContactForm = ({ data }: { data: PageBlocksContactForm }) => {
                                     />
                                     <div className="font-semibold text-gray-900">Vervolg</div>
                                     <div className="text-xs text-gray-500 mt-1">60 minuten • €100</div>
+                                </label>
+                                <label className={cn(
+                                    "border rounded-xl p-4 cursor-pointer transition-all",
+                                    formData.treatmentType === 'free_intro'
+                                        ? 'border-orange-500 bg-orange-50'
+                                        : 'border-gray-200 hover:border-gray-300'
+                                )}>
+                                    <input
+                                        type="radio"
+                                        name="treatmentType"
+                                        value="free_intro"
+                                        checked={formData.treatmentType === 'free_intro'}
+                                        onChange={handleChange}
+                                        className="hidden"
+                                    />
+                                    <div className="font-semibold text-gray-900">Gratis Kennismaking</div>
+                                    <div className="text-xs text-gray-500 mt-1">15 min • Telefonisch</div>
                                 </label>
                             </div>
                         </div>

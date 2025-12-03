@@ -44,45 +44,7 @@ const CardDecorator = ({ children }: { children: React.ReactNode }) => (
 )
 
 export const Feature: React.FC<PageBlocksFeaturesItems> = (data) => {
-  const [isExpanded, setIsExpanded] = useState(false);
   const router = useRouter();
-
-  // Convert rich text to plain text for length checking
-  const getPlainText = (content: any): string => {
-    if (!content) return '';
-    if (typeof content === 'string') return content;
-
-    let text = '';
-    const extract = (item: any): void => {
-      if (!item) return;
-
-      if (typeof item === 'string') {
-        text += item;
-        return;
-      }
-
-      if (Array.isArray(item)) {
-        item.forEach(extract);
-        return;
-      }
-
-      if (item.text) {
-        text += item.text;
-      }
-
-      if (item.children) {
-        extract(item.children);
-      }
-    };
-
-    extract(content);
-    return text;
-  };
-
-  const plainText = getPlainText(data.text);
-  const MAX_LENGTH = 150;
-  const shouldTruncate = plainText.length > MAX_LENGTH;
-  const truncatedText = shouldTruncate ? plainText.substring(0, MAX_LENGTH) + '...' : plainText;
   const hasLink = !!(data as any).link;
 
   const handleCardClick = () => {
@@ -94,8 +56,8 @@ export const Feature: React.FC<PageBlocksFeaturesItems> = (data) => {
   return (
     <Card
       className={`group text-center shadow-sm border-accent-100 bg-white/60 backdrop-blur-sm rounded-xl h-full flex flex-col ${hasLink
-          ? 'cursor-pointer hover:shadow-lg hover:-translate-y-1 transition-all duration-150 ease-out'
-          : ''
+        ? 'cursor-pointer hover:shadow-lg hover:-translate-y-1 transition-all duration-150 ease-out'
+        : ''
         }`}
       onClick={handleCardClick}
     >
@@ -118,40 +80,10 @@ export const Feature: React.FC<PageBlocksFeaturesItems> = (data) => {
 
       <CardContent className="text-sm pb-6 flex-grow flex flex-col">
         <div data-tina-field={tinaField(data, "text")} className="text-gray-600 flex-grow leading-relaxed">
-          {isExpanded || !shouldTruncate ? (
-            <div className="leading-relaxed">
-              <TinaMarkdown content={data.text} />
-            </div>
-          ) : (
-            <div className="leading-relaxed">{truncatedText}</div>
-          )}
-        </div>
-
-        {shouldTruncate && (
-          <div className="flex justify-center mt-4">
-            <button
-              onClick={(e) => {
-                e.preventDefault();
-                e.stopPropagation();
-                setIsExpanded(!isExpanded);
-              }}
-              className="inline-flex items-center gap-1 text-sm text-primary hover:text-primary/80 transition-colors font-medium cursor-pointer"
-              aria-label={isExpanded ? "Lees minder" : "Lees meer"}
-            >
-              {isExpanded ? (
-                <>
-                  Lees minder
-                  <ChevronUp className="w-4 h-4" />
-                </>
-              ) : (
-                <>
-                  Lees meer
-                  <ChevronDown className="w-4 h-4" />
-                </>
-              )}
-            </button>
+          <div className="leading-relaxed">
+            <TinaMarkdown content={data.text} />
           </div>
-        )}
+        </div>
       </CardContent>
     </Card>
   );
