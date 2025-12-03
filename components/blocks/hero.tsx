@@ -137,9 +137,9 @@ export const Hero = ({ data }: { data: PageBlocksHero }) => {
                           <div className="flex items-center gap-2" suppressHydrationWarning>
                             {action?.icon && <Icon data={action?.icon} />}
                             <div className="flex flex-col items-start" suppressHydrationWarning>
-                              <span className='text-nowrap font-medium'>{action!.label}</span>
+                              <span className='text-nowrap font-medium' suppressHydrationWarning>{action!.label}</span>
                               {isPrimary && data.actionsSubtitle && (
-                                <span className="text-xs font-normal opacity-90">{data.actionsSubtitle}</span>
+                                <span className="text-xs font-normal opacity-90" suppressHydrationWarning>{data.actionsSubtitle}</span>
                               )}
                             </div>
                           </div>
@@ -161,9 +161,9 @@ export const Hero = ({ data }: { data: PageBlocksHero }) => {
                             >
                               {action?.icon && <Icon data={action?.icon} />}
                               <div className="flex flex-col items-start" suppressHydrationWarning>
-                                <span className='text-nowrap font-medium'>{action!.label}</span>
+                                <span className='text-nowrap font-medium' suppressHydrationWarning>{action!.label}</span>
                                 {isPrimary && data.actionsSubtitle && (
-                                  <span className="text-xs font-normal opacity-90">{data.actionsSubtitle}</span>
+                                  <span className="text-xs font-normal opacity-90" suppressHydrationWarning>{data.actionsSubtitle}</span>
                                 )}
                               </div>
                             </a>
@@ -171,9 +171,9 @@ export const Hero = ({ data }: { data: PageBlocksHero }) => {
                             <Link href={linkUrl} className="flex items-center gap-2" suppressHydrationWarning>
                               {action?.icon && <Icon data={action?.icon} />}
                               <div className="flex flex-col items-start" suppressHydrationWarning>
-                                <span className='text-nowrap font-medium'>{action!.label}</span>
+                                <span className='text-nowrap font-medium' suppressHydrationWarning>{action!.label}</span>
                                 {isPrimary && data.actionsSubtitle && (
-                                  <span className="text-xs font-normal opacity-90">{data.actionsSubtitle}</span>
+                                  <span className="text-xs font-normal opacity-90" suppressHydrationWarning>{data.actionsSubtitle}</span>
                                 )}
                               </div>
                             </Link>

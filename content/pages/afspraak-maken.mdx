@@ -6,11 +6,17 @@ blocks:
     tagline: >-
       Kies de manier die jij het prettigst vindt: bel, app, mail of vul het formulier in. Kennismaken kan natuurlijk altijd vrijblijvend.
     actions:
-      - label: Bel direct
+      - label: Aanvraagformulier
         type: button
         icon:
-          name: BiPhone
+          name: BiCalendarCheck
           color: white
+        link: '#aanvraagformulier'
+      - label: Bel direct
+        type: link
+        icon:
+          name: BiPhone
+          color: orange
         link: 'tel:0612261363'
       - label: WhatsApp
         type: link
@@ -18,12 +24,6 @@ blocks:
           name: BiLogoWhatsapp
           color: orange
         link: 'https://wa.me/31612261363?text=Hoi%20Jeroen,%20ik%20wil%20graag%20een%20afspraak%20maken.'
-      - label: Aanvraagformulier
-        type: link
-        icon:
-          name: BiCalendarCheck
-          color: orange
-        link: '#aanvraagformulier'
     image:
       src: /uploads/jeroen-portrait.jpg
       alt: Jeroen van der Hoff - Body Therapist & NIS Therapeut
