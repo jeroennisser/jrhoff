@@ -47,9 +47,14 @@ export const Feature: React.FC<PageBlocksFeaturesItems> = (data) => {
   const router = useRouter();
   const hasLink = !!(data as any).link;
 
-  const handleCardClick = () => {
+  const handleCardClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    console.log('handleCardClick called, hasLink:', hasLink);
+
     if (hasLink) {
       const link = (data as any).link;
+      console.log('Feature card clicked with link:', link);
+
       // Check if it's an anchor link (starts with #)
       if (link.startsWith('#')) {
         const element = document.querySelector(link);
@@ -57,7 +62,33 @@ export const Feature: React.FC<PageBlocksFeaturesItems> = (data) => {
           element.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
       } else {
-        router.push(link);
+        // Check if link contains a hash (for cross-page anchor links)
+        const hashIndex = link.indexOf('#');
+        const queryIndex = link.indexOf('?');
+
+        console.log('hashIndex:', hashIndex, 'queryIndex:', queryIndex);
+
+        if (hashIndex !== -1 && queryIndex !== -1) {
+          // Extract components from URL
+          const anchor = link.substring(hashIndex);
+          const queryString = link.substring(queryIndex + 1, hashIndex);
+          const urlParams = new URLSearchParams(queryString);
+          const type = urlParams.get('type');
+
+          console.log('Anchor:', anchor, 'Query string:', queryString, 'Type:', type);
+
+          // Store the type in sessionStorage so it persists across navigation
+          if (type) {
+            sessionStorage.setItem('formType', type);
+            console.log('Stored formType in sessionStorage:', type);
+          }
+
+          // Navigate using router.push
+          router.push(link);
+        } else {
+          // Simple navigation
+          router.push(link);
+        }
       }
     }
   };

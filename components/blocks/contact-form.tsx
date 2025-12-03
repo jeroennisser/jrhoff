@@ -13,14 +13,46 @@ export const ContactForm = ({ data }: { data: PageBlocksContactForm }) => {
     const searchParams = useSearchParams();
     const typeParam = searchParams?.get('type');
 
-    const [formData, setFormData] = useState({
-        appointmentType: data.appointmentMode ? 'appointment' : 'information',
-        treatmentType: 'free_intro',
-        preferredTime: '',
-        name: '',
-        email: '',
-        phone: '',
-        message: '',
+    const [formData, setFormData] = useState(() => {
+        // Read URL params directly in the initializer
+        const urlParams = new URLSearchParams(typeof window !== 'undefined' ? window.location.search : '');
+        let type = urlParams.get('type');
+
+        // Also check sessionStorage (for cross-page navigation)
+        if (!type && typeof window !== 'undefined') {
+            type = sessionStorage.getItem('formType');
+            if (type) {
+                console.log('Found formType in sessionStorage:', type);
+                // Clear it after reading
+                sessionStorage.removeItem('formType');
+            }
+        }
+
+        console.log('Contact form initializing with type:', type);
+        let initialAppointmentType = data.appointmentMode ? 'appointment' : 'information';
+        let initialTreatmentType = 'free_intro';
+
+        if (type === 'kennismaking') {
+            console.log('Setting to kennismaking mode');
+            initialAppointmentType = 'appointment';
+            initialTreatmentType = 'free_intro';
+        } else if (type === 'intake') {
+            console.log('Setting to intake mode');
+            initialAppointmentType = 'appointment';
+            initialTreatmentType = 'intake';
+        }
+
+        console.log('Initial form data:', { initialAppointmentType, initialTreatmentType });
+
+        return {
+            appointmentType: initialAppointmentType,
+            treatmentType: initialTreatmentType,
+            preferredTime: '',
+            name: '',
+            email: '',
+            phone: '',
+            message: '',
+        };
     });
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
@@ -37,6 +69,12 @@ export const ContactForm = ({ data }: { data: PageBlocksContactForm }) => {
                     appointmentType: 'appointment',
                     treatmentType: 'free_intro'
                 }));
+            } else if (type === 'intake') {
+                setFormData(prev => ({
+                    ...prev,
+                    appointmentType: 'appointment',
+                    treatmentType: 'intake'
+                }));
             }
         };
 
@@ -48,6 +86,12 @@ export const ContactForm = ({ data }: { data: PageBlocksContactForm }) => {
                 ...prev,
                 appointmentType: 'appointment',
                 treatmentType: 'free_intro'
+            }));
+        } else if (typeParam === 'intake') {
+            setFormData(prev => ({
+                ...prev,
+                appointmentType: 'appointment',
+                treatmentType: 'intake'
             }));
         }
 
