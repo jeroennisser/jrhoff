@@ -94,12 +94,17 @@ export const Hero = ({ data }: { data: PageBlocksHero }) => {
                       const [anchor, query] = linkUrl.split('?');
                       console.log('Anchor:', anchor, 'Query:', query);
 
-                      // Update URL with query params if present
+                      // Update URL with query params if present (query params must come before hash)
                       if (query) {
-                        const newUrl = `${window.location.pathname}${anchor}?${query}`;
+                        const newUrl = `${window.location.pathname}?${query}${anchor}`;
                         window.history.pushState({}, '', newUrl);
-                        // Trigger a popstate event so React components can react to URL change
-                        window.dispatchEvent(new PopStateEvent('popstate'));
+
+                        // Dispatch custom event for form to react
+                        const urlParams = new URLSearchParams(query);
+                        window.dispatchEvent(new CustomEvent('formTypeChange', {
+                          detail: { type: urlParams.get('type') }
+                        }));
+                        console.log('Dispatched formTypeChange event with type:', urlParams.get('type'));
                       }
 
                       // Wait a brief moment for React to update, then scroll

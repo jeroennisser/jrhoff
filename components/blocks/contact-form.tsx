@@ -14,7 +14,7 @@ export const ContactForm = ({ data }: { data: PageBlocksContactForm }) => {
     const typeParam = searchParams?.get('type');
 
     const [formData, setFormData] = useState({
-        appointmentType: data.appointmentMode ? 'appointment' : (typeParam === 'kennismaking' ? 'appointment' : 'information'),
+        appointmentType: data.appointmentMode ? 'appointment' : 'information',
         treatmentType: 'free_intro',
         preferredTime: '',
         name: '',
@@ -25,14 +25,37 @@ export const ContactForm = ({ data }: { data: PageBlocksContactForm }) => {
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
 
+    // Listen for custom formTypeChange event
     useEffect(() => {
+        const handleFormTypeChange = (event: Event) => {
+            const customEvent = event as CustomEvent;
+            const type = customEvent.detail?.type;
+            console.log('FormTypeChange event received, type:', type);
+
+            if (type === 'kennismaking') {
+                console.log('Setting form to kennismaking mode');
+                setFormData(prev => ({
+                    ...prev,
+                    appointmentType: 'appointment',
+                    treatmentType: 'free_intro'
+                }));
+            }
+        };
+
+        window.addEventListener('formTypeChange', handleFormTypeChange);
+
+        // Also check on mount
+        console.log('Contact form mounted, typeParam:', typeParam);
         if (typeParam === 'kennismaking') {
+            console.log('Initial typeParam is kennismaking, setting form');
             setFormData(prev => ({
                 ...prev,
                 appointmentType: 'appointment',
                 treatmentType: 'free_intro'
             }));
         }
+
+        return () => window.removeEventListener('formTypeChange', handleFormTypeChange);
     }, [typeParam]);
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
