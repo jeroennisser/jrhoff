@@ -5,15 +5,18 @@ blocks:
     headline: '*Neem* *contact* *op*'
     tagline: Heeft u vragen over de behandelingen? Ik help u graag verder met informatie
     actions:
-      - label: Bel direct
+      - label: Stel een vraag
         type: button
         icon:
-          name: BiPhone
+          name: BiMessageDetail
           color: white
-        link: 'tel:0612261363'
-      - label: Stuur een email
+        link: '#contact-form'
+      - label: Gratis kennismaking
         type: link
-        link: 'mailto:jeroen@bodytherapist.nl'
+        icon:
+          name: BiPhoneCall
+          color: orange
+        link: '#contact-form?type=kennismaking'
     image:
       src: ''
       alt: Contact opnemen met Jeroen van der Hoff
@@ -114,6 +117,7 @@ blocks:
   - background: bg-hero-layered
     title: Laten we kennismaken!
     description: Heeft u vragen over de behandelingen of werkwijze? Vul het formulier in en ik neem zo snel mogelijk contact met u op.
+    formId: contact-form
     _template: contactForm
   - title: Klaar voor een afspraak?
     description: >-

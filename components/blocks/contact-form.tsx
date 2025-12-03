@@ -1,16 +1,20 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Section } from '../layout/section';
 import { tinaField } from 'tinacms/dist/react';
 import type { Template } from 'tinacms';
 import { PageBlocksContactForm } from '../../tina/__generated__/types';
 import { Button } from '../ui/button';
 import { cn } from '@/lib/utils';
+import { useSearchParams } from 'next/navigation';
 
 export const ContactForm = ({ data }: { data: PageBlocksContactForm }) => {
+    const searchParams = useSearchParams();
+    const typeParam = searchParams?.get('type');
+
     const [formData, setFormData] = useState({
-        appointmentType: data.appointmentMode ? 'appointment' : 'information',
+        appointmentType: data.appointmentMode ? 'appointment' : (typeParam === 'kennismaking' ? 'appointment' : 'information'),
         treatmentType: 'free_intro',
         preferredTime: '',
         name: '',
@@ -20,6 +24,16 @@ export const ContactForm = ({ data }: { data: PageBlocksContactForm }) => {
     });
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
+
+    useEffect(() => {
+        if (typeParam === 'kennismaking') {
+            setFormData(prev => ({
+                ...prev,
+                appointmentType: 'appointment',
+                treatmentType: 'free_intro'
+            }));
+        }
+    }, [typeParam]);
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
@@ -70,7 +84,7 @@ export const ContactForm = ({ data }: { data: PageBlocksContactForm }) => {
     };
 
     return (
-        <Section background={data.background!} id="aanvraagformulier">
+        <Section background={data.background!} id={(data as any).formId || "aanvraagformulier"}>
             <div className="max-w-2xl mx-auto bg-white/40 backdrop-blur-sm rounded-2xl p-8 shadow-sm" suppressHydrationWarning>
                 {data.title && (
                     <h2 className="text-3xl md:text-4xl font-bold font-serif text-gray-900 text-center mb-4" data-tina-field={tinaField(data, 'title')}>
@@ -378,6 +392,12 @@ export const contactFormBlockSchema: Template = {
             label: 'Appointment Mode',
             name: 'appointmentMode',
             description: 'Show appointment-specific fields (treatment type, time preferences)',
+        },
+        {
+            type: 'string' as const,
+            label: 'Form ID',
+            name: 'formId',
+            description: 'ID for the form section (used for anchor links)',
         },
     ],
 };

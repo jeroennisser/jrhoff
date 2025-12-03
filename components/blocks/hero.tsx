@@ -8,41 +8,11 @@ import { tinaField } from 'tinacms/dist/react';
 import { PageBlocksHero, PageBlocksHeroImage } from '../../tina/__generated__/types';
 import { Icon } from '../icon';
 import { Section, sectionBlockSchemaField } from '../layout/section';
-import { AnimatedGroup } from '../motion-primitives/animated-group';
-import { TextEffect } from '../motion-primitives/text-effect';
 import { Button } from '../ui/button';
 import HeroVideoDialog from '../ui/hero-video-dialog';
-import { Transition } from 'motion/react';
 
 const isExternalLink = (url: string) => {
   return url.startsWith('http://') || url.startsWith('https://') || url.startsWith('tel:') || url.startsWith('mailto:') || url.startsWith('#');
-};
-const transitionVariants = {
-  container: {
-    visible: {
-      transition: {
-        staggerChildren: 0.05,
-        delayChildren: 0.75,
-      },
-    },
-  },
-  item: {
-    hidden: {
-      opacity: 0,
-      filter: 'blur(12px)',
-      y: 12,
-    },
-    visible: {
-      opacity: 1,
-      filter: 'blur(0px)',
-      y: 0,
-      transition: {
-        type: 'spring',
-        bounce: 0.3,
-        duration: 1.5,
-      } as Transition,
-    },
-  },
 };
 
 export const Hero = ({ data }: { data: PageBlocksHero }) => {
@@ -69,7 +39,7 @@ export const Hero = ({ data }: { data: PageBlocksHero }) => {
         <div className={`mt-12 lg:mt-0 ${hasImage ? 'text-center lg:text-left lg:col-span-7 2xl:col-span-6' : 'text-center lg:col-span-10 lg:col-start-2'}`} suppressHydrationWarning>
           {data.headline && (
             <div data-tina-field={tinaField(data, 'headline')}>
-              <h1 className={`mt-4 text-balance text-2xl md:text-3xl xl:text-4xl tracking-tight font-bold font-serif leading-snug text-accent animate-fade-in-blur ${!hasImage ? 'mx-auto' : 'lg:mx-0 mx-auto'}`} suppressHydrationWarning>
+              <h1 className={`mt-4 text-balance text-2xl md:text-3xl xl:text-4xl tracking-tight font-bold font-serif leading-snug text-accent ${!hasImage ? 'mx-auto' : 'lg:mx-0 mx-auto'}`} suppressHydrationWarning>
                 {data.headline?.split(/(\s+)/).map((segment, i) => {
                   if (segment.includes('*')) {
                     return (
@@ -85,14 +55,14 @@ export const Hero = ({ data }: { data: PageBlocksHero }) => {
           )}
           {data.tagline && (
             <div data-tina-field={tinaField(data, 'tagline')}>
-              <TextEffect per='line' preset='fade-in-blur' speedSegment={0.3} delay={0.5} as='div' className={`mt-6 max-w-xl text-lg text-gray-600 font-normal leading-relaxed ${!hasImage ? 'mx-auto' : 'lg:mx-0 mx-auto'}`}>
+              <div className={`mt-6 max-w-xl text-lg text-gray-600 font-normal leading-relaxed ${!hasImage ? 'mx-auto' : 'lg:mx-0 mx-auto'}`}>
                 {data.tagline!}
-              </TextEffect>
+              </div>
             </div>
           )}
 
           {data.usps && data.usps.length > 0 && (
-            <AnimatedGroup variants={transitionVariants} className={`mt-6 flex flex-col gap-4 text-base text-gray-700 ${!hasImage ? 'items-center' : 'items-center lg:items-start'}`}>
+            <div className={`mt-6 flex flex-col gap-4 text-base text-gray-700 ${!hasImage ? 'items-center' : 'items-center lg:items-start'}`}>
               {data.usps.map((usp, i) => (
                 <div key={i} className="flex items-center gap-3">
                   <div className="flex-shrink-0 w-5 h-5 flex items-center justify-center">
@@ -103,11 +73,11 @@ export const Hero = ({ data }: { data: PageBlocksHero }) => {
                   <span className="text-gray-600">{usp?.text}</span>
                 </div>
               ))}
-            </AnimatedGroup>
+            </div>
           )}
 
 
-          <AnimatedGroup variants={transitionVariants} className={`mt-10 flex flex-col gap-4 ${hasImage ? 'justify-center items-center lg:justify-start lg:items-start' : 'justify-center items-center'}`}>
+          <div className={`mt-10 flex flex-col gap-4 ${hasImage ? 'justify-center items-center lg:justify-start lg:items-start' : 'justify-center items-center'}`}>
             <div className="flex flex-col sm:flex-row gap-4" suppressHydrationWarning>
               {data.actions &&
                 data.actions.map((action, index) => {
@@ -118,10 +88,30 @@ export const Hero = ({ data }: { data: PageBlocksHero }) => {
                   const handleClick = (e: React.MouseEvent) => {
                     if (linkUrl.startsWith('#')) {
                       e.preventDefault();
-                      const element = document.querySelector(linkUrl);
-                      if (element) {
-                        element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                      console.log('Anchor link clicked:', linkUrl);
+
+                      // Extract anchor and query params
+                      const [anchor, query] = linkUrl.split('?');
+                      console.log('Anchor:', anchor, 'Query:', query);
+
+                      // Update URL with query params if present
+                      if (query) {
+                        const newUrl = `${window.location.pathname}${anchor}?${query}`;
+                        window.history.pushState({}, '', newUrl);
+                        // Trigger a popstate event so React components can react to URL change
+                        window.dispatchEvent(new PopStateEvent('popstate'));
                       }
+
+                      // Wait a brief moment for React to update, then scroll
+                      setTimeout(() => {
+                        const element = document.querySelector(anchor);
+                        console.log('Found element:', element);
+                        if (element) {
+                          element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                        } else {
+                          console.error('Element not found for selector:', anchor);
+                        }
+                      }, 100);
                     }
                   };
 
@@ -131,7 +121,7 @@ export const Hero = ({ data }: { data: PageBlocksHero }) => {
                         <Button
                           size='lg'
                           variant={isPrimary ? 'default' : 'outline'}
-                          className={`px-8 py-6 text-base rounded-full transition-all duration-150 ease-out hover:scale-[1.02] ${!isPrimary ? 'border-[1.5px] border-gray-300 bg-white hover:bg-orange-100 hover:shadow-sm !text-gray-900 hover:!text-gray-900' : 'bg-[var(--page-accent)] hover:opacity-90 text-white'}`}
+                          className={`px-8 py-6 text-base rounded-full transition-all duration-150 ease-out hover:scale-[1.02] cursor-pointer ${!isPrimary ? 'border-[1.5px] border-gray-300 bg-white hover:bg-orange-100 hover:shadow-sm !text-gray-900 hover:!text-gray-900' : 'bg-[var(--page-accent)] hover:opacity-90 text-white'}`}
                           onClick={handleClick}
                         >
                           <div className="flex items-center gap-2" suppressHydrationWarning>
@@ -149,7 +139,7 @@ export const Hero = ({ data }: { data: PageBlocksHero }) => {
                           asChild
                           size='lg'
                           variant={isPrimary ? 'default' : 'outline'}
-                          className={`px-8 py-6 text-base rounded-full transition-all duration-150 ease-out hover:scale-[1.02] ${!isPrimary ? 'border-[1.5px] border-gray-300 bg-white hover:bg-orange-100 hover:shadow-sm !text-gray-900 hover:!text-gray-900' : 'bg-[var(--page-accent)] hover:opacity-90 text-white'}`}
+                          className={`px-8 py-6 text-base rounded-full transition-all duration-150 ease-out hover:scale-[1.02] cursor-pointer ${!isPrimary ? 'border-[1.5px] border-gray-300 bg-white hover:bg-orange-100 hover:shadow-sm !text-gray-900 hover:!text-gray-900' : 'bg-[var(--page-accent)] hover:opacity-90 text-white'}`}
                         >
                           {isExternal ? (
                             <a
@@ -184,24 +174,24 @@ export const Hero = ({ data }: { data: PageBlocksHero }) => {
                   );
                 })}
             </div>
-          </AnimatedGroup>
+          </div>
 
           {data.trust && (
-            <AnimatedGroup variants={transitionVariants} className="mt-6">
+            <div className="mt-6">
               <p className="text-base font-medium text-gray-600">{data.trust.text}</p>
-            </AnimatedGroup>
+            </div>
           )}
         </div>
 
         {hasImage && (
-          <AnimatedGroup variants={transitionVariants} className="relative flex justify-center lg:justify-end lg:col-span-5 2xl:col-span-6">
+          <div className="relative flex justify-center lg:justify-end lg:col-span-5 2xl:col-span-6">
             <div className='relative w-full aspect-square' data-tina-field={tinaField(data, 'image')}>
               {/* Decorative background blob or gradient could go here if needed */}
               <div className='relative w-full h-full rounded-full overflow-hidden border-4 border-white shadow-2xl shadow-orange-900/10'>
                 <ImageBlock image={data.image!} />
               </div>
             </div>
-          </AnimatedGroup>
+          </div>
         )}
       </div>
     </Section>
