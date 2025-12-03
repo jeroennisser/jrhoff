@@ -55,11 +55,7 @@ export const Feature: React.FC<PageBlocksFeaturesItems> = (data) => {
 
   return (
     <Card
-      className={`group text-center shadow-sm border-accent-100 bg-white/60 backdrop-blur-sm rounded-xl h-full flex flex-col ${hasLink
-        ? 'cursor-pointer hover:shadow-lg hover:-translate-y-1 transition-all duration-150 ease-out'
-        : ''
-        }`}
-      onClick={handleCardClick}
+      className="group text-center shadow-sm border-accent-100 bg-white/60 backdrop-blur-sm rounded-xl h-full flex flex-col"
     >
       <CardHeader className="pb-4">
         <CardDecorator>
@@ -79,11 +75,26 @@ export const Feature: React.FC<PageBlocksFeaturesItems> = (data) => {
       </CardHeader>
 
       <CardContent className="text-sm pb-6 flex-grow flex flex-col">
-        <div data-tina-field={tinaField(data, "text")} className="text-gray-600 flex-grow leading-relaxed">
+        <div data-tina-field={tinaField(data, "text")} className="text-gray-600 flex-grow leading-relaxed mb-6">
           <div className="leading-relaxed">
             <TinaMarkdown content={data.text} />
           </div>
         </div>
+
+        {hasLink && (
+          <div className="mt-auto pt-4">
+            <button
+              onClick={handleCardClick}
+              className="inline-flex items-center justify-center px-6 py-2 text-sm font-medium text-white transition-colors rounded-full hover:opacity-90 focus:outline-none focus:ring-2 focus:ring-offset-2 cursor-pointer"
+              style={{
+                backgroundColor: 'var(--page-accent)',
+                '--tw-ring-color': 'var(--page-accent)'
+              } as React.CSSProperties}
+            >
+              {(data as any).buttonText || 'Ga verder'}
+            </button>
+          </div>
+        )}
       </CardContent>
     </Card>
   );
@@ -154,6 +165,12 @@ export const featureBlockSchema: Template = {
           label: "Link (optional)",
           name: "link",
           description: "Internal link (e.g., /nis, /about) or external URL",
+        },
+        {
+          type: "string",
+          label: "Button Text",
+          name: "buttonText",
+          description: "Text for the button (default: Ga verder)",
         },
       ],
     },
