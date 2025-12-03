@@ -14,7 +14,7 @@ export const Testimonial = ({ data }: { data: PageBlocksTestimonial }) => {
         <h2 className="text-title text-3xl font-semibold" data-tina-field={tinaField(data, 'title')}>{data.title}</h2>
         <p className="text-body mt-6" data-tina-field={tinaField(data, 'description')}>{data.description}</p>
       </div>
-      <div className="mt-8 [column-width:300px] [column-gap:1.5rem] md:mt-12">
+      <div className="mt-8 grid gap-6 md:mt-12 md:grid-cols-2">
         {data.testimonials?.map((testimonial, index) => (
           <TestimonialCard key={index} testimonial={testimonial!} />
         ))}
@@ -25,7 +25,7 @@ export const Testimonial = ({ data }: { data: PageBlocksTestimonial }) => {
 
 const TestimonialCard = ({ testimonial }: { testimonial: PageBlocksTestimonialTestimonials }) => {
   return (
-    <Card className="mb-6 break-inside-avoid">
+    <Card className="h-full">
       <CardContent className="grid grid-cols-[auto_1fr] gap-3 pt-6">
         <Avatar className="size-9" data-tina-field={tinaField(testimonial, 'avatar')}>
           {testimonial.avatar && (
