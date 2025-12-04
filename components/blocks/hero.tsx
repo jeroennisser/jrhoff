@@ -35,11 +35,11 @@ export const Hero = ({ data }: { data: PageBlocksHero }) => {
 
   return (
     <Section background={data.background!}>
-      <div className={`grid lg:grid-cols-12 gap-8 lg:gap-12 items-center pt-12 md:pt-16 pb-10 ${!hasImage ? 'justify-center' : ''}`} suppressHydrationWarning>
-        <div className={`mt-12 lg:mt-0 ${hasImage ? 'text-center lg:text-left lg:col-span-7 2xl:col-span-6' : 'text-center lg:col-span-10 lg:col-start-2'}`} suppressHydrationWarning>
+      <div className={`grid lg:grid-cols-12 gap-8 lg:gap-12 items-center pt-12 md:pt-16 lg:pt-20 pb-10 md:pb-12 ${!hasImage ? 'justify-center' : ''}`} suppressHydrationWarning>
+        <div className={`mt-0 lg:mt-0 ${hasImage ? 'text-left lg:col-span-7 2xl:col-span-6' : 'text-center lg:col-span-10 lg:col-start-2'}`} suppressHydrationWarning>
           {data.headline && (
             <div data-tina-field={tinaField(data, 'headline')}>
-              <h1 className={`mt-4 text-balance text-2xl md:text-3xl xl:text-4xl tracking-tight font-bold font-serif leading-snug text-accent ${!hasImage ? 'mx-auto' : 'lg:mx-0 mx-auto'}`} suppressHydrationWarning>
+              <h1 className={`text-balance text-2xl sm:text-3xl md:text-4xl lg:text-4xl xl:text-5xl tracking-tight font-bold font-serif leading-[1.15] sm:leading-[1.2] text-accent ${!hasImage ? 'mx-auto' : ''}`} suppressHydrationWarning>
                 {data.headline?.split(/(\s+)/).map((segment, i) => {
                   if (segment.includes('*')) {
                     return (
@@ -55,30 +55,30 @@ export const Hero = ({ data }: { data: PageBlocksHero }) => {
           )}
           {data.tagline && (
             <div data-tina-field={tinaField(data, 'tagline')}>
-              <div className={`mt-6 max-w-xl text-lg text-gray-600 font-normal leading-relaxed ${!hasImage ? 'mx-auto' : 'lg:mx-0 mx-auto'}`}>
+              <div className={`mt-6 md:mt-8 max-w-xl text-base md:text-lg text-gray-700 font-normal leading-relaxed ${!hasImage ? 'mx-auto' : ''}`}>
                 {data.tagline!}
               </div>
             </div>
           )}
 
           {data.usps && data.usps.length > 0 && (
-            <div className={`mt-6 flex flex-col gap-4 text-base text-gray-700 ${!hasImage ? 'items-center' : 'items-center lg:items-start'}`}>
+            <div className={`mt-8 md:mt-10 flex flex-col gap-4 md:gap-5 text-base md:text-base text-gray-700 ${!hasImage ? 'items-center' : 'items-start'}`}>
               {data.usps.map((usp, i) => (
-                <div key={i} className="flex items-center gap-3">
-                  <div className="flex-shrink-0 w-5 h-5 flex items-center justify-center">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" className="w-4 h-4 text-gray-600">
-                      <polyline points="20 6 9 17 4 12" />
+                <div key={i} className="flex items-start gap-3 md:gap-3">
+                  <div className="flex-shrink-0 w-5 h-5 md:w-5 md:h-5 flex items-center justify-center mt-0.5">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5 md:w-5 md:h-5 text-[var(--page-accent)]">
+                      <path fillRule="evenodd" d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12zm13.36-1.814a.75.75 0 10-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 00-1.06 1.06l2.25 2.25a.75.75 0 001.14-.094l3.75-5.25z" clipRule="evenodd" />
                     </svg>
                   </div>
-                  <span className="text-gray-600">{usp?.text}</span>
+                  <span className="text-gray-700 leading-relaxed">{usp?.text}</span>
                 </div>
               ))}
             </div>
           )}
 
 
-          <div className={`mt-10 flex flex-col gap-4 ${hasImage ? 'justify-center items-center lg:justify-start lg:items-start' : 'justify-center items-center'}`}>
-            <div className="flex flex-col sm:flex-row gap-4" suppressHydrationWarning>
+          <div className={`mt-10 md:mt-12 flex flex-col gap-3 md:gap-4 ${hasImage ? 'justify-start items-start' : 'justify-center items-center'}`}>
+            <div className="flex flex-col sm:flex-row gap-3 md:gap-4 w-full sm:w-auto" suppressHydrationWarning>
               {data.actions &&
                 data.actions.map((action, index) => {
                   const linkUrl = action!.link!;
@@ -120,7 +120,7 @@ export const Hero = ({ data }: { data: PageBlocksHero }) => {
                         <Button
                           size='lg'
                           variant={isPrimary ? 'default' : 'outline'}
-                          className={`px-8 py-6 text-base rounded-full transition-all duration-150 ease-out hover:scale-[1.02] cursor-pointer ${!isPrimary ? 'border-[1.5px] border-gray-300 bg-white hover:bg-orange-100 hover:shadow-sm !text-gray-900 hover:!text-gray-900' : 'bg-[var(--page-accent)] hover:opacity-90 text-white'}`}
+                          className={`w-full sm:w-auto px-6 md:px-8 py-4 md:py-6 text-sm md:text-base rounded-full transition-all duration-150 ease-out hover:scale-[1.02] cursor-pointer ${!isPrimary ? 'border-[1.5px] border-gray-300 bg-white hover:bg-orange-100 hover:shadow-sm !text-gray-900 hover:!text-gray-900' : 'bg-[var(--page-accent)] hover:opacity-90 text-white'}`}
                           onClick={handleClick}
                         >
                           <div className="flex items-center gap-2" suppressHydrationWarning>
@@ -138,7 +138,7 @@ export const Hero = ({ data }: { data: PageBlocksHero }) => {
                           asChild
                           size='lg'
                           variant={isPrimary ? 'default' : 'outline'}
-                          className={`px-8 py-6 text-base rounded-full transition-all duration-150 ease-out hover:scale-[1.02] cursor-pointer ${!isPrimary ? 'border-[1.5px] border-gray-300 bg-white hover:bg-orange-100 hover:shadow-sm !text-gray-900 hover:!text-gray-900' : 'bg-[var(--page-accent)] hover:opacity-90 text-white'}`}
+                          className={`w-full sm:w-auto px-6 md:px-8 py-4 md:py-6 text-sm md:text-base rounded-full transition-all duration-150 ease-out hover:scale-[1.02] cursor-pointer ${!isPrimary ? 'border-[1.5px] border-gray-300 bg-white hover:bg-orange-100 hover:shadow-sm !text-gray-900 hover:!text-gray-900' : 'bg-[var(--page-accent)] hover:opacity-90 text-white'}`}
                         >
                           {isExternal ? (
                             <a
@@ -176,8 +176,8 @@ export const Hero = ({ data }: { data: PageBlocksHero }) => {
           </div>
 
           {data.trust && (
-            <div className="mt-6">
-              <p className="text-base font-medium text-gray-600">{data.trust.text}</p>
+            <div className="mt-4 md:mt-6">
+              <p className="text-sm md:text-base font-medium text-gray-600">{data.trust.text}</p>
             </div>
           )}
         </div>

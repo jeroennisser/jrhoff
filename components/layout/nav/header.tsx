@@ -76,11 +76,11 @@ export const Header = () => {
 
   return (
     <header
-      className={`fixed z-20 w-full px-4 transition-all duration-300 ease-in-out ${isVisible ? 'top-0 pt-2' : '-top-24'
+      className={`fixed z-20 w-full px-2 md:px-4 transition-all duration-300 ease-in-out ${isVisible ? 'top-0 pt-2' : '-top-24'
         }`}
     >
-      <nav className="bg-white/70 backdrop-blur-xl border shadow-lg mx-4 transition-all duration-500 ease-out rounded-[2rem]">
-        <div className="px-6 transition-all duration-300">
+      <nav className="bg-white/70 backdrop-blur-xl border shadow-lg mx-2 md:mx-4 transition-all duration-500 ease-out rounded-[2rem]">
+        <div className="px-4 md:px-6 transition-all duration-300">
           <div className="flex items-center justify-between py-2 lg:py-2 relative">
             {/* Logo */}
             <Link
