@@ -15,7 +15,7 @@ const isExternalLink = (url: string) => {
   return url.startsWith('http://') || url.startsWith('https://') || url.startsWith('tel:') || url.startsWith('mailto:') || url.startsWith('#');
 };
 
-export const Hero = ({ data }: { data: PageBlocksHero }) => {
+export const Hero = ({ data, priority = false }: { data: PageBlocksHero; priority?: boolean }) => {
   // Extract the background style logic into a more readable format
   let gradientStyle: React.CSSProperties | undefined = undefined;
   if (data.background) {
@@ -187,7 +187,7 @@ export const Hero = ({ data }: { data: PageBlocksHero }) => {
             <div className='relative w-full aspect-square' data-tina-field={tinaField(data, 'image')}>
               {/* Decorative background blob or gradient could go here if needed */}
               <div className='relative w-full h-full rounded-full overflow-hidden border-4 border-white shadow-2xl shadow-orange-900/10'>
-                <ImageBlock image={data.image!} />
+                <ImageBlock image={data.image!} priority={priority} />
               </div>
             </div>
           </div>
@@ -197,7 +197,7 @@ export const Hero = ({ data }: { data: PageBlocksHero }) => {
   );
 };
 
-const ImageBlock = ({ image }: { image: PageBlocksHeroImage }) => {
+const ImageBlock = ({ image, priority = false }: { image: PageBlocksHeroImage; priority?: boolean }) => {
   if (image.videoUrl) {
     let videoId = '';
     if (image.videoUrl) {
@@ -216,10 +216,13 @@ const ImageBlock = ({ image }: { image: PageBlocksHeroImage }) => {
     return (
       <Image
         className='z-2 relative w-full h-full object-cover'
-        alt={image!.alt || ''}
+        alt={image!.alt || 'Hero image'}
         src={image!.src!}
         height={1080}
         width={1080}
+        priority={priority}
+        fetchPriority={priority ? "high" : undefined}
+        sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 40vw"
       />
     );
   }

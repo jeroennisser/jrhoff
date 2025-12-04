@@ -1,6 +1,10 @@
 import type { NextConfig } from 'next'
 
 const nextConfig: NextConfig = {
+  // Enable compression
+  compress: true,
+
+  // Optimize images
   images: {
     remotePatterns: [
       {
@@ -14,14 +18,26 @@ const nextConfig: NextConfig = {
         port: '',
       }
     ],
+    formats: ['image/avif', 'image/webp'],
+    minimumCacheTTL: 60,
   },
+
+  // Modularize imports to reduce bundle size
   modularizeImports: {
     'react-icons': {
       transform: 'react-icons/{{member}}',
     },
   },
+
+  // Optimize production builds
+  productionBrowserSourceMaps: false,
+
+  // Experimental features for better performance
+  experimental: {
+    optimizePackageImports: ['lucide-react', 'react-icons', 'motion'],
+  },
+
   async headers() {
-    // these are also defined in the root layout since github pages doesn't support headers
     const headers = [
       {
         key: 'X-Frame-Options',
@@ -31,11 +47,49 @@ const nextConfig: NextConfig = {
         key: 'Content-Security-Policy',
         value: "frame-ancestors 'self'",
       },
-    ];
-    return [
       {
-        source: '/(.*)',
+        key: 'Cache-Control',
+        value: 'public, max-age=31536000, immutable',
+      },
+    ];
+
+    return [
+      // Cache static assets aggressively
+      {
+        source: '/static/:path*',
         headers,
+      },
+      {
+        source: '/_next/static/:path*',
+        headers,
+      },
+      {
+        source: '/_next/image/:path*',
+        headers: [
+          ...headers,
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=31536000, immutable',
+          },
+        ],
+      },
+      // Enable back/forward cache for pages
+      {
+        source: '/:path*',
+        headers: [
+          {
+            key: 'X-Frame-Options',
+            value: 'SAMEORIGIN',
+          },
+          {
+            key: 'Content-Security-Policy',
+            value: "frame-ancestors 'self'",
+          },
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=0, must-revalidate',
+          },
+        ],
       },
     ];
   },

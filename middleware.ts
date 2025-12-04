@@ -2,55 +2,30 @@ import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 
 export function middleware(request: NextRequest) {
-  const { pathname } = request.nextUrl;
+  const response = NextResponse.next();
 
-  // Get password from environment
-  const PASSWORD = process.env.PASSWORD;
+  // Add security headers
+  response.headers.set('X-DNS-Prefetch-Control', 'on');
+  response.headers.set('Strict-Transport-Security', 'max-age=63072000; includeSubDomains; preload');
+  response.headers.set('X-Content-Type-Options', 'nosniff');
+  response.headers.set('X-Frame-Options', 'SAMEORIGIN');
+  response.headers.set('Referrer-Policy', 'origin-when-cross-origin');
 
-  // Skip protection if no password is set
-  if (!PASSWORD) {
-    return NextResponse.next();
-  }
+  // Enable back/forward cache
+  response.headers.set('Cache-Control', 'public, max-age=0, must-revalidate');
 
-  // Skip in development unless FORCE_AUTH is set
-  const FORCE_AUTH = process.env.FORCE_AUTH;
-  if (process.env.NODE_ENV === 'development' && !FORCE_AUTH) {
-    return NextResponse.next();
-  }
-
-  // Check authentication cookie
-  const authCookie = request.cookies.get('auth');
-
-  if (authCookie?.value === 'authenticated') {
-    return NextResponse.next();
-  }
-
-  // Allow access to login page, API routes, form helpers, and static assets
-  if (
-    pathname === '/login' ||
-    pathname === '/__forms.html' ||
-    pathname.startsWith('/api/') ||
-    pathname.startsWith('/_next/') ||
-    pathname.startsWith('/favicon') ||
-    pathname.startsWith('/uploads/')
-  ) {
-    return NextResponse.next();
-  }
-
-  // Redirect to login
-  const url = request.nextUrl.clone();
-  url.pathname = '/login';
-  return NextResponse.redirect(url);
+  return response;
 }
 
 export const config = {
   matcher: [
     /*
      * Match all request paths except for the ones starting with:
+     * - api (API routes)
      * - _next/static (static files)
      * - _next/image (image optimization files)
      * - favicon.ico (favicon file)
      */
-    '/((?!_next/static|_next/image|favicon.ico).*)',
+    '/((?!api|_next/static|_next/image|favicon.ico).*)',
   ],
 };

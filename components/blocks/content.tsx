@@ -19,7 +19,7 @@ const isExternalLink = (url: string) => {
   return url.startsWith('http://') || url.startsWith('https://') || url.startsWith('tel:') || url.startsWith('mailto:');
 };
 
-export const Content = ({ data }: { data: PageBlocksContent }) => {
+export const Content = ({ data, priority = false }: { data: PageBlocksContent; priority?: boolean }) => {
   const hasImage = data.image?.src;
   const imagePosition = data.imagePosition || 'right';
 
@@ -72,6 +72,8 @@ export const Content = ({ data }: { data: PageBlocksContent }) => {
                     alt={data.image!.alt || ''}
                     fill
                     className="object-cover"
+                    priority={priority}
+                    sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 40vw"
                   />
                 </div>
               </div>
@@ -95,6 +97,8 @@ export const Content = ({ data }: { data: PageBlocksContent }) => {
                     alt={data.image!.alt || ''}
                     fill
                     className="object-cover"
+                    priority={priority}
+                    sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 40vw"
                   />
                 </div>
               </div>

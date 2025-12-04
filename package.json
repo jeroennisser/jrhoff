@@ -9,7 +9,8 @@
     "start": "tinacms build && next start",
     "export": "npm run build && next export",
     "lint": "biome lint",
-    "dev:build": "next build"
+    "dev:build": "next build",
+    "analyze": "ANALYZE=true npm run build"
   },
   "devDependencies": {
     "@biomejs/biome": "^1.9.4",

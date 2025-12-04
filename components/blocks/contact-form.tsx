@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, Suspense } from 'react';
 import { Section } from '../layout/section';
 import { tinaField } from 'tinacms/dist/react';
 import type { Template } from 'tinacms';
@@ -9,7 +9,7 @@ import { Button } from '../ui/button';
 import { cn } from '@/lib/utils';
 import { useSearchParams } from 'next/navigation';
 
-export const ContactForm = ({ data }: { data: PageBlocksContactForm }) => {
+function ContactFormContent({ data }: { data: PageBlocksContactForm }) {
     const searchParams = useSearchParams();
     const typeParam = searchParams?.get('type');
 
@@ -408,6 +408,23 @@ export const ContactForm = ({ data }: { data: PageBlocksContactForm }) => {
                 </form >
             </div >
         </Section >
+    );
+}
+
+export const ContactForm = ({ data }: { data: PageBlocksContactForm }) => {
+    return (
+        <Suspense fallback={
+            <Section background={data.background!}>
+                <div className="max-w-2xl mx-auto bg-white/40 backdrop-blur-sm rounded-2xl p-8 shadow-sm">
+                    <div className="animate-pulse">
+                        <div className="h-8 bg-gray-200 rounded w-3/4 mx-auto mb-4"></div>
+                        <div className="h-4 bg-gray-200 rounded w-1/2 mx-auto mb-8"></div>
+                    </div>
+                </div>
+            </Section>
+        }>
+            <ContactFormContent data={data} />
+        </Suspense>
     );
 };
 

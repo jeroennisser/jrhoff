@@ -20,7 +20,7 @@ export const Blocks = (props: Omit<Page, "id" | "_sys" | "_values">) => {
       {props.blocks.map(function (block, i) {
         return (
           <div key={i} data-tina-field={tinaField(block)}>
-            <Block {...block} />
+            <Block {...block} blockIndex={i} />
           </div>
         );
       })}
@@ -28,18 +28,20 @@ export const Blocks = (props: Omit<Page, "id" | "_sys" | "_values">) => {
   );
 };
 
-const Block = (block: PageBlocks) => {
+const Block = (block: PageBlocks & { blockIndex: number }) => {
+  const isFirstBlock = block.blockIndex === 0;
+
   switch (block.__typename) {
     case "PageBlocksVideo":
       return <Video data={block} />;
     case "PageBlocksHero":
-      return <Hero data={block} />;
+      return <Hero data={block} priority={isFirstBlock} />;
     case "PageBlocksCallout":
       return <Callout data={block} />;
     case "PageBlocksStats":
       return <Stats data={block} />;
     case "PageBlocksContent":
-      return <Content data={block} />;
+      return <Content data={block} priority={isFirstBlock} />;
     case "PageBlocksFeatures":
       return <Features data={block} />;
     case "PageBlocksTestimonial":
@@ -47,7 +49,7 @@ const Block = (block: PageBlocks) => {
     case "PageBlocksCta":
       return <CallToAction data={block} />;
     case "PageBlocksGallery":
-      return <Gallery data={block} />;
+      return <Gallery data={block} priority={isFirstBlock} />;
     case "PageBlocksContactForm":
       return <ContactForm data={block} />;
     default:

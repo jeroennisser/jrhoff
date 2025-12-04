@@ -7,7 +7,7 @@ import { Section } from '../layout/section';
 import { sectionBlockSchemaField } from '../layout/section';
 import Image from 'next/image';
 
-export const Gallery = ({ data }: { data: PageBlocksGallery }) => {
+export const Gallery = ({ data, priority = false }: { data: PageBlocksGallery; priority?: boolean }) => {
   if (!data.images || data.images.length === 0) {
     return null;
   }
@@ -15,8 +15,8 @@ export const Gallery = ({ data }: { data: PageBlocksGallery }) => {
   const columns = data.columns || 3;
   const gridClass =
     columns === 2 ? 'grid-cols-1 md:grid-cols-2' :
-    columns === 4 ? 'grid-cols-1 md:grid-cols-2 lg:grid-cols-4' :
-    'grid-cols-1 md:grid-cols-2 lg:grid-cols-3';
+      columns === 4 ? 'grid-cols-1 md:grid-cols-2 lg:grid-cols-4' :
+        'grid-cols-1 md:grid-cols-2 lg:grid-cols-3';
 
   return (
     <Section background={data.background!}>
@@ -45,6 +45,7 @@ export const Gallery = ({ data }: { data: PageBlocksGallery }) => {
               fill
               className="object-cover hover:scale-105 transition-transform duration-300"
               sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+              priority={priority && index === 0}
             />
             {image.caption && (
               <div className="absolute bottom-0 left-0 right-0 bg-black/60 text-white p-2 text-sm">
