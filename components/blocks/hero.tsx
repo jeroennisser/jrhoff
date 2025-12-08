@@ -35,8 +35,8 @@ export const Hero = ({ data, priority = false }: { data: PageBlocksHero; priorit
 
   return (
     <Section background={data.background!}>
-      <div className={`grid ${hasImage ? 'grid-cols-1 lg:grid-cols-2' : 'lg:grid-cols-1'} gap-8 lg:gap-12 items-center ${hasImage ? 'justify-items-center lg:justify-items-stretch' : ''} pt-12 md:pt-16 lg:pt-20 pb-10 md:pb-12`} suppressHydrationWarning>
-        <div className={`mt-0 lg:mt-0 w-full ${hasImage ? 'text-left max-w-2xl lg:max-w-none' : 'text-center mx-auto max-w-3xl'}`} suppressHydrationWarning>
+      <div className={`grid ${hasImage ? 'grid-cols-1 lg:grid-cols-2' : 'lg:grid-cols-1'} gap-8 lg:gap-12 items-center pt-12 md:pt-16 lg:pt-20 pb-10 md:pb-12`} suppressHydrationWarning>
+        <div className={`mt-0 lg:mt-0 ${hasImage ? 'text-left mx-auto lg:mx-0 max-w-2xl lg:max-w-none' : 'text-center mx-auto max-w-3xl'}`} suppressHydrationWarning>
           {data.headline && (
             <div data-tina-field={tinaField(data, 'headline')}>
               <h1 className={`text-balance text-2xl sm:text-3xl md:text-4xl lg:text-4xl xl:text-5xl tracking-tight font-bold font-serif leading-[1.15] sm:leading-[1.2] ${!hasImage ? 'mx-auto' : ''}`} suppressHydrationWarning>
@@ -181,7 +181,7 @@ export const Hero = ({ data, priority = false }: { data: PageBlocksHero; priorit
         </div>
 
         {hasImage && (
-          <div className="relative flex justify-center order-first lg:order-last">
+          <div className="relative flex justify-center order-first lg:order-last mx-auto lg:mx-0">
             <div className='relative breathing-circle w-64 h-64 sm:w-72 sm:h-72 md:w-80 md:h-80 lg:w-96 lg:h-96' data-tina-field={tinaField(data, 'image')}>
               {/* Decorative background blob or gradient could go here if needed */}
               <div className='relative w-full h-full rounded-full overflow-hidden border-4 border-white shadow-2xl shadow-orange-900/10'>

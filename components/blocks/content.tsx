@@ -91,12 +91,12 @@ export const Content = ({ data, priority = false }: { data: PageBlocksContent; p
 
     return (
       <Section background={data.background!}>
-        <div className={`grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-center justify-items-center lg:justify-items-stretch ${imagePosition === 'left' ? 'lg:flex-row-reverse' : ''}`}>
+        <div className={`grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-center ${imagePosition === 'left' ? 'lg:flex-row-reverse' : ''}`}>
           {/* On mobile, always show image first; on desktop, respect imagePosition */}
-          <div className={`w-full max-w-2xl lg:max-w-none ${imagePosition === 'right' ? 'order-first lg:order-last' : ''}`}>
+          <div className={`mx-auto lg:mx-0 max-w-2xl lg:max-w-none ${imagePosition === 'right' ? 'order-first lg:order-last' : ''}`}>
             <ImageComponent />
           </div>
-          <div className="w-full max-w-2xl lg:max-w-none">
+          <div className="mx-auto lg:mx-0 max-w-2xl lg:max-w-none">
             <TextComponent />
           </div>
         </div>
