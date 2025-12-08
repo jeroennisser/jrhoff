@@ -32,11 +32,11 @@ export const CallToAction = ({ data }: { data: PageBlocksCta }) => {
                                     asChild
                                     size="lg"
                                     variant={isPrimary ? 'default' : 'outline'}
-                                    className={`px-7 py-3 text-base transition-all duration-150 ease-out hover:scale-[1.02] ${isPrimaryBackground && !isPrimary ? 'bg-white hover:bg-white text-[var(--page-accent)] hover:text-[var(--page-accent)] border-white hover:border-white hover:brightness-95' : ''} ${isPrimaryBackground && isPrimary ? 'bg-white hover:bg-gray-100 text-[var(--page-accent)]' : ''}`}>
+                                    className={`group px-7 py-3 text-base transition-all duration-150 ease-out hover:scale-[1.02] ${isPrimaryBackground && !isPrimary ? 'bg-transparent hover:bg-white/20 text-white border-white hover:border-white' : ''} ${isPrimaryBackground && isPrimary ? 'bg-white hover:bg-white/90 text-[var(--page-accent)]' : ''}`}>
                                     {isExternal ? (
                                         <a href={linkUrl} target={linkUrl.startsWith('http') ? '_blank' : undefined} rel={linkUrl.startsWith('http') ? 'noopener noreferrer' : undefined} className="flex items-center gap-2">
                                             {action?.icon && (
-                                                <span className={isPrimaryBackground ? 'text-[var(--page-accent)]' : ''} suppressHydrationWarning>
+                                                <span className={isPrimaryBackground ? (isPrimary ? 'text-[var(--page-accent)]' : 'text-white') : ''} suppressHydrationWarning>
                                                     <Icon data={action?.icon} />
                                                 </span>
                                             )}
@@ -50,7 +50,7 @@ export const CallToAction = ({ data }: { data: PageBlocksCta }) => {
                                     ) : (
                                         <Link href={linkUrl} className="flex items-center gap-2">
                                             {action?.icon && (
-                                                <span className={isPrimaryBackground ? 'text-[var(--page-accent)]' : ''} suppressHydrationWarning>
+                                                <span className={isPrimaryBackground ? (isPrimary ? 'text-[var(--page-accent)]' : 'text-white') : ''} suppressHydrationWarning>
                                                     <Icon data={action?.icon} />
                                                 </span>
                                             )}
