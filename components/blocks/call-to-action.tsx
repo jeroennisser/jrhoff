@@ -36,7 +36,7 @@ export const CallToAction = ({ data }: { data: PageBlocksCta }) => {
                                     {isExternal ? (
                                         <a href={linkUrl} target={linkUrl.startsWith('http') ? '_blank' : undefined} rel={linkUrl.startsWith('http') ? 'noopener noreferrer' : undefined} className="flex items-center gap-2">
                                             {action?.icon && (
-                                                <span className={isPrimaryBackground ? 'text-[var(--page-accent)]' : ''}>
+                                                <span className={isPrimaryBackground ? 'text-[var(--page-accent)]' : ''} suppressHydrationWarning>
                                                     <Icon data={action?.icon} />
                                                 </span>
                                             )}
@@ -50,7 +50,7 @@ export const CallToAction = ({ data }: { data: PageBlocksCta }) => {
                                     ) : (
                                         <Link href={linkUrl} className="flex items-center gap-2">
                                             {action?.icon && (
-                                                <span className={isPrimaryBackground ? 'text-[var(--page-accent)]' : ''}>
+                                                <span className={isPrimaryBackground ? 'text-[var(--page-accent)]' : ''} suppressHydrationWarning>
                                                     <Icon data={action?.icon} />
                                                 </span>
                                             )}

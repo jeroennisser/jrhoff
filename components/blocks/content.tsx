@@ -28,7 +28,7 @@ export const Content = ({ data, priority = false }: { data: PageBlocksContent; p
   const Actions = () => {
     if (!data.actions || data.actions.length === 0) return null;
     return (
-      <div className="mt-8 flex flex-wrap gap-4">
+      <div className="not-prose mt-8 flex flex-wrap gap-4">
         {data.actions.map((action) => {
           const linkUrl = action!.link!;
           const isExternal = isExternalLink(linkUrl);
@@ -41,12 +41,12 @@ export const Content = ({ data, priority = false }: { data: PageBlocksContent; p
                 className={`px-7 py-3 text-base rounded-full transition-all duration-150 ease-out hover:scale-[1.02] ${action!.type === 'link' ? 'bg-white hover:bg-orange-50 text-gray-900 border-[1.5px] border-gray-300' : 'bg-[var(--page-accent)] text-white hover:opacity-90'}`}
               >
                 {isExternal ? (
-                  <a href={linkUrl} target={linkUrl.startsWith('http') ? '_blank' : undefined} rel={linkUrl.startsWith('http') ? 'noopener noreferrer' : undefined}>
+                  <a href={linkUrl} target={linkUrl.startsWith('http') ? '_blank' : undefined} rel={linkUrl.startsWith('http') ? 'noopener noreferrer' : undefined} className="flex items-center gap-2">
                     {action?.icon && <Icon data={action?.icon} />}
                     <span className="text-nowrap">{action!.label}</span>
                   </a>
                 ) : (
-                  <Link href={linkUrl}>
+                  <Link href={linkUrl} className="flex items-center gap-2">
                     {action?.icon && <Icon data={action?.icon} />}
                     <span className="text-nowrap">{action!.label}</span>
                   </Link>
