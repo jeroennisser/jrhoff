@@ -637,4 +637,36 @@ p {
       opacity: 0.6;
     }
   }
+
+  /* Custom numbered list styling with accent circles */
+  .prose ol {
+    list-style: none;
+    counter-reset: list-counter;
+    padding-left: 3rem;
+  }
+
+  .prose ol li {
+    position: relative;
+    counter-increment: list-counter;
+    padding-left: 1rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .prose ol li::before {
+    content: counter(list-counter);
+    position: absolute;
+    left: -2.5rem;
+    top: 0;
+    width: 2rem;
+    height: 2rem;
+    background: var(--page-accent);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    font-size: 0.875rem;
+    line-height: 1;
+  }
 }

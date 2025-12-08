@@ -181,7 +181,7 @@ export const Hero = ({ data, priority = false }: { data: PageBlocksHero; priorit
         </div>
 
         {hasImage && (
-          <div className="relative flex justify-center order-first lg:order-last mx-auto lg:ml-auto lg:mr-0">
+          <div className="relative flex justify-center order-first lg:order-last mx-auto lg:ml-auto lg:mr-0 mb-8 lg:mb-0">
             <div className='relative breathing-circle w-64 h-64 sm:w-72 sm:h-72 md:w-80 md:h-80 lg:w-96 lg:h-96' data-tina-field={tinaField(data, 'image')}>
               {/* Decorative background blob or gradient could go here if needed */}
               <div className='relative w-full h-full rounded-full overflow-hidden border-4 border-white shadow-2xl shadow-orange-900/10'>

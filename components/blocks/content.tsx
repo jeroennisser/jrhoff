@@ -62,7 +62,7 @@ export const Content = ({ data, priority = false }: { data: PageBlocksContent; p
   if (hasImage) {
     const ImageComponent = () => (
       <div className="relative flex justify-center" data-tina-field={tinaField(data, 'image')}>
-        <div className="relative w-full max-w-md aspect-square breathing-circle">
+        <div className="relative breathing-circle w-64 h-64 sm:w-72 sm:h-72 md:w-80 md:h-80 lg:w-96 lg:h-96">
           <div className="relative w-full h-full rounded-full overflow-hidden border-4 border-white shadow-2xl shadow-orange-900/10">
             <Image
               src={data.image!.src!}
@@ -93,7 +93,7 @@ export const Content = ({ data, priority = false }: { data: PageBlocksContent; p
       <Section background={data.background!}>
         <div className={`grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-center ${imagePosition === 'left' ? 'lg:flex-row-reverse' : ''}`}>
           {/* On mobile, always show image first; on desktop, respect imagePosition */}
-          <div className={`mx-auto lg:mx-0 max-w-2xl lg:max-w-none ${imagePosition === 'right' ? 'order-first lg:order-last' : ''}`}>
+          <div className={`mx-auto lg:mx-0 max-w-md lg:max-w-none mb-8 lg:mb-0 ${imagePosition === 'right' ? 'order-first lg:order-last' : ''}`}>
             <ImageComponent />
           </div>
           <div className="mx-auto lg:mx-0 max-w-2xl lg:max-w-none">
