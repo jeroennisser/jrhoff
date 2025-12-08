@@ -375,7 +375,7 @@ function ContactFormContent({ data }: { data: PageBlocksContactForm }) {
                         <Button
                             type="submit"
                             disabled={isSubmitting}
-                            className="w-full px-8 py-6 text-base rounded-full bg-orange-600 hover:bg-orange-700 text-white transition-all duration-150 ease-out hover:scale-[1.02] disabled:opacity-50 disabled:cursor-not-allowed"
+                            className="w-full px-8 py-6 text-base rounded-full bg-[var(--page-accent)] hover:opacity-90 text-white transition-all duration-150 ease-out hover:scale-[1.02] disabled:opacity-50 disabled:cursor-not-allowed"
                         >
                             {isSubmitting ? 'Verzenden...' : 'Verstuur bericht'}
                         </Button>

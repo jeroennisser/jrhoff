@@ -94,7 +94,7 @@ export const Header = () => {
             </Link>
 
             {/* Desktop Menu - Centered */}
-            <div className="hidden lg:flex absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 ml-8">
+            <div className="hidden lg:flex absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 ml-16">
               <nav>
                 <ul className="flex gap-8 text-sm">
                   {header.nav!.map((item, index) => {
