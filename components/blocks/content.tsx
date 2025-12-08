@@ -38,16 +38,24 @@ export const Content = ({ data, priority = false }: { data: PageBlocksContent; p
                 asChild
                 size="lg"
                 variant={action!.type === 'link' ? 'outline' : 'default'}
-                className={`px-7 py-3 text-base rounded-full transition-all duration-150 ease-out hover:scale-[1.02] ${action!.type === 'link' ? 'bg-white hover:bg-orange-50 text-gray-900 border-[1.5px] border-gray-300' : 'bg-[var(--page-accent)] text-white hover:opacity-90'}`}
+                className={`group px-7 py-3 text-base rounded-full transition-all duration-150 ease-out hover:scale-[1.02] ${action!.type === 'link' ? 'bg-white hover:bg-[var(--page-accent)] hover:text-white text-gray-900 border-[1.5px] border-gray-300 hover:border-[var(--page-accent)]' : 'bg-[var(--page-accent)] text-white hover:opacity-90'}`}
               >
                 {isExternal ? (
                   <a href={linkUrl} target={linkUrl.startsWith('http') ? '_blank' : undefined} rel={linkUrl.startsWith('http') ? 'noopener noreferrer' : undefined} className="flex items-center gap-2">
-                    {action?.icon && <Icon data={action?.icon} />}
+                    {action?.icon && (
+                      <span className={action!.type === 'link' ? 'group-hover:text-white' : ''}>
+                        <Icon data={action?.icon} />
+                      </span>
+                    )}
                     <span className="text-nowrap">{action!.label}</span>
                   </a>
                 ) : (
                   <Link href={linkUrl} className="flex items-center gap-2">
-                    {action?.icon && <Icon data={action?.icon} />}
+                    {action?.icon && (
+                      <span className={action!.type === 'link' ? 'group-hover:text-white' : ''}>
+                        <Icon data={action?.icon} />
+                      </span>
+                    )}
                     <span className="text-nowrap">{action!.label}</span>
                   </Link>
                 )}
