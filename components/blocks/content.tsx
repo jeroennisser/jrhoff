@@ -38,7 +38,7 @@ export const Content = ({ data, priority = false }: { data: PageBlocksContent; p
                 asChild
                 size="lg"
                 variant={action!.type === 'link' ? 'outline' : 'default'}
-                className={`px-7 py-3 text-base transition-all duration-150 ease-out hover:scale-[1.02] ${action!.type === 'link' ? 'bg-white hover:bg-orange-50 text-gray-900' : 'bg-[var(--page-accent)] text-white hover:opacity-90'}`}
+                className={`px-7 py-3 text-base rounded-full transition-all duration-150 ease-out hover:scale-[1.02] ${action!.type === 'link' ? 'bg-white hover:bg-orange-50 text-gray-900 border-[1.5px] border-gray-300' : 'bg-[var(--page-accent)] text-white hover:opacity-90'}`}
               >
                 {isExternal ? (
                   <a href={linkUrl} target={linkUrl.startsWith('http') ? '_blank' : undefined} rel={linkUrl.startsWith('http') ? 'noopener noreferrer' : undefined}>
