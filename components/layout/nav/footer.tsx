@@ -9,23 +9,23 @@ export const Footer = () => {
   const { header, footer } = globalSettings!;
 
   return (
-    <footer className="border-t bg-white pt-12 pb-8 dark:bg-transparent">
+    <footer className="bg-[#2D2926] text-white pt-12 pb-8">
       <div className="mx-auto max-w-5xl px-6">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
 
           {/* Contact Info */}
           <div>
-            <h3 className="font-semibold text-sm mb-3">Contact</h3>
-            <div className="space-y-2 text-sm text-muted-foreground">
+            <h3 className="font-semibold text-sm mb-3 text-white">Contact</h3>
+            <div className="space-y-2 text-sm text-white/70">
               <p>Musical 23</p>
               <p>1507 TS Zaandam</p>
               <p>
-                <a href="tel:0612261363" className="hover:text-primary">
+                <a href="tel:0612261363" className="hover:text-[var(--page-accent)] transition-colors">
                   06-12261363
                 </a>
               </p>
               <p>
-                <a href="mailto:jeroen@bodytherapist.nl" className="hover:text-primary">
+                <a href="mailto:jeroen@bodytherapist.nl" className="hover:text-[var(--page-accent)] transition-colors">
                   jeroen@bodytherapist.nl
                 </a>
               </p>
@@ -34,11 +34,11 @@ export const Footer = () => {
 
           {/* Quick Links */}
           <div>
-            <h3 className="font-semibold text-sm mb-3">Menu</h3>
-            <ul className="space-y-2 text-sm text-muted-foreground">
+            <h3 className="font-semibold text-sm mb-3 text-white">Menu</h3>
+            <ul className="space-y-2 text-sm text-white/70">
               {header?.nav?.map((item, index) => (
                 <li key={index}>
-                  <Link href={item!.href!} className="hover:text-primary">
+                  <Link href={item!.href!} className="hover:text-[var(--page-accent)] transition-colors">
                     {item!.label}
                   </Link>
                 </li>
@@ -48,8 +48,8 @@ export const Footer = () => {
 
           {/* Business Info */}
           <div>
-            <h3 className="font-semibold text-sm mb-3">Bedrijfsgegevens</h3>
-            <div className="space-y-2 text-sm text-muted-foreground">
+            <h3 className="font-semibold text-sm mb-3 text-white">Bedrijfsgegevens</h3>
+            <div className="space-y-2 text-sm text-white/70">
               <p>KvK: 34337856</p>
               <p>Body Therapist & NIS Therapeut</p>
             </div>
@@ -57,9 +57,9 @@ export const Footer = () => {
 
         </div>
 
-        <div className="pt-6 border-t flex flex-col md:flex-row justify-between items-center gap-4">
+        <div className="pt-6 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-4">
           <div className="flex items-center gap-2">
-            <span className="text-muted-foreground text-sm">
+            <span className="text-white/50 text-sm">
               © {new Date().getFullYear()} {header?.name}. Alle rechten voorbehouden.
             </span>
           </div>

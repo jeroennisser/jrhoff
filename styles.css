@@ -42,6 +42,7 @@ h4 {
 
 /* Improved paragraph spacing and readability */
 p {
+  font-family: var(--font-sans), system-ui, -apple-system, sans-serif;
   line-height: 1.7;
   margin-bottom: 1.25rem;
 }
@@ -608,6 +609,32 @@ p {
       opacity: 1;
       filter: blur(0);
       transform: translateY(0);
+    }
+  }
+
+  /* Breathing circle animation for circular images */
+  .breathing-circle {
+    position: relative;
+  }
+
+  .breathing-circle::before {
+    content: '';
+    position: absolute;
+    inset: -12px;
+    border: 2px solid color-mix(in oklch, var(--primary) 40%, transparent);
+    border-radius: 50%;
+    animation: breathing-pulse 4s ease-in-out infinite;
+    pointer-events: none;
+  }
+
+  @keyframes breathing-pulse {
+    0%, 100% {
+      transform: scale(1);
+      opacity: 0.4;
+    }
+    50% {
+      transform: scale(1.03);
+      opacity: 0.6;
     }
   }
 }

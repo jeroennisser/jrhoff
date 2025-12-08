@@ -5,18 +5,20 @@ import { iconSchema } from '@/tina/fields/icon';
 import { Button } from '@/components/ui/button'
 import { PageBlocksCta } from '@/tina/__generated__/types';
 import { Icon } from '../icon';
-import { Section } from '../layout/section';
+import { Section, sectionBlockSchemaField } from '../layout/section';
 
 const isExternalLink = (url: string) => {
     return url.startsWith('http://') || url.startsWith('https://') || url.startsWith('tel:') || url.startsWith('mailto:');
 };
 
 export const CallToAction = ({ data }: { data: PageBlocksCta }) => {
+    const isPrimaryBackground = data.background === 'bg-primary';
+
     return (
-        <Section>
+        <Section background={data.background!}>
             <div className="text-center">
-                <h2 className="text-balance text-4xl font-semibold lg:text-5xl" data-tina-field={tinaField(data, 'title')}>{data.title}</h2>
-                <p className="mt-4" data-tina-field={tinaField(data, 'description')}>{data.description}</p>
+                <h2 className={`text-balance text-4xl font-semibold lg:text-5xl ${isPrimaryBackground ? 'text-white' : ''}`} data-tina-field={tinaField(data, 'title')}>{data.title}</h2>
+                <p className={`mt-4 text-lg ${isPrimaryBackground ? 'text-white/95' : ''}`} data-tina-field={tinaField(data, 'description')}>{data.description}</p>
 
                 <div className="mt-12 flex flex-wrap justify-center gap-4">
                     {data.actions && data.actions.map(action => {
@@ -30,7 +32,7 @@ export const CallToAction = ({ data }: { data: PageBlocksCta }) => {
                                     asChild
                                     size="lg"
                                     variant={isPrimary ? 'default' : 'outline'}
-                                    className="px-7 py-3 text-base transition-all duration-150 ease-out hover:scale-[1.02]">
+                                    className={`px-7 py-3 text-base transition-all duration-150 ease-out hover:scale-[1.02] ${isPrimaryBackground && !isPrimary ? 'bg-white hover:bg-white/90 text-[var(--page-accent)] border-white' : ''} ${isPrimaryBackground && isPrimary ? 'bg-white hover:bg-white/90 text-[var(--page-accent)]' : ''}`}>
                                     {isExternal ? (
                                         <a href={linkUrl} target={linkUrl.startsWith('http') ? '_blank' : undefined} rel={linkUrl.startsWith('http') ? 'noopener noreferrer' : undefined} className="flex items-center gap-2">
                                             {action?.icon && (<Icon data={action?.icon} />)}
@@ -86,6 +88,7 @@ export const ctaBlockSchema: Template = {
         },
     },
     fields: [
+        sectionBlockSchemaField as any,
         {
             type: "string",
             label: "Title",

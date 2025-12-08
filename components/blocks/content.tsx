@@ -60,50 +60,45 @@ export const Content = ({ data, priority = false }: { data: PageBlocksContent; p
   };
 
   if (hasImage) {
+    const ImageComponent = () => (
+      <div className="relative flex justify-center" data-tina-field={tinaField(data, 'image')}>
+        <div className="relative w-full max-w-md aspect-square breathing-circle">
+          <div className="relative w-full h-full rounded-full overflow-hidden border-4 border-white shadow-2xl shadow-orange-900/10">
+            <Image
+              src={data.image!.src!}
+              alt={data.image!.alt || ''}
+              fill
+              className="object-cover"
+              priority={priority}
+              sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 40vw"
+            />
+          </div>
+        </div>
+      </div>
+    );
+
+    const TextComponent = () => (
+      <div className={proseClasses} data-tina-field={tinaField(data, 'body')}>
+        <TinaMarkdown
+          content={data.body}
+          components={{
+            scriptCopyBlock: (props: any) => <ScriptCopyBtn {...props} />,
+          }}
+        />
+        <Actions />
+      </div>
+    );
+
     return (
       <Section background={data.background!}>
-        <div className={`max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-center ${imagePosition === 'left' ? 'lg:flex-row-reverse' : ''}`}>
-          {imagePosition === 'left' && (
-            <div className="relative flex justify-center" data-tina-field={tinaField(data, 'image')}>
-              <div className="relative w-full max-w-md aspect-square">
-                <div className="relative w-full h-full rounded-full overflow-hidden border-4 border-white shadow-2xl shadow-orange-900/10">
-                  <Image
-                    src={data.image!.src!}
-                    alt={data.image!.alt || ''}
-                    fill
-                    className="object-cover"
-                    priority={priority}
-                    sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 40vw"
-                  />
-                </div>
-              </div>
-            </div>
-          )}
-          <div className={proseClasses} data-tina-field={tinaField(data, 'body')}>
-            <TinaMarkdown
-              content={data.body}
-              components={{
-                scriptCopyBlock: (props: any) => <ScriptCopyBtn {...props} />,
-              }}
-            />
-            <Actions />
+        <div className={`grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-center justify-items-center lg:justify-items-stretch ${imagePosition === 'left' ? 'lg:flex-row-reverse' : ''}`}>
+          {/* On mobile, always show image first; on desktop, respect imagePosition */}
+          <div className={`w-full max-w-2xl lg:max-w-none ${imagePosition === 'right' ? 'order-first lg:order-last' : ''}`}>
+            <ImageComponent />
           </div>
-          {imagePosition === 'right' && (
-            <div className="relative flex justify-center" data-tina-field={tinaField(data, 'image')}>
-              <div className="relative w-full max-w-md aspect-square">
-                <div className="relative w-full h-full rounded-full overflow-hidden border-4 border-white shadow-2xl shadow-orange-900/10">
-                  <Image
-                    src={data.image!.src!}
-                    alt={data.image!.alt || ''}
-                    fill
-                    className="object-cover"
-                    priority={priority}
-                    sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 40vw"
-                  />
-                </div>
-              </div>
-            </div>
-          )}
+          <div className="w-full max-w-2xl lg:max-w-none">
+            <TextComponent />
+          </div>
         </div>
       </Section>
     );

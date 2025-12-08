@@ -35,27 +35,25 @@ export const Hero = ({ data, priority = false }: { data: PageBlocksHero; priorit
 
   return (
     <Section background={data.background!}>
-      <div className={`grid lg:grid-cols-12 gap-8 lg:gap-12 items-center pt-12 md:pt-16 lg:pt-20 pb-10 md:pb-12 ${!hasImage ? 'justify-center' : ''}`} suppressHydrationWarning>
-        <div className={`mt-0 lg:mt-0 ${hasImage ? 'text-left lg:col-span-7 2xl:col-span-6' : 'text-center lg:col-span-10 lg:col-start-2'}`} suppressHydrationWarning>
+      <div className={`grid ${hasImage ? 'grid-cols-1 lg:grid-cols-2' : 'lg:grid-cols-1'} gap-8 lg:gap-12 items-center ${hasImage ? 'justify-items-center lg:justify-items-stretch' : ''} pt-12 md:pt-16 lg:pt-20 pb-10 md:pb-12`} suppressHydrationWarning>
+        <div className={`mt-0 lg:mt-0 w-full ${hasImage ? 'text-left max-w-2xl lg:max-w-none' : 'text-center mx-auto max-w-3xl'}`} suppressHydrationWarning>
           {data.headline && (
             <div data-tina-field={tinaField(data, 'headline')}>
-              <h1 className={`text-balance text-2xl sm:text-3xl md:text-4xl lg:text-4xl xl:text-5xl tracking-tight font-bold font-serif leading-[1.15] sm:leading-[1.2] text-accent ${!hasImage ? 'mx-auto' : ''}`} suppressHydrationWarning>
-                {data.headline?.split(/(\s+)/).map((segment, i) => {
-                  if (segment.includes('*')) {
-                    return (
-                      <span key={i} className="text-[var(--page-accent)]">
-                        {segment.replaceAll('*', '')}
-                      </span>
-                    );
-                  }
-                  return <span key={i}>{segment}</span>;
-                })}
+              <h1 className={`text-balance text-2xl sm:text-3xl md:text-4xl lg:text-4xl xl:text-5xl tracking-tight font-bold font-serif leading-[1.15] sm:leading-[1.2] ${!hasImage ? 'mx-auto' : ''}`} suppressHydrationWarning>
+                {data.headline?.split('|').map((part, i) => (
+                  <React.Fragment key={i}>
+                    {i > 0 && <br />}
+                    <span className={i === 0 ? 'text-[#2D2926]' : 'text-[var(--page-accent)]'}>
+                      {part}
+                    </span>
+                  </React.Fragment>
+                ))}
               </h1>
             </div>
           )}
           {data.tagline && (
             <div data-tina-field={tinaField(data, 'tagline')}>
-              <div className={`mt-6 md:mt-8 max-w-xl text-base md:text-lg text-gray-700 font-normal leading-relaxed ${!hasImage ? 'mx-auto' : ''}`}>
+              <div className={`mt-6 md:mt-8 max-w-xl text-base md:text-lg text-gray-700 font-normal leading-relaxed font-sans ${!hasImage ? 'mx-auto' : ''}`}>
                 {data.tagline!}
               </div>
             </div>
@@ -183,8 +181,8 @@ export const Hero = ({ data, priority = false }: { data: PageBlocksHero; priorit
         </div>
 
         {hasImage && (
-          <div className="relative flex justify-center lg:justify-end lg:col-span-5 2xl:col-span-6">
-            <div className='relative w-full aspect-square' data-tina-field={tinaField(data, 'image')}>
+          <div className="relative flex justify-center order-first lg:order-last">
+            <div className='relative breathing-circle w-64 h-64 sm:w-72 sm:h-72 md:w-80 md:h-80 lg:w-96 lg:h-96' data-tina-field={tinaField(data, 'image')}>
               {/* Decorative background blob or gradient could go here if needed */}
               <div className='relative w-full h-full rounded-full overflow-hidden border-4 border-white shadow-2xl shadow-orange-900/10'>
                 <ImageBlock image={data.image!} priority={priority} />
