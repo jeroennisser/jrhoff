@@ -176,6 +176,11 @@ const iconSizeClass = {
 //@ts-ignore
 export const Icon = ({ data, parentColor = '', className = '', tinaField = '' }) => {
   const { theme } = useLayout();
+  const [isClient, setIsClient] = React.useState(false);
+
+  React.useEffect(() => {
+    setIsClient(true);
+  }, []);
 
   //@ts-ignore
   if (IconOptions[data.name] === null || IconOptions[data.name] === undefined) {
@@ -190,27 +195,28 @@ export const Icon = ({ data, parentColor = '', className = '', tinaField = '' })
   //@ts-ignore
   const iconSizeClasses = typeof size === 'string' ? iconSizeClass[size] : iconSizeClass[Object.keys(iconSizeClass)[size]];
 
-  const iconColor = color ? (color === 'primary' ? theme!.color : color) : theme!.color;
+  // Use a default color during SSR to prevent hydration mismatch
+  const iconColor = isClient
+    ? (color ? (color === 'primary' ? theme!.color : color) : theme!.color)
+    : (color && color !== 'primary' ? color : 'blue');
 
   if (style == 'circle') {
     return (
       <div
         {...(tinaField ? { 'data-tina-field': tinaField } : {})} // only render data-tina-field if it exists
         className={`relative z-10 inline-flex items-center justify-center shrink-0 ${iconSizeClasses} rounded-full ${iconColorClass[iconColor].circle} ${className}`}
-        suppressHydrationWarning
       >
-        <IconSVG className='w-2/3 h-2/3' suppressHydrationWarning />
+        <IconSVG className='w-2/3 h-2/3' />
       </div>
     );
   } else {
     const iconColorClasses =
-      iconColorClass[parentColor === 'primary' && (iconColor === theme!.color || iconColor === 'primary') ? 'white' : iconColor!].regular;
+      iconColorClass[parentColor === 'primary' && isClient && (iconColor === theme!.color || iconColor === 'primary') ? 'white' : iconColor!].regular;
     return (
       <IconSVG
         {...(tinaField ? { 'data-tina-field': tinaField } : {})} // only render data-tina-field if it exists
         className={`${iconSizeClasses} ${iconColorClasses} ${className}`}
         style={{ strokeWidth: '0.5px' }}
-        suppressHydrationWarning
       />
     );
   }
