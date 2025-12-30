@@ -6,7 +6,7 @@ import { PageBlocksVideo } from '@/tina/__generated__/types';
 import { Section } from '../layout/section';
 import { sectionBlockSchemaField } from '../layout/section';
 
-const ReactPlayer = dynamic(() => import('react-player'), { ssr: false });
+const ReactPlayer = dynamic(() => import('react-player').then(mod => mod.default), { ssr: false });
 
 export const Video = ({ data }: { data: PageBlocksVideo }) => {
   if (!data.url) {
@@ -14,7 +14,7 @@ export const Video = ({ data }: { data: PageBlocksVideo }) => {
   }
   return (
     <Section background={data.background!} className={`aspect-video ${data.color}`}>
-      <ReactPlayer width='100%' height='100%' style={{ margin: 'auto' }} playing={!!data.autoPlay} loop={!!data.loop} controls={true} url={data.url} />
+      <ReactPlayer width='100%' height='100%' style={{ margin: 'auto' }} playing={!!data.autoPlay} loop={!!data.loop} controls={true} src={data.url} />
     </Section>
   );
 };
