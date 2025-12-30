@@ -37,6 +37,17 @@ const libreBaskerville = Libre_Baskerville({
 export const metadata: Metadata = {
   title: "Jeroen van der Hoff - Body Therapist & NIS Therapeut Zaandam",
   description: "Body Therapist en NIS Therapeut in Zaandam. Professionele behandelingen met Neurolink NIS voor diverse klachten. KvK: 34337856",
+  icons: {
+    icon: [
+      { url: '/favicon-16x16.png', sizes: '16x16', type: 'image/png' },
+      { url: '/favicon-32x32.png', sizes: '32x32', type: 'image/png' },
+      { url: '/favicon.ico', sizes: 'any' },
+    ],
+    apple: [
+      { url: '/apple-touch-icon.png', sizes: '180x180', type: 'image/png' },
+    ],
+  },
+  manifest: '/site.webmanifest',
 };
 
 export default function RootLayout({

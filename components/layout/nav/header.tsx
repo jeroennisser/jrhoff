@@ -2,6 +2,7 @@
 
 import React from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
 import { Icon } from "../../icon";
 import { useLayout } from "../layout-context";
@@ -87,7 +88,15 @@ export const Header = () => {
               href="/"
               aria-label="home"
               className="flex items-center gap-3">
-              <div className="w-8 h-8 rounded-full bg-[#EB5A3C]"></div>
+              <div className="relative w-8 h-8">
+                <Image
+                  src="/uploads/logo/logo_small.png"
+                  alt="Jeroen van der Hoff logo"
+                  fill
+                  className="object-contain"
+                  priority
+                />
+              </div>
               <span className="text-lg font-bold text-black tracking-wide">
                 Jeroen van der Hoff
               </span>

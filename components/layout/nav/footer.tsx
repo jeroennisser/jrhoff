@@ -63,6 +63,15 @@ export const Footer = () => {
               © {new Date().getFullYear()} {header?.name}. Alle rechten voorbehouden.
             </span>
           </div>
+          <div className="flex items-center gap-4 text-sm">
+            <Link href="/privacy" className="text-white/70 hover:text-[var(--page-accent)] transition-colors">
+              Privacy Statement
+            </Link>
+            <span className="text-white/30">|</span>
+            <Link href="/algemene-voorwaarden" className="text-white/70 hover:text-[var(--page-accent)] transition-colors">
+              Algemene Voorwaarden
+            </Link>
+          </div>
         </div>
       </div>
     </footer>

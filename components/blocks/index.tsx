@@ -12,6 +12,7 @@ const Stats = dynamic(() => import("./stats").then((mod) => mod.Stats));
 const CallToAction = dynamic(() => import("./call-to-action").then((mod) => mod.CallToAction));
 const Gallery = dynamic(() => import("./gallery").then((mod) => mod.Gallery));
 const ContactForm = dynamic(() => import("./contact-form").then((mod) => mod.ContactForm));
+const Partnership = dynamic(() => import("./partnership").then((mod) => mod.Partnership));
 
 export const Blocks = (props: Omit<Page, "id" | "_sys" | "_values">) => {
   if (!props.blocks) return null;
@@ -52,6 +53,8 @@ const Block = (block: PageBlocks & { blockIndex: number }) => {
       return <Gallery data={block} priority={isFirstBlock} />;
     case "PageBlocksContactForm":
       return <ContactForm data={block} />;
+    case "PageBlocksPartnership":
+      return <Partnership data={block} priority={isFirstBlock} />;
     default:
       return null;
   }

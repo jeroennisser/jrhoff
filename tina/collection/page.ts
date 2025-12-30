@@ -9,6 +9,7 @@ import { statsBlockSchema } from '@/components/blocks/stats';
 import { ctaBlockSchema } from '@/components/blocks/call-to-action';
 import { galleryBlockSchema } from '@/components/blocks/gallery';
 import { contactFormBlockSchema } from '@/components/blocks/contact-form';
+import { partnershipBlockSchema } from '@/components/blocks/partnership';
 
 const Page: Collection = {
   label: 'Pages',
@@ -44,6 +45,7 @@ const Page: Collection = {
         videoBlockSchema,
         galleryBlockSchema,
         contactFormBlockSchema,
+        partnershipBlockSchema,
       ],
     },
   ],
