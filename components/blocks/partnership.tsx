@@ -36,7 +36,8 @@ export const Partnership = ({ data, priority = false }: { data: PageBlocksPartne
         <div className="mx-auto lg:mx-0 max-w-2xl">
           {data.title && (
             <h2
-              className="text-3xl md:text-4xl font-bold tracking-tight text-gray-900 mb-6"
+              className="text-3xl md:text-4xl font-bold tracking-tight mb-6"
+              style={{ color: 'var(--page-accent)' }}
               data-tina-field={tinaField(data, 'title')}
             >
               {data.title}
