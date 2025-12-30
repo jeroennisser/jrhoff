@@ -89,7 +89,7 @@ export const Header = () => {
               className="flex items-center gap-3">
               <div className="w-8 h-8 rounded-full bg-[#EB5A3C]"></div>
               <span className="text-lg font-bold text-black tracking-wide">
-                JRHOFF
+                Jeroen van der Hoff
               </span>
             </Link>
 
