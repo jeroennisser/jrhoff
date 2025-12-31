@@ -35,18 +35,12 @@ export const Hero = ({ data, priority = false }: { data: PageBlocksHero; priorit
 
   return (
     <Section background={data.background!}>
-      <div className={`grid ${hasImage ? 'grid-cols-1 lg:grid-cols-[1.3fr_1fr]' : 'lg:grid-cols-1'} gap-8 lg:gap-12 items-center pt-12 md:pt-16 lg:pt-20 pb-10 md:pb-12`} suppressHydrationWarning>
+      <div className={`grid ${hasImage ? 'grid-cols-1 lg:grid-cols-2' : 'lg:grid-cols-1'} gap-8 lg:gap-12 items-center pt-12 md:pt-16 lg:pt-20 pb-10 md:pb-12`} suppressHydrationWarning>
         <div className={`mt-0 lg:mt-0 ${hasImage ? 'text-left mx-auto lg:mx-0 max-w-full lg:max-w-none' : 'text-center mx-auto max-w-3xl'}`} suppressHydrationWarning>
           {data.headline && (
             <div data-tina-field={tinaField(data, 'headline')}>
-              <h1 className={`tracking-tight font-bold font-serif leading-[1.3] ${!hasImage ? 'mx-auto' : ''} text-[var(--page-accent)]`} suppressHydrationWarning>
-                {data.headline?.split('|').map((part, i) => (
-                  <React.Fragment key={i}>
-                    <span className="block text-[clamp(1.25rem,4vw,2.5rem)]">
-                      {part}
-                    </span>
-                  </React.Fragment>
-                ))}
+              <h1 className={`tracking-tight font-bold font-serif leading-tight text-2xl sm:text-3xl md:text-4xl lg:text-4xl xl:text-5xl ${!hasImage ? 'mx-auto' : ''} text-[var(--page-accent)]`} suppressHydrationWarning>
+                {data.headline}
               </h1>
             </div>
           )}

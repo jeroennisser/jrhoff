@@ -275,7 +275,7 @@ function ContactFormContent({ data }: { data: PageBlocksContactForm }) {
                     }
 
                     {/* Name Field */}
-                    <div>
+                    <div suppressHydrationWarning>
                         <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-2">
                             Naam <span className="text-orange-600">*</span>
                         </label>
@@ -292,7 +292,7 @@ function ContactFormContent({ data }: { data: PageBlocksContactForm }) {
                     </div>
 
                     {/* Email Field */}
-                    <div>
+                    <div suppressHydrationWarning>
                         <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
                             E-mailadres <span className="text-orange-600">*</span>
                         </label>
@@ -309,7 +309,7 @@ function ContactFormContent({ data }: { data: PageBlocksContactForm }) {
                     </div>
 
                     {/* Phone Field */}
-                    <div>
+                    <div suppressHydrationWarning>
                         <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-2">
                             Telefoonnummer <span className="text-orange-600">*</span>
                         </label>
