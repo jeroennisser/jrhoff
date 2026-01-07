@@ -1,6 +1,6 @@
 # JRHOFF - NIS & Body Therapy Website
 
-A modern, visually stunning website for Jeroen Hoff's NIS & Body Therapy practice, built with Next.js and TinaCMS.
+A modern, visually stunning website for Jeroen Hoff's NIS & Body Therapy practice, built with Next.js and TinaCMS. Built by Studio Alex.
 
 ## 🎨 Features
 
