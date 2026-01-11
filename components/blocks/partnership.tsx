@@ -2,6 +2,7 @@
 import React from 'react';
 import Image from 'next/image';
 import type { Template } from 'tinacms';
+import { TinaMarkdown } from 'tinacms/dist/rich-text';
 import { PageBlocksPartnership } from '../../tina/__generated__/types';
 import { tinaField } from 'tinacms/dist/react';
 import { Section } from '../layout/section';
@@ -43,12 +44,12 @@ export const Partnership = ({ data, priority = false }: { data: PageBlocksPartne
               {data.title}
             </h2>
           )}
-          {data.description && (
+          {data.body && (
             <div
-              className="text-lg text-gray-700 leading-relaxed"
-              data-tina-field={tinaField(data, 'description')}
+              className="prose prose-lg prose-p:text-gray-700 prose-p:leading-relaxed prose-strong:text-gray-900"
+              data-tina-field={tinaField(data, 'body')}
             >
-              <p>{data.description}</p>
+              <TinaMarkdown content={data.body} />
             </div>
           )}
         </div>
@@ -64,7 +65,7 @@ export const partnershipBlockSchema: Template = {
     previewSrc: '/blocks/partnership.png',
     defaultItem: {
       title: 'Samenwerking',
-      description: 'Wij werken samen aan complementaire zaken om onze cliënten de beste zorg te bieden.',
+      body: 'Wij werken samen aan complementaire zaken om onze cliënten de beste zorg te bieden.',
     },
   },
   fields: [
@@ -75,12 +76,9 @@ export const partnershipBlockSchema: Template = {
       name: 'title',
     },
     {
-      type: 'string',
-      label: 'Description',
-      name: 'description',
-      ui: {
-        component: 'textarea',
-      },
+      type: 'rich-text',
+      label: 'Body',
+      name: 'body',
     },
     {
       type: 'object',
