@@ -16,19 +16,23 @@ export const Footer = () => {
           {/* Contact Info */}
           <div>
             <h3 className="font-semibold text-sm mb-3 text-white">Contact</h3>
-            <div className="space-y-2 text-sm text-white/70">
-              <p>Musical 23</p>
-              <p>1507 TS Zaandam</p>
-              <p>
-                <a href="tel:0612261363" className="hover:text-[var(--page-accent)] transition-colors">
+            <div className="text-sm text-white/70">
+              <div className="mb-4">
+                <span className="text-white font-medium text-xs block">Zaandam</span>
+                <span className="block">Musical 23, 1507 TS</span>
+              </div>
+              <div className="mb-4">
+                <span className="text-white font-medium text-xs block">Dordrecht</span>
+                <span className="block">Sint Jorisweg 48, 3311 PL</span>
+              </div>
+              <div>
+                <a href="tel:0612261363" className="block hover:text-[var(--page-accent)] transition-colors">
                   06-12261363
                 </a>
-              </p>
-              <p>
-                <a href="mailto:jeroen@bodytherapist.nl" className="hover:text-[var(--page-accent)] transition-colors">
+                <a href="mailto:jeroen@bodytherapist.nl" className="block hover:text-[var(--page-accent)] transition-colors">
                   jeroen@bodytherapist.nl
                 </a>
-              </p>
+              </div>
             </div>
           </div>
 
