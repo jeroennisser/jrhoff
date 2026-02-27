@@ -17,7 +17,6 @@ A modern, visually stunning website for Jeroen Hoff's NIS & Body Therapy practic
 - **Styling**: Tailwind CSS with custom design system
 - **Animations**: Motion (Framer Motion) for smooth transitions
 - **Icons**: Lucide React
-- **Authentication**: Custom login system
 
 ## 📦 Getting Started
 

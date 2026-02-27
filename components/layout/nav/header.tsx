@@ -3,10 +3,10 @@
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
 import { Icon } from "../../icon";
 import { useLayout } from "../layout-context";
-import { Menu, X, LogOut } from "lucide-react";
+import { Menu, X } from "lucide-react";
 
 // Page-specific accent colors 
 const pageColors: Record<string, string> = {
@@ -21,7 +21,6 @@ export const Header = () => {
   const { globalSettings, theme } = useLayout();
   const header = globalSettings!.header!;
   const pathname = usePathname();
-  const router = useRouter();
 
   const [menuState, setMenuState] = React.useState(false);
   const [isVisible, setIsVisible] = React.useState(true);
@@ -52,16 +51,6 @@ export const Header = () => {
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, [lastScrollY]);
-
-  const handleLogout = async () => {
-    try {
-      await fetch('/api/logout', { method: 'POST' });
-      router.push('/login');
-      router.refresh();
-    } catch (error) {
-      console.error('Logout error:', error);
-    }
-  };
 
   // Set CSS custom property for current page color
   React.useEffect(() => {
@@ -138,13 +127,6 @@ export const Header = () => {
                 <span>06-12261363</span>
               </a>
 
-              <button
-                onClick={handleLogout}
-                className="flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors cursor-pointer"
-                aria-label="Uitloggen">
-                <LogOut className="w-4 h-4" />
-                <span className="sr-only">Uitloggen</span>
-              </button>
             </div>
 
             {/* Mobile Menu Button */}
@@ -180,19 +162,6 @@ export const Header = () => {
                   );
                 })}
               </ul>
-
-              <div className="mt-6 pt-6 border-t">
-                <button
-                  onClick={() => {
-                    setMenuState(false);
-                    handleLogout();
-                  }}
-                  className="flex items-center gap-2 text-base text-muted-foreground hover:text-primary transition-colors"
-                  aria-label="Uitloggen">
-                  <LogOut className="w-4 h-4" />
-                  <span>Uitloggen</span>
-                </button>
-              </div>
             </div>
           )}
         </div>
