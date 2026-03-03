@@ -15,6 +15,16 @@
   to = "/admin/index.html"
   status = 200
 
+# Security headers served directly from CDN (no edge function needed)
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-DNS-Prefetch-Control = "on"
+    Strict-Transport-Security = "max-age=63072000; includeSubDomains; preload"
+    X-Content-Type-Options = "nosniff"
+    X-Frame-Options = "SAMEORIGIN"
+    Referrer-Policy = "origin-when-cross-origin"
+
 # Note: Make sure these environment variables are configured in Netlify dashboard:
 # - NEXT_PUBLIC_TINA_CLIENT_ID
 # - TINA_TOKEN
