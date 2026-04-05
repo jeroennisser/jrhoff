@@ -13,7 +13,10 @@
       "Bash(find:*)",
       "Bash(npx tsc:*)",
       "Bash(npx next:*)",
-      "Bash(npm audit:*)"
+      "Bash(npm audit:*)",
+      "Bash(python3 -c \"import sys,json; d=json.load\\(sys.stdin\\); print\\('peerDeps:', json.dumps\\(d.get\\('peerDependencies',{}\\), indent=2\\)\\); print\\('breaking changes link:', d.get\\('homepage',''\\)\\)\")",
+      "Bash(python3 -c \"import sys,json; vs=json.load\\(sys.stdin\\); majors={}; [majors.setdefault\\(v.split\\('.'\\)[0], []\\).append\\(v\\) for v in vs]; print\\('v2 latest:', majors.get\\('2',['none']\\)[-1]\\); print\\('v3 latest:', majors.get\\('3',['none']\\)[-1]\\)\")",
+      "Bash(npm install:*)"
     ],
     "deny": [],
     "ask": []
