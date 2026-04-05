@@ -12,7 +12,8 @@
       "Bash(pnpm add:*)",
       "Bash(find:*)",
       "Bash(npx tsc:*)",
-      "Bash(npx next:*)"
+      "Bash(npx next:*)",
+      "Bash(npm audit:*)"
     ],
     "deny": [],
     "ask": []

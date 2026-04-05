@@ -41,6 +41,7 @@ function ContactFormContent({ data }: { data: PageBlocksContactForm }) {
         return {
             appointmentType: initialAppointmentType,
             treatmentType: initialTreatmentType,
+            preferredLocation: '',
             preferredTime: '',
             name: '',
             email: '',
@@ -117,6 +118,7 @@ function ContactFormContent({ data }: { data: PageBlocksContactForm }) {
                 setFormData({
                     appointmentType: data.appointmentMode ? 'appointment' : 'information',
                     treatmentType: 'free_intro',
+                    preferredLocation: '',
                     preferredTime: '',
                     name: '',
                     email: '',
@@ -268,6 +270,68 @@ function ContactFormContent({ data }: { data: PageBlocksContactForm }) {
                                         />
                                         <div className="font-semibold text-gray-900">Vervolg</div>
                                         <div className="text-xs text-gray-500 mt-1">60 minuten • €100</div>
+                                    </label>
+                                </div>
+                            </div>
+                        )
+                    }
+
+                    {/* Location Preference - Only show when appointment is selected */}
+                    {
+                        (data.appointmentMode || formData.appointmentType === 'appointment') && (
+                            <div className="space-y-3">
+                                <label className="block text-sm font-medium text-gray-700 mb-3">
+                                    Voorkeur locatie <span className="text-orange-600">*</span>
+                                </label>
+                                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                                    <label className={cn(
+                                        "border rounded-xl p-4 cursor-pointer transition-all bg-white text-center",
+                                        formData.preferredLocation === 'zaandam'
+                                            ? 'border-orange-500 bg-orange-50'
+                                            : 'border-gray-200 hover:border-gray-300'
+                                    )}>
+                                        <input
+                                            type="radio"
+                                            name="preferredLocation"
+                                            value="zaandam"
+                                            checked={formData.preferredLocation === 'zaandam'}
+                                            onChange={handleChange}
+                                            className="hidden"
+                                            required
+                                        />
+                                        <div className="font-semibold text-gray-900">Zaandam</div>
+                                    </label>
+                                    <label className={cn(
+                                        "border rounded-xl p-4 cursor-pointer transition-all bg-white text-center",
+                                        formData.preferredLocation === 'dordrecht'
+                                            ? 'border-orange-500 bg-orange-50'
+                                            : 'border-gray-200 hover:border-gray-300'
+                                    )}>
+                                        <input
+                                            type="radio"
+                                            name="preferredLocation"
+                                            value="dordrecht"
+                                            checked={formData.preferredLocation === 'dordrecht'}
+                                            onChange={handleChange}
+                                            className="hidden"
+                                        />
+                                        <div className="font-semibold text-gray-900">Dordrecht</div>
+                                    </label>
+                                    <label className={cn(
+                                        "border rounded-xl p-4 cursor-pointer transition-all bg-white text-center",
+                                        formData.preferredLocation === 'hilversum'
+                                            ? 'border-orange-500 bg-orange-50'
+                                            : 'border-gray-200 hover:border-gray-300'
+                                    )}>
+                                        <input
+                                            type="radio"
+                                            name="preferredLocation"
+                                            value="hilversum"
+                                            checked={formData.preferredLocation === 'hilversum'}
+                                            onChange={handleChange}
+                                            className="hidden"
+                                        />
+                                        <div className="font-semibold text-gray-900">Hilversum</div>
                                     </label>
                                 </div>
                             </div>
