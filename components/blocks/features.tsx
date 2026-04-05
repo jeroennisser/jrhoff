@@ -87,9 +87,9 @@ export const Feature: React.FC<PageBlocksFeaturesItems> = (data) => {
 
   return (
     <Card
-      className="group text-center shadow-sm border-accent-100 bg-white/60 backdrop-blur-sm rounded-xl h-full flex flex-col"
+      className="group text-center shadow-sm border-accent-100 bg-white/60 backdrop-blur-sm rounded-xl h-full flex flex-col gap-3 py-6"
     >
-      <CardHeader className="pb-4">
+      <CardHeader className="pb-0">
         <CardDecorator>
           {data.icon && (
             <Icon
@@ -100,15 +100,15 @@ export const Feature: React.FC<PageBlocksFeaturesItems> = (data) => {
         </CardDecorator>
 
         <div data-tina-field={tinaField(data, "title")}>
-          <h3 className="mt-6 font-semibold text-sm">
+          <h3 className="mt-2 font-bold text-2xl min-h-[2.5em]">
             {data.title}
           </h3>
         </div>
       </CardHeader>
 
-      <CardContent className="text-sm pb-6 flex-grow flex flex-col">
-        <div data-tina-field={tinaField(data, "text")} className="text-gray-600 flex-grow leading-relaxed mb-6">
-          <div className="leading-relaxed">
+      <CardContent className="text-sm pb-0 flex-grow flex flex-col">
+        <div data-tina-field={tinaField(data, "text")} className="text-gray-600 flex-grow leading-relaxed">
+          <div className="leading-relaxed [&>h3]:mb-3 [&>p>strong]:text-base [&>p>strong]:text-gray-700">
             <TinaMarkdown content={data.text} />
           </div>
         </div>
